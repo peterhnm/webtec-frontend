@@ -3,7 +3,7 @@ name: Epic
 about: Create an Epic for JamBuddy
 title: '[Epic] - <your-name-here>'
 labels: 'epic'
-assignees: '@peterhnm'
+assignees: 'peterhnm'
 
 ---
 

@@ -2,8 +2,8 @@
 name: Feature
 about: Create a Feature for JamBuddy
 title: '[Feature] - <your-name-here>'
-labels: 'frontend'
-assignees: '@peterhnm'
+labels: 'feat'
+assignees: 'peterhnm'
 
 ---
 
