@@ -9,14 +9,14 @@ describe("Tags creation", () => {
             return Promise.resolve({
                 json() {
                     return Promise.resolve({
-                        results: [
-                            { name: "Tag 1" },
-                            { name: "Tag 2" },
-                            { name: "Tag 3" },
-                            { name: "Tag 4" },
-                            { name: "Tag 5" },
-                            { name: "Tag 6" },
-                            { name: "Tag 7" }
+                        tags: [
+                            "Tag 1",
+                            "Tag 2",
+                            "Tag 3",
+                            "Tag 4",
+                            "Tag 5",
+                            "Tag 6",
+                            "Tag 7"
                         ]
                     });
                 }
@@ -29,7 +29,7 @@ describe("Tags creation", () => {
 
         await waitFor(() => {
             expect(fetch).toHaveBeenCalledWith(
-                "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"
+                "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/get_tags"
             );
             expect(getAllByLabelText(/Tag */)).toHaveLength(5);
         });
