@@ -2,7 +2,9 @@
   // Fetch tags from backend
   const getTags = async () => {
     // todo: replace the url with the real endpoint from our backend
-    const response = await fetch("https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/get_tags");
+    const response = await fetch(
+      "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/get_tags"
+    );
     return await response.json();
   };
 
@@ -15,7 +17,7 @@
   {:then tags}
     {#each { length: 5 } as _, i}
       <label>
-        <input type="checkbox">
+        <input type="checkbox" />
         {tags.tags[i]}
       </label>
     {/each}
