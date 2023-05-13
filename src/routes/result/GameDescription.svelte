@@ -40,7 +40,7 @@
         <p>Loading ..</p>
     {:then result}
         <input value={result.title} readonly type="text" />
-        <textarea value={result.desc} readonly />
+        <textarea readonly>{result.desc}</textarea>
         <input value={result.mechanics} readonly type="text" />
         <input value={result.style} readonly type="text" />
     {/await}
