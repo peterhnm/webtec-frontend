@@ -1,39 +1,39 @@
 <script>
-  import { page } from "$app/stores";
-  import { base } from "$app/paths";
-  import logo from "$lib/images/svelte-logo.svg";
-  import github from "$lib/images/github.svg";
+    import { page } from "$app/stores";
+    import { base } from "$app/paths";
+    import logo from "$lib/images/svelte-logo.svg";
+    import github from "$lib/images/github.svg";
 </script>
 
 <header>
-  <div class="corner">
-    <a href="https://kit.svelte.dev">
-      <img alt="SvelteKit" src={logo} />
-    </a>
-  </div>
+    <div class="corner">
+        <a href="https://kit.svelte.dev">
+            <img alt="SvelteKit" src={logo} />
+        </a>
+    </div>
 
-  <nav>
-    <svg aria-hidden="true" viewBox="0 0 2 3">
-      <path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-    </svg>
-    <ul>
-      <li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-        <a href="{base}/">Home</a>
-      </li>
-      <li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-        <a href="{base}/about">About</a>
-      </li>
-    </ul>
-    <svg aria-hidden="true" viewBox="0 0 2 3">
-      <path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-    </svg>
-  </nav>
+    <nav>
+        <svg aria-hidden="true" viewBox="0 0 2 3">
+            <path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
+        </svg>
+        <ul>
+            <li aria-current={$page.url.pathname === "/" ? "page" : undefined}>
+                <a href="{base}/">Home</a>
+            </li>
+            <li aria-current={$page.url.pathname === "/about" ? "page" : undefined}>
+                <a href="{base}/about">About</a>
+            </li>
+        </ul>
+        <svg aria-hidden="true" viewBox="0 0 2 3">
+            <path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
+        </svg>
+    </nav>
 
-  <div class="corner">
-    <a href="https://github.com/sveltejs/kit">
-      <img alt="GitHub" src={github} />
-    </a>
-  </div>
+    <div class="corner">
+        <a href="https://github.com/sveltejs/kit">
+            <img alt="GitHub" src={github} />
+        </a>
+    </div>
 </header>
 
 <style>
@@ -95,9 +95,9 @@
         height: 100%;
     }
 
-    li[aria-current='page']::before {
+    li[aria-current="page"]::before {
         --size: 6px;
-        content: '';
+        content: "";
         width: 0;
         height: 0;
         position: absolute;
