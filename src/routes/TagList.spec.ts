@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, waitFor } from "@testing-library/svelte";
-import Tags from "./Tags.svelte";
+import TagList from "./TagList.svelte";
 
 describe("Tags creation", () => {
     // Mocking the global fetch
@@ -25,13 +25,13 @@ describe("Tags creation", () => {
     });
 
     it("should show five checkboxes", async () => {
-        const { getAllByLabelText } = render(Tags);
+        const { getAllByLabelText } = render(TagList);
 
         await waitFor(() => {
             expect(fetch).toHaveBeenCalledWith(
                 "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/get_tags"
             );
-            expect(getAllByLabelText(/Tag */)).toHaveLength(5);
+            expect(getAllByLabelText(/Tag */)).toHaveLength(7);
         });
     });
 });

@@ -1,6 +1,5 @@
 <script lang="ts">
-    export let prompt: string;
-    export let tags: [string];
+    import { promptStore, tagsStore } from "../stores";
 
     class Result {
         title: string;
@@ -16,7 +15,11 @@
         }
     }
 
-    async function getDescription(prompt: string, tags: [string]): Promise<Result> {
+    async function getGameIdea(): Promise<Result> {
+        console.log(JSON.stringify({
+            prompt: $promptStore,
+            tags: $tagsStore
+        }));
         const url = "";
         const res = await fetch(url, {
             method: "POST",
@@ -24,15 +27,15 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                prompt,
-                tags
+                prompt: $promptStore,
+                tags: $tagsStore
             })
         });
-        const json = await res.json();
-        return new Result({ json });
+        const { json } = await res.json();
+        return new Result(json);
     }
 
-    const resultPromise = await getDescription(prompt, tags);
+    const resultPromise = getGameIdea();
 </script>
 
 <div class="gameDesc">
