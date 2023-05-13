@@ -16,11 +16,8 @@
     }
 
     async function getGameIdea(): Promise<Result> {
-        console.log(JSON.stringify({
-            prompt: $promptStore,
-            tags: $tagsStore
-        }));
-        const url = "";
+        // FIXME: replace the url with the real endpoint from our backend
+        const url = "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/get_result";
         const res = await fetch(url, {
             method: "POST",
             headers: {
@@ -31,7 +28,7 @@
                 tags: $tagsStore
             })
         });
-        const { json } = await res.json();
+        const json = await res.json();
         return new Result(json);
     }
 
@@ -39,7 +36,9 @@
 </script>
 
 <div class="gameDesc">
-    {#await resultPromise then result}
+    {#await resultPromise}
+        <p>Loading ..</p>
+    {:then result}
         <input value={result.title} readonly type="text" />
         <textarea value={result.desc} readonly />
         <input value={result.mechanics} readonly type="text" />
