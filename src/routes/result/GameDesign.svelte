@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { promptStore, tagsStore } from "../stores";
+    import { promptStore, tagsStore } from "../stores";
 
-  class Image {
+    class Image {
+        title: string;
         url: string;
 
         constructor(json: any) {
+            this.title = json.title;
             this.url = json.url;
         }
     }
@@ -33,6 +35,6 @@
     {#await resultPromise}
         <p>Rendering Images ..</p>
     {:then image}
-        <img src="{image.url}" alt="Image" width="180">
+        <img src="{image.url}" alt="{image.title}" width="180">
     {/await}
 </div>
