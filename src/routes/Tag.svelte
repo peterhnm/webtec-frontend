@@ -8,13 +8,12 @@
         if (el.checked && !checkedTags.includes(el.id)) {
             checkedTags.push(el.id);
         } else if (!el.checked) {
-            checkedTags = checkedTags.filter(item => item !== el.id);
+            checkedTags = checkedTags.filter((item) => item !== el.id);
         }
     };
-
 </script>
 
-<label for="{id}">
-    <input checked="{checked}" id="{id}" on:click={toggleTag} type="checkbox" />
+<label for={id}>
+    <input {checked} {id} on:click={toggleTag} type="checkbox" />
     {id}
 </label>

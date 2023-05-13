@@ -13,7 +13,8 @@
 
     async function getGameIdea(): Promise<Image> {
         // FIXME: replace the url with the real endpoint from our backend
-        const url = "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/get_images";
+        const url =
+            "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/get_images";
         const res = await fetch(url, {
             method: "POST",
             headers: {
@@ -35,6 +36,6 @@
     {#await resultPromise}
         <p>Rendering Images ..</p>
     {:then image}
-        <img src="{image.url}" alt="{image.title}" width="180">
+        <img src={image.url} alt={image.title} width="180" />
     {/await}
 </div>

@@ -23,7 +23,7 @@
 
 <h1>Jam Buddy</h1>
 
-<input bind:value={$promptStore} placeholder="Jam Theme..." type="text">
+<input bind:value={$promptStore} placeholder="Jam Theme..." type="text" />
 
 <TagList bind:checkedTags={$tagsStore} />
 

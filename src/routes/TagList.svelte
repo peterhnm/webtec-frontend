@@ -21,9 +21,9 @@
     {:then json}
         {#each json.tags as tag}
             {#if checkedTags.includes(tag)}
-                <Tag id={tag} checked={true} bind:checkedTags={checkedTags} />
+                <Tag id={tag} checked={true} bind:checkedTags />
             {:else}
-                <Tag id={tag} checked={false} bind:checkedTags={checkedTags} />
+                <Tag id={tag} checked={false} bind:checkedTags />
             {/if}
         {/each}
     {/await}
