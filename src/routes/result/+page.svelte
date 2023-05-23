@@ -1,8 +1,16 @@
 <script lang="ts">
+    import type { PageData } from "./$types";
     import { afterNavigate, goto } from "$app/navigation";
     import { base } from "$app/paths";
     import GameDescription from "./GameDescription.svelte";
     import GameDesign from "./GameDesign.svelte";
+
+    export let data: PageData;
+
+    let {
+        description,
+        images
+    } = data;
 
     let previousPage: string = base;
 
@@ -17,6 +25,14 @@
 
 <button on:click={goBack}>Back</button>
 
-<GameDescription />
+{#if description}
+    <GameDescription bind:data={description}/>
+{:else}
+    <p>loading ...</p>
+{/if}
 
-<GameDesign />
+{#if images}
+    <GameDesign bind:data={images}/>
+{:else}
+    <p>loading ...</p>
+{/if}
