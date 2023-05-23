@@ -7,10 +7,7 @@
 
     export let data: PageData;
 
-    let {
-        description,
-        images
-    } = data;
+    let { description, images } = data;
 
     let previousPage: string = base;
 
@@ -26,13 +23,13 @@
 <button on:click={goBack}>Back</button>
 
 {#if description}
-    <GameDescription bind:data={description}/>
+    <GameDescription bind:data={description} />
 {:else}
     <p>loading ...</p>
 {/if}
 
 {#if images}
-    <GameDesign bind:data={images}/>
+    <GameDesign bind:data={images} />
 {:else}
     <p>loading ...</p>
 {/if}

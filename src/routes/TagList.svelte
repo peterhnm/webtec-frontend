@@ -1,8 +1,8 @@
 <script lang="ts">
     import Tag from "./Tag.svelte";
 
-    export let tags: [string];
-    export let checkedTags: [string] = [];
+    export let tags: string[];
+    export let checkedTags: string[] = [];
 </script>
 
 <div class="tags">

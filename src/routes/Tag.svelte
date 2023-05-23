@@ -1,7 +1,7 @@
 <script lang="ts">
     export let id: string;
     export let checked: boolean;
-    export let checkedTags: [string];
+    export let checkedTags: string[];
 
     const toggleTag = (event) => {
         const el = event.srcElement;
@@ -13,7 +13,7 @@
     };
 </script>
 
-<label for="{id}">
+<label for={id}>
     <input {checked} {id} on:click={toggleTag} type="checkbox" />
     {id}
 </label>
