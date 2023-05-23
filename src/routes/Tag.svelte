@@ -13,7 +13,7 @@
     };
 </script>
 
-<label for={id}>
+<label for="{id}">
     <input {checked} {id} on:click={toggleTag} type="checkbox" />
     {id}
 </label>

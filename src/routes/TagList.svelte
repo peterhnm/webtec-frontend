@@ -1,30 +1,16 @@
 <script lang="ts">
     import Tag from "./Tag.svelte";
 
+    export let tags: [string];
     export let checkedTags: [string] = [];
-
-    // Fetch tags from backend
-    const getTags = async () => {
-        // FIXME: replace the url with the real endpoint from our backend
-        const response = await fetch(
-            "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/get_tags"
-        );
-        return await response.json();
-    };
-
-    const tagsPromise = getTags();
 </script>
 
 <div class="tags">
-    {#await tagsPromise}
-        <p>Loading ...</p>
-    {:then json}
-        {#each json.tags as tag}
-            {#if checkedTags.includes(tag)}
-                <Tag id={tag} checked={true} bind:checkedTags />
-            {:else}
-                <Tag id={tag} checked={false} bind:checkedTags />
-            {/if}
-        {/each}
-    {/await}
+    {#each tags as tag}
+        {#if checkedTags.includes(tag)}
+            <Tag id={tag} checked={true} bind:checkedTags />
+        {:else}
+            <Tag id={tag} checked={false} bind:checkedTags />
+        {/if}
+    {/each}
 </div>

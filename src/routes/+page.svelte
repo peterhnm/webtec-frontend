@@ -1,9 +1,14 @@
 <script lang="ts">
+    import type { PageData } from "./$types";
     import { goto } from "$app/navigation";
     import { base } from "$app/paths";
     import "./style.css";
     import TagList from "./TagList.svelte";
     import { promptStore, tagsStore } from "./stores";
+
+    export let data: PageData;
+
+    let { tags } = data;
 
     function processData() {
         /*
@@ -21,10 +26,20 @@
     }
 </script>
 
-<h1>Jam Buddy</h1>
+<section id="logo">
+    <h1>Jam Buddy</h1>
+</section>
 
-<input bind:value={$promptStore} placeholder="Jam Theme..." type="text" />
+<section id="prompt">
+    <input bind:value={$promptStore} placeholder="Jam Theme..." type="text" />
+</section>
 
-<TagList bind:checkedTags={$tagsStore} />
+<section id="tags">
+    {#if tags}
+        <TagList bind:checkedTags={$tagsStore} {tags} />
+    {:else}
+        <p>loading ...</p>
+    {/if}
+</section>
 
 <button on:click={processData}>Start Dreaming</button>
