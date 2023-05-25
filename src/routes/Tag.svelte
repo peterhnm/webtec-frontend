@@ -1,14 +1,25 @@
 <script lang="ts">
+    import { selectedTagsStore } from "./stores";
+
     export let id: string;
     export let checked: boolean;
-    export let checkedTags: string[];
 
     const toggleTag = (event) => {
         const el = event.srcElement;
-        if (el.checked && !checkedTags.includes(el.id)) {
-            checkedTags.push(el.id);
-        } else if (!el.checked) {
-            checkedTags = checkedTags.filter((item) => item !== el.id);
+        if (el.checked) {
+            // add tag to the store
+            selectedTagsStore.update((arr: string[]) => {
+                if (!arr.includes(el.id)) {
+                    arr.push(el.id);
+                }
+                return arr;
+            });
+        } else {
+            // remove tag from the store
+            selectedTagsStore.update((arr: string[]) => {
+                arr = arr.filter((item) => item !== el.id);
+                return arr;
+            });
         }
     };
 </script>

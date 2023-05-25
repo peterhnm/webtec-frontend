@@ -1,6 +1,6 @@
 import type { PageLoad } from "./$types";
 import type { AiResponse } from "./types";
-import { promptStore, tagsStore } from "../stores";
+import { promptStore, selectedTagsStore } from "../stores";
 
 export const prerender = true;
 export const ssr = false;
@@ -11,8 +11,8 @@ export const load = (async ({ fetch }): Promise<AiResponse> => {
         prompt = value;
     });
 
-    let tags: [string] = [""];
-    tagsStore.subscribe((value) => {
+    let tags: string[] = [""];
+    selectedTagsStore.subscribe((value) => {
         tags = value;
     });
 

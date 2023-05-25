@@ -4,8 +4,11 @@
     import { base } from "$app/paths";
     import GameDescription from "./GameDescription.svelte";
     import GameDesign from "./GameDesign.svelte";
+    import { headingStore } from "../stores";
 
     export let data: PageData;
+
+    $headingStore = "Generation complete!\nYour game is:";
 
     let { description, images } = data;
 
