@@ -3,9 +3,19 @@ body {
     padding: 0;
 }
 
-/*@font-face {
-    font-family: "Inter";
+button {
+    cursor: pointer;
+    align-items: center;
+
+    background: #44AB9F;
+    border: solid #000 1px;
+    border-radius: 5px;
+
+    font-family: 'Inter', sans-serif;
     font-style: normal;
-    font-weight: ;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #000000;
 }
-*/

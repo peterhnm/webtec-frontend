@@ -16,7 +16,8 @@ export const load = (async ({ fetch }): Promise<AiResponse> => {
         tags = value;
     });
 
-    const url = "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/get_result";
+    const url: string =
+        "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/get_result";
     const res = await fetch(url, {
         method: "POST",
         headers: {

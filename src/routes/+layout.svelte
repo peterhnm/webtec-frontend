@@ -41,10 +41,6 @@
 
     main {
         grid-area: main;
-        width: 100%;
-        max-width: 545px;
-        margin: 77px auto 0 auto;
-        padding: 6px;
         box-sizing: border-box;
     }
 

@@ -132,6 +132,10 @@
                 "desc"
                 "prompt"
                 "tags";
+        width: 100%;
+        max-width: 545px;
+        margin: 77px auto 0 auto;
+        padding: 6px;
     }
 
     .main p {
@@ -168,22 +172,7 @@
     }
 
     .prompt button {
-        display: grid;
         grid-area: button;
-
-        align-items: center;
-
-        background: #44AB9F;
-        border: solid #000 1px;
-        border-radius: 5px;
-
-        font-family: 'Inter', sans-serif;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
-
-        color: #000000;
     }
 
     .tags {
