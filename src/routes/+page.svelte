@@ -29,6 +29,7 @@
             if (
                 visible &&
                 !target.closest(".search") &&
+                !target.closest(".dropdown") &&
                 !(target.tagName === "INPUT" && target.type === "checkbox")
             ) {
                 visible = false;
@@ -57,14 +58,8 @@
 
 <div class="main">
     <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-        vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-        no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-        amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-        labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-        et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-        sanctus est Lorem ipsum dolor sit amet.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+        dolore magna aliquyam erat, sed diam voluptua.
     </p>
 
     <div class="prompt">
@@ -78,12 +73,12 @@
         <button on:click={processData}>Generate</button>
     </div>
 
+    {#if visible}
+        <Dropdown {tags} />
+    {/if}
+
     <div class="tags">
         <div class="search">
-            {#if visible}
-                <Dropdown {tags} />
-            {/if}
-
             <input
                 bind:this={searchBar}
                 placeholder="...search for game tags"
@@ -99,52 +94,119 @@
                 {/each}
             {/if}
         </div>
+        <small>Added Tags</small>
     </div>
 </div>
 
 <style>
     input[type="text"] {
-        font-size: 16pt;
+        min-height: 42px;
+
+        border: solid #000 1px;
+        border-radius: 3px;
+        font-family: 'Inter', sans-serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+
+        color: #000000;
+        background: #BEE6DC;
     }
 
     small {
         width: 100%;
-        color: gray;
-        font-size: 14px;
+
+        font-family: 'Inter', sans-serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+
+        color: #000000;
     }
 
-    .prompt,
-    .search {
-        margin: 60px 0 60px 0;
+    .main {
+        display: grid;
+        grid-template-areas:
+                "desc"
+                "prompt"
+                "tags";
+    }
+
+    .main p {
+        grid-area: desc;
+        margin: 0 0 37px 0;
+
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+
+        color: #333333;
     }
 
     .prompt {
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 10px;
-        justify-content: flex-start;
+        grid-area: prompt;
+        display: grid;
+        grid-template-areas:
+                "input button"
+                "small button";
+        grid-column-gap: 33px;
+        margin-bottom: 97px;
     }
 
     .prompt input {
-        flex-grow: 1;
+        display: grid;
+        grid-area: input;
     }
 
     .prompt small {
-        order: 3;
+        display: grid;
+        grid-area: small;
     }
 
-    .tags .search {
-        display: flex;
-        flex-wrap: wrap;
+    .prompt button {
+        display: grid;
+        grid-area: button;
+
+        align-items: center;
+
+        background: #44AB9F;
+        border: solid #000 1px;
+        border-radius: 5px;
+
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+
+        color: #000000;
     }
 
-    .tags .search input {
-        width: 100%;
+    .tags {
+        grid-area: tags;
+        display: grid;
+        grid-template-areas:
+                "search"
+                "selectedTags";
     }
 
-    .tags .selectedTags {
-        padding: 10px 5px 10px 5px;
-        border: solid black 2px;
-        border-radius: 4px;
+    .search {
+        grid-area: search;
+        display: grid;
+        grid-template-areas:
+                "input"
+                "small";
+        margin-bottom: 33px;
+    }
+
+    .selectedTags {
+        grid-area: selectedTags;
+        min-height: 58px;
+        background: #BEE6DC;
+        border-radius: 15px;
     }
 </style>

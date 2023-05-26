@@ -7,16 +7,16 @@
 
 <div class="tags">
     <ul>
-        {#each tags as tag}
+        {#each { length: 5 } as _, i}
             <li>
                 {#if $selectedTagsStore}
-                    {#if $selectedTagsStore.includes(tag)}
-                        <Tag id={tag} checked={true} />
+                    {#if $selectedTagsStore.includes(tags[i])}
+                        <Tag id={tags[i]} checked={true} />
                     {:else}
-                        <Tag id={tag} checked={false} />
+                        <Tag id={tags[i]} checked={false} />
                     {/if}
                 {:else}
-                    <Tag id={tag} checked={false} />
+                    <Tag id={tags[i]} checked={false} />
                 {/if}
             </li>
         {/each}
@@ -26,5 +26,6 @@
 <style>
     ul {
         width: 100px;
+        list-style: none;
     }
 </style>

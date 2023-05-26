@@ -3,48 +3,67 @@
 </script>
 
 <header>
-    <div class="corner">
-        <p>JAMBUDDY</p>
-    </div>
+    <p>JAMBUDDY</p>
 
-    <div class="corner">
-        <nav>
-            <ul>
-                <li aria-current={$page.url.pathname === "/" ? "page" : undefined}>
-                    <a href="/">Home</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+    <nav>
+        <ul>
+            <li aria-current={$page.url.pathname === "/" ? "page" : undefined}>
+                <a href="/">Home</a>
+            </li>
+        </ul>
+    </nav>
 </header>
 
 <style>
     header {
-        display: flex;
-        justify-content: space-between;
+        grid-area: header;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        max-height: 57px;
+
+        background: #3B6660;
     }
 
-    .corner {
-        width: 3em;
-        height: 3em;
+    header p {
+        justify-self: start;
+
+        margin: 0 0 0 14px;
+        padding: 0;
+
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 24px;
+        line-height: 57px;
+
+        color: #DCDCDC;
     }
 
-    .corner a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
+    header nav {
+        justify-self: end;
+
+        margin: 0 14px 0 0;
+
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+
+        color: #DCDCDC;
+
     }
 
-    nav {
-        display: flex;
-        justify-content: center;
-        --background: rgba(255, 255, 255, 0.7);
+    ul {
+        list-style: none;
     }
 
-    li {
-        position: relative;
-        height: 100%;
+    a {
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: #DCDCDC;
     }
 </style>
