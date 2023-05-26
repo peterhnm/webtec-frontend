@@ -16,7 +16,7 @@
     .gameDesc p {
         margin: 0 0 18px 0;
 
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-style: normal;
         font-weight: 600;
         font-size: 36px;
@@ -34,7 +34,7 @@
         border: none;
         resize: none;
 
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;

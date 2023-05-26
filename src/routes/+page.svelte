@@ -58,8 +58,8 @@
 
 <div class="main">
     <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-        dolore magna aliquyam erat, sed diam voluptua.
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
     </p>
 
     <div class="prompt">
@@ -104,20 +104,20 @@
 
         border: solid #000 1px;
         border-radius: 3px;
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-style: italic;
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
 
         color: #000000;
-        background: #BEE6DC;
+        background: #bee6dc;
     }
 
     small {
         width: 100%;
 
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-style: italic;
         font-weight: 400;
         font-size: 16px;
@@ -129,9 +129,9 @@
     .main {
         display: grid;
         grid-template-areas:
-                "desc"
-                "prompt"
-                "tags";
+            "desc"
+            "prompt"
+            "tags";
         width: 100%;
         max-width: 545px;
         margin: 77px auto 0 auto;
@@ -142,7 +142,7 @@
         grid-area: desc;
         margin: 0 0 37px 0;
 
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
@@ -155,8 +155,8 @@
         grid-area: prompt;
         display: grid;
         grid-template-areas:
-                "input button"
-                "small button";
+            "input button"
+            "small button";
         grid-column-gap: 33px;
         margin-bottom: 97px;
     }
@@ -179,23 +179,23 @@
         grid-area: tags;
         display: grid;
         grid-template-areas:
-                "search"
-                "selectedTags";
+            "search"
+            "selectedTags";
     }
 
     .search {
         grid-area: search;
         display: grid;
         grid-template-areas:
-                "input"
-                "small";
+            "input"
+            "small";
         margin-bottom: 33px;
     }
 
     .selectedTags {
         grid-area: selectedTags;
         min-height: 58px;
-        background: #BEE6DC;
+        background: #bee6dc;
         border-radius: 15px;
     }
 </style>

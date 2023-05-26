@@ -18,12 +18,8 @@
     </main>
 
     <footer>
-        <p class="left">
-            Webtechnologien
-        </p>
-        <p class="right">
-            Social Media
-        </p>
+        <p class="left">Webtechnologien</p>
+        <p class="right">Social Media</p>
     </footer>
 </div>
 
@@ -31,10 +27,10 @@
     .app {
         display: grid;
         grid-template-areas:
-                "header"
-                "logo"
-                "main"
-                "footer";
+            "header"
+            "logo"
+            "main"
+            "footer";
         grid-template-rows: 57px 283px auto 121px;
         min-height: 100vh;
     }
@@ -51,14 +47,14 @@
         align-items: center;
         padding: 0 57px;
 
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
 
-        color: #FFFFFF;
-        background: #667D77;
+        color: #ffffff;
+        background: #667d77;
     }
 
     footer .left {

@@ -21,7 +21,7 @@
         align-self: end;
         max-height: 240px;
 
-        background: #BEE6DC;
+        background: #bee6dc;
         border: solid #000 1px;
         border-radius: 3px;
     }

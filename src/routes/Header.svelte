@@ -22,7 +22,7 @@
 
         max-height: 57px;
 
-        background: #3B6660;
+        background: #3b6660;
     }
 
     header p {
@@ -31,13 +31,13 @@
         margin: 0 0 0 14px;
         padding: 0;
 
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-style: normal;
         font-weight: 800;
         font-size: 24px;
         line-height: 57px;
 
-        color: #DCDCDC;
+        color: #dcdcdc;
     }
 
     header nav {
@@ -45,14 +45,13 @@
 
         margin: 0 14px 0 0;
 
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
 
-        color: #DCDCDC;
-
+        color: #dcdcdc;
     }
 
     ul {
@@ -64,6 +63,6 @@
     }
 
     a:visited {
-        color: #DCDCDC;
+        color: #dcdcdc;
     }
 </style>

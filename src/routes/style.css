@@ -7,11 +7,11 @@ button {
     cursor: pointer;
     align-items: center;
 
-    background: #44AB9F;
+    background: #44ab9f;
     border: solid #000 1px;
     border-radius: 5px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 20px;

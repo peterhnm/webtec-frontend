@@ -24,7 +24,7 @@
 
     function reload() {
         // execute the load function again = new post request
-        invalidate(url => url.pathname === `/get_result`);
+        invalidate((url) => url.pathname === `/get_result`);
     }
 </script>
 
@@ -50,13 +50,13 @@
     .main {
         display: grid;
         grid-template-areas:
-                "desc image"
-                "button button";
+            "desc image"
+            "button button";
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto 72px;
         width: 100%;
         max-width: 875px;
-        margin: 0 auto;
+        margin: 77px auto 0 auto;
     }
 
     button {
