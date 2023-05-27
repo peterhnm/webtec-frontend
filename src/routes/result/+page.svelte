@@ -23,6 +23,7 @@
     // }
 
     function reload() {
+        // FIXME
         // execute the load function again = new post request
         invalidate((url) => url.pathname === `/get_result`);
     }
