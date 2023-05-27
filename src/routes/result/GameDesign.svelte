@@ -1,8 +1,7 @@
 <script lang="ts">
-    import type { Image } from "./types";
     import { onMount } from "svelte";
 
-    export let data: [Image];
+    export let data: string[];
 
     let items: HTMLUListElement;
     let dots: HTMLOListElement;
@@ -52,9 +51,9 @@
 <div class="gameImage">
     <div class="carousel-viewport">
         <ul bind:this={items} class="items">
-            {#each data as img}
+            {#each data as img, i}
                 <li class="item">
-                    <img src={img.url} alt={img.title} />
+                    <img src={img} alt="Image {i}" />
                 </li>
             {/each}
         </ul>
