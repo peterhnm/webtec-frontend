@@ -73,10 +73,6 @@
         <button on:click={processData}>Generate</button>
     </div>
 
-    {#if visible}
-        <Dropdown {tags} />
-    {/if}
-
     <div class="tags">
         <div class="search">
             <input
@@ -96,6 +92,10 @@
         </div>
         <small>Added Tags</small>
     </div>
+
+    {#if visible}
+        <Dropdown {tags} />
+    {/if}
 </div>
 
 <style>
