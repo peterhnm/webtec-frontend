@@ -3,28 +3,28 @@
 
     export let data: string[];
 
+    const active = "active";
     let items: HTMLUListElement;
     let dots: HTMLOListElement;
     let prev: HTMLButtonElement;
     let next: HTMLButtonElement;
-    const active = "active";
     let current = 0;
+
+    const setActiveDot = () => {
+        let index = 0;
+        dots.childNodes.forEach((el: HTMLElement) => {
+            if (el.nodeType === 1) {
+                index === current
+                    ? el.classList.add(active)
+                    : el.classList.remove(active);
+
+                index++;
+            }
+        });
+    };
 
     onMount(() => {
         let total = items.children.length - 1;
-
-        const setActiveDot = () => {
-            let index = 0;
-            dots.childNodes.forEach((el: HTMLElement) => {
-                if (el.nodeType === 1) {
-                    index === current
-                        ? el.classList.add(active)
-                        : el.classList.remove(active);
-
-                    index++;
-                }
-            });
-        };
 
         const scrollToCurrent = () => {
             items.style.transform = `translateX(${current * -100}%`;
@@ -59,16 +59,38 @@
         </ul>
     </div>
     <button bind:this={prev} class="carousel-control prev" title="Go to previous item">
-        <svg viewBox="0 0 256 512">
+        <svg
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <circle cx="20" cy="20" r="20" transform="rotate(-180 20 20)" fill="white" />
             <path
-                d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
+                d="M25 7L10 20.0345L25 34"
+                stroke="#999999"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
             />
         </svg>
     </button>
     <button bind:this={next} class="carousel-control next" title="Go to next item">
-        <svg viewBox="0 0 256 512">
+        <svg
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <circle cx="20" cy="20" r="20" transform="rotate(-180 20 20)" fill="white" />
             <path
-                d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+                d="M16 34L31 20.9655L16 7"
+                stroke="#999999"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
             />
         </svg>
     </button>
@@ -124,13 +146,19 @@
     .carousel-viewport {
         position: relative;
         overflow: hidden;
-        margin: 0 auto;
+        margin: auto;
+        padding: 20px 0;
+        width: 100%;
+        height: 100%;
     }
 
     .carousel-viewport .items {
         position: relative;
         display: flex;
+        margin: 0;
         padding: 0;
+        width: 100%;
+        height: 100%;
         transition: transform 500ms cubic-bezier(0.25, 1, 0.5, 1);
     }
 
@@ -151,15 +179,11 @@
 
     .carousel-control {
         --size: clamp(2.5rem, 8vw, 4rem);
-
         position: relative;
-        cursor: pointer;
         display: flex;
         align-content: center;
         justify-content: center;
-        color: white;
-        fill: currentcolor;
-        background: dodgerblue;
+        background: unset;
         border: none;
         width: var(--size);
         height: var(--size);
@@ -182,6 +206,7 @@
         display: flex;
         gap: 1rem;
         padding: 1rem;
+        z-index: 1;
     }
 
     .carousel-dots .dot {
@@ -189,14 +214,14 @@
         padding: 0;
         font-size: 0;
         color: transparent;
-        border: 3px solid white;
-        background-color: white;
+        border: 3px solid #ececec;
+        background-color: #ececec;
         border-radius: 50%;
         width: var(--size);
         height: var(--size);
     }
 
     .carousel-dots .dot.active {
-        background-color: dodgerblue;
+        background-color: #44ab9f;
     }
 </style>
