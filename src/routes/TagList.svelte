@@ -25,7 +25,12 @@
 
 <style>
     ul {
-        width: 100px;
+        margin: 10px;
+        padding: 0;
         list-style: none;
+    }
+
+    li {
+        margin: 0 0 4px 0;
     }
 </style>

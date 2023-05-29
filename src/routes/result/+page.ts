@@ -21,7 +21,7 @@ export const load = (async ({ fetch }): Promise<AiResponse> => {
     const data = await res.json();
 
     return {
-        description: data.description,
+        description: data.concept,
         images: data.images
     };
 }) satisfies PageLoad;
