@@ -7,10 +7,12 @@
     import { headingStore } from "../stores";
 
     export let data: PageData;
+    let description = "";
+    let images = [""];
 
     $headingStore = "Generation complete!\nYour game is:";
 
-    let { description, images } = data;
+    $: ({ description, images } = data);
 
     let previousPage: string = base;
 
