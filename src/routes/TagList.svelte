@@ -5,32 +5,31 @@
     export let tags: string[];
 </script>
 
-<div class="tags">
-    <ul>
-        {#each { length: 5 } as _, i}
-            <li>
-                {#if $selectedTagsStore}
-                    {#if $selectedTagsStore.includes(tags[i])}
-                        <Tag id={tags[i]} checked={true} />
-                    {:else}
-                        <Tag id={tags[i]} checked={false} />
-                    {/if}
+<ul>
+    {#each { length: 5 } as _, i}
+        <li>
+            {#if $selectedTagsStore}
+                {#if $selectedTagsStore.includes(tags[i])}
+                    <Tag id={tags[i]} checked={true} />
                 {:else}
                     <Tag id={tags[i]} checked={false} />
                 {/if}
-            </li>
-        {/each}
-    </ul>
-</div>
+            {:else}
+                <Tag id={tags[i]} checked={false} />
+            {/if}
+        </li>
+    {/each}
+</ul>
 
 <style>
     ul {
+        display: table;
         margin: 10px;
         padding: 0;
         list-style: none;
     }
 
     li {
-        margin: 0 0 4px 0;
+        margin: 0 0 14px 0;
     }
 </style>

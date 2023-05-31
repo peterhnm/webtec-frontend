@@ -33,8 +33,8 @@
                 !(target.tagName === "INPUT" && target.type === "checkbox")
             ) {
                 visible = false;
-                event.stopPropagation();
-                event.preventDefault();
+                // event.stopPropagation();
+                // event.preventDefault();
             }
         });
     });
@@ -196,8 +196,13 @@
     }
 
     .selectedTags {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 13px;
         grid-area: selectedTags;
-        min-height: 58px;
+        padding: 13px;
+        min-height: 32px;
+
         background: #bee6dc;
         border-radius: 15px;
     }
