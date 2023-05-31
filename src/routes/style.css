@@ -8,8 +8,8 @@ button {
     align-items: center;
 
     background: #44ab9f;
-    border: solid #000 1px;
     border-radius: 5px;
+    border: none;
 
     font-family: "Inter", sans-serif;
     font-style: normal;
