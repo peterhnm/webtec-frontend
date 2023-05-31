@@ -69,9 +69,9 @@
     @media (max-width: 480px) {
         .main {
             grid-template-areas:
-                    "image"
-                    "desc"
-                    "button";
+                "image"
+                "desc"
+                "button";
             grid-template-columns: 1fr;
             grid-template-rows: auto;
             place-items: center;
