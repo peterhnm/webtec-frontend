@@ -102,16 +102,19 @@
     input[type="text"] {
         min-height: 42px;
 
-        border: solid #000 1px;
+        border: none;
         border-radius: 3px;
         font-family: "Inter", sans-serif;
-        font-style: italic;
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
 
         color: #000000;
         background: #bee6dc;
+    }
+
+    input[type="text"]:placeholder-shown {
+        font-style: italic;
     }
 
     small {
@@ -134,7 +137,7 @@
             "tags";
         width: 100%;
         max-width: 545px;
-        margin: 77px auto 0 auto;
+        margin: 77px auto 20px auto;
         padding: 6px;
     }
 
