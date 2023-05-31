@@ -20,9 +20,11 @@
         justify-self: start;
         align-self: end;
         max-height: 240px;
+        margin: 0 0 2px 0;
 
         background: #bee6dc;
-        border: solid #000 1px;
-        border-radius: 3px;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+        border: none;
     }
 </style>

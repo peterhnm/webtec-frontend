@@ -54,13 +54,33 @@
             "button button";
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto 72px;
+        grid-column-gap: 5px;
+        grid-row-gap: 15px;
         width: 100%;
         max-width: 875px;
-        margin: 77px auto 0 auto;
+        margin: 77px auto 20px auto;
     }
 
     button {
         grid-area: button;
         justify-self: start;
+    }
+
+    @media (max-width: 480px) {
+        .main {
+            grid-template-areas:
+                    "image"
+                    "desc"
+                    "button";
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            place-items: center;
+            place-content: center;
+        }
+
+        button {
+            justify-self: center;
+            height: 72px;
+        }
     }
 </style>
