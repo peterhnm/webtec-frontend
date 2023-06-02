@@ -2,13 +2,13 @@
     import { invalidate } from "$app/navigation";
     import GameDescription from "./GameDescription.svelte";
     import GameDesign from "./GameDesign.svelte";
-    import { headingStore, promptStore } from "../stores";
-    import { selectedTagsStore } from "../stores.js";
+    import { headingStore, promptStore, selectedTagsStore } from "../stores";
 
     $headingStore = "Generation complete!\nYour game is:";
 
     async function getData() {
-        const url: string = `https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io?theme=${$promptStore}&tags=${$selectedTagsStore}`;
+        const url: string = `https://jambuddyserver.onrender.com?theme=${$promptStore}&tags=${$selectedTagsStore}`;
+        console.log(url);
         const res = await fetch(url);
         return await res.json();
     }
