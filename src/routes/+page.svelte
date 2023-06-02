@@ -1,5 +1,4 @@
 <script lang="ts">
-    import type { PageData } from "./$types";
     import { goto } from "$app/navigation";
     import { base } from "$app/paths";
     import { headingStore, promptStore, selectedTagsStore } from "./stores";
@@ -130,7 +129,6 @@
             "tags";
         width: 100%;
         max-width: 545px;
-        margin: 77px auto 20px auto;
         padding: 6px;
     }
 

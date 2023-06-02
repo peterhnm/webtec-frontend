@@ -46,7 +46,6 @@
         grid-row-gap: 15px;
         width: 100%;
         max-width: 875px;
-        margin: 77px auto 20px auto;
     }
 
     button {

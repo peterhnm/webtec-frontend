@@ -38,7 +38,7 @@
     main {
         grid-area: main;
         box-sizing: border-box;
-        min-height: 65vh;
+        margin: 77px auto;
     }
 
     footer {

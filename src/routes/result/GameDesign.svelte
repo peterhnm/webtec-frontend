@@ -60,37 +60,37 @@
     </div>
     <button bind:this={prev} class="carousel-control prev" title="Go to previous item">
         <svg
-            width="40"
+            fill="none"
             height="40"
             viewBox="0 0 40 40"
-            fill="none"
+            width="40"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <circle cx="20" cy="20" r="20" transform="rotate(-180 20 20)" fill="white" />
+            <circle cx="20" cy="20" fill="white" r="20" transform="rotate(-180 20 20)" />
             <path
                 d="M25 7L10 20.0345L25 34"
                 stroke="#999999"
-                stroke-width="3"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                stroke-width="3"
             />
         </svg>
     </button>
     <button bind:this={next} class="carousel-control next" title="Go to next item">
         <svg
-            width="40"
+            fill="none"
             height="40"
             viewBox="0 0 40 40"
-            fill="none"
+            width="40"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <circle cx="20" cy="20" r="20" transform="rotate(-180 20 20)" fill="white" />
+            <circle cx="20" cy="20" fill="white" r="20" transform="rotate(-180 20 20)" />
             <path
                 d="M16 34L31 20.9655L16 7"
                 stroke="#999999"
-                stroke-width="3"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                stroke-width="3"
             />
         </svg>
     </button>
@@ -113,8 +113,8 @@
         place-items: center;
         place-content: center;
         overflow: hidden;
-        max-width: 400px;
-        max-height: 400px;
+        width: 400px;
+        height: 400px;
 
         background: #bee6dc;
         border-radius: 15px;
@@ -178,16 +178,11 @@
     }
 
     .carousel-control {
-        --size: clamp(2.5rem, 8vw, 4rem);
         position: relative;
         display: flex;
         align-content: center;
         justify-content: center;
         background: unset;
-        border: none;
-        width: var(--size);
-        height: var(--size);
-        padding: 0.25rem;
         touch-action: manipulation;
         transform: translateY(0);
     }
