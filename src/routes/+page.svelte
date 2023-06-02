@@ -1,15 +1,10 @@
 <script lang="ts">
-    import type { PageData } from "./$types";
     import { goto } from "$app/navigation";
     import { base } from "$app/paths";
     import { headingStore, promptStore, selectedTagsStore } from "./stores";
     import { onMount } from "svelte";
     import Dropdown from "./Dropdown.svelte";
     import Tag from "./Tag.svelte";
-
-    export let data: PageData;
-
-    let { tags } = data; // all possible tags
 
     $headingStore = "Generate your Game Jam Idea within minutes!";
 
@@ -21,7 +16,6 @@
             visible = true;
         });
 
-        // TODO use 'focusout' and research on how to keep focus
         window.addEventListener("click", (event) => {
             // hide Dropdown if we click outside it
             const target = event.target as HTMLElement;
@@ -33,8 +27,6 @@
                 !(target.tagName === "INPUT" && target.type === "checkbox")
             ) {
                 visible = false;
-                // event.stopPropagation();
-                // event.preventDefault();
             }
         });
     });
@@ -94,7 +86,7 @@
     </div>
 
     {#if visible}
-        <Dropdown {tags} />
+        <Dropdown />
     {/if}
 </div>
 
