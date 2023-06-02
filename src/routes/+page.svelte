@@ -7,10 +7,6 @@
     import Dropdown from "./Dropdown.svelte";
     import Tag from "./Tag.svelte";
 
-    export let data: PageData;
-
-    let { tags } = data; // all possible tags
-
     $headingStore = "Generate your Game Jam Idea within minutes!";
 
     let searchBar: HTMLInputElement;
@@ -21,7 +17,6 @@
             visible = true;
         });
 
-        // TODO use 'focusout' and research on how to keep focus
         window.addEventListener("click", (event) => {
             // hide Dropdown if we click outside it
             const target = event.target as HTMLElement;
@@ -33,8 +28,6 @@
                 !(target.tagName === "INPUT" && target.type === "checkbox")
             ) {
                 visible = false;
-                // event.stopPropagation();
-                // event.preventDefault();
             }
         });
     });
@@ -94,7 +87,7 @@
     </div>
 
     {#if visible}
-        <Dropdown {tags} />
+        <Dropdown />
     {/if}
 </div>
 
