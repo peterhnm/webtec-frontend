@@ -27,4 +27,77 @@
 <label for={id}>
     <input {checked} {id} on:click={toggleTag} type="checkbox" />
     {id}
+    {#if checked}
+        <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <circle cx="10" cy="10" r="10" fill="white" />
+            <path
+                d="M3 10L17 10"
+                stroke="#999999"
+                stroke-width="2"
+                stroke-linecap="round"
+            />
+        </svg>
+    {:else}
+        <svg
+            fill="none"
+            height="20"
+            viewBox="0 0 20 20"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <circle cx="10" cy="10" fill="white" r="10" />
+            <path
+                d="M3 10L17 10"
+                stroke="#999999"
+                stroke-linecap="round"
+                stroke-width="2"
+            />
+            <path
+                d="M10 3L10 17"
+                stroke="#999999"
+                stroke-linecap="round"
+                stroke-width="2"
+            />
+        </svg>
+    {/if}
 </label>
+
+<style>
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    label {
+        display: inline-grid;
+        grid-template-areas: "text icon";
+        grid-gap: 8px;
+        align-items: center;
+        padding: 2px 0 2px 8px;
+
+        min-height: 28px;
+        width: 130px;
+
+        border: none;
+        border-radius: 15px;
+
+        font-family: "Inter", sans-serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+
+        background: #70c4b0;
+    }
+
+    svg {
+        grid-area: icon;
+        justify-self: end;
+        margin-right: 8px;
+    }
+</style>
