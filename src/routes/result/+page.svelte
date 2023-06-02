@@ -1,50 +1,36 @@
 <script lang="ts">
-    import type { PageData } from "./$types";
-    import { afterNavigate, invalidate } from "$app/navigation";
-    import { base } from "$app/paths";
+    import { invalidate } from "$app/navigation";
     import GameDescription from "./GameDescription.svelte";
     import GameDesign from "./GameDesign.svelte";
-    import { headingStore } from "../stores";
-
-    export let data: PageData;
-    let description = "";
-    let images = [""];
+    import { headingStore, promptStore } from "../stores";
+    import { selectedTagsStore } from "../stores.js";
 
     $headingStore = "Generation complete!\nYour game is:";
 
-    $: ({ description, images } = data);
-
-    let previousPage: string = base;
-
-    afterNavigate(({ from }) => {
-        previousPage = from?.url.pathname || previousPage;
-    });
-
-    // function goBack() {
-    //     goto(previousPage);
-    // }
+    async function getData() {
+        const url: string = `https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io?theme=${$promptStore}&tags=${$selectedTagsStore}`;
+        const res = await fetch(url);
+        return await res.json();
+    }
 
     function reload() {
         // FIXME
         // execute the load function again = new post request
         invalidate((url) => url.pathname === `/`);
     }
+
+    const data = getData();
 </script>
 
 <!-- <button on:click={goBack}>Back</button> -->
 
 <div class="main">
-    {#if description}
-        <GameDescription bind:data={description} />
-    {:else}
+    {#await data}
         <p>loading ...</p>
-    {/if}
-
-    {#if images}
-        <GameDesign bind:data={images} />
-    {:else}
-        <p>loading ...</p>
-    {/if}
+    {:then res}
+        <GameDescription data={res.concept} />
+        <GameDesign data={res.images} />
+    {/await}
 
     <button on:click={reload}>Try again</button>
 </div>
