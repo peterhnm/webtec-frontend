@@ -187,14 +187,12 @@
     }
 
     .selectedTags {
-        display: inline-flex;
+        display: flex;
         flex-wrap: wrap;
         gap: 13px;
         grid-area: selectedTags;
-        padding: 13px;
         min-height: 32px;
 
-        background: #bee6dc;
         border-radius: 15px;
     }
 </style>

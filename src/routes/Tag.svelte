@@ -24,10 +24,10 @@
     };
 </script>
 
-<label for={id}>
-    <input {checked} {id} on:click={toggleTag} type="checkbox" />
-    {id}
-    {#if checked}
+{#if checked}
+    <label for={id}>
+        {id}
+        <input {checked} {id} on:click={toggleTag} type="checkbox" />
         <svg
             width="20"
             height="20"
@@ -43,7 +43,11 @@
                 stroke-linecap="round"
             />
         </svg>
-    {:else}
+    </label>
+{:else}
+    <label for={id} class="unchecked">
+        {id}
+        <input {checked} {id} on:click={toggleTag} type="checkbox" />
         <svg
             fill="none"
             height="20"
@@ -65,8 +69,8 @@
                 stroke-width="2"
             />
         </svg>
-    {/if}
-</label>
+    </label>
+{/if}
 
 <style>
     input[type="checkbox"] {
@@ -77,11 +81,11 @@
         display: inline-grid;
         grid-template-areas: "text icon";
         grid-gap: 8px;
+
         align-items: center;
         padding: 2px 0 2px 8px;
-
         min-height: 28px;
-        width: 130px;
+        cursor: pointer;
 
         border: none;
         border-radius: 15px;
@@ -93,6 +97,10 @@
         line-height: 19px;
 
         background: #70c4b0;
+    }
+
+    .unchecked {
+        width: 130px;
     }
 
     svg {
