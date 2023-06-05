@@ -42,6 +42,14 @@
         goto(`${base}/result`);
     }
 
+    async function getData() {
+        const url: string = "https://jambuddyserver.onrender.com/tags";
+        const res = await fetch(url);
+        return await res.json();
+    }
+
+    const data = getData();
+
     let selectedTags: string[];
     selectedTagsStore.subscribe((value: string[]) => {
         selectedTags = value;
@@ -86,7 +94,11 @@
     </div>
 
     {#if visible}
-        <Dropdown />
+        {#await data}
+            <p>loading ...</p>
+        {:then tags}
+            <Dropdown {tags} />
+        {/await}
     {/if}
 </div>
 

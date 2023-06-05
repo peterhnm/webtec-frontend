@@ -1,21 +1,11 @@
 <script lang="ts">
     import TagList from "./TagList.svelte";
 
-    async function getData() {
-        const url: string = "https://jambuddyserver.onrender.com/tags";
-        const res = await fetch(url);
-        return await res.json();
-    }
-
-    const data = getData();
+    export let tags: string[];
 </script>
 
 <div class="dropdown">
-    {#await data}
-        <p>loading ...</p>
-    {:then tags}
-        <TagList {tags} />
-    {/await}
+    <TagList {tags} />
 </div>
 
 <style>
