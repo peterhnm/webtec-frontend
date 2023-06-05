@@ -54,6 +54,7 @@
         display: grid;
         grid-area: desc;
         grid-template: "container" 1fr;
+        width: 100%;
     }
 
     .gameDesc > * {
@@ -116,8 +117,11 @@
         font-size: 14px;
         line-height: 17px;
 
-        color: #999999;
+        color: #999;
         cursor: pointer;
+        border-radius: 15px;
+        background: #fff;
+        padding: 2px;
     }
 
     .pacman {
