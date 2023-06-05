@@ -21,17 +21,16 @@
     const data = getData();
 </script>
 
-<!-- <button on:click={goBack}>Back</button> -->
-
 <div class="main">
+    <span class="pacman"></span>
+    <span class="loader">Loading</span>
     {#await data}
-        <p>loading ...</p>
     {:then res}
         <GameDescription data={res.concept} />
         <GameDesign data={res.images} />
+        <button on:click={reload}>Try again</button>
     {/await}
 
-    <button on:click={reload}>Try again</button>
 </div>
 
 <style>
@@ -43,7 +42,7 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto 72px;
         grid-column-gap: 5px;
-        grid-row-gap: 15px;
+        /* grid-row-gap: 15px; */
         width: 100%;
         max-width: 875px;
     }
@@ -70,4 +69,105 @@
             height: 72px;
         }
     }
+
+    /* ------ Pacman -----> */
+    .pacman {
+        grid-column: 1/2;
+        grid-row: 1;
+        align-self: center;
+        justify-self: center;
+        position: relative;
+        border: 24px solid #44ab9f;
+        border-radius: 50%;
+        box-sizing: border-box;
+        animation: eat 1s linear infinite;
+    }
+
+    .pacman::after, .pacman::before {
+        content: '';
+        position: absolute;
+        left: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #999;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        opacity: 0;
+        animation: move 2s linear infinite;
+    }
+
+    .pacman::before {
+        animation-delay: 1s;
+    }
+
+    @keyframes eat {
+        0%, 49% {
+            border-right-color: #44ab9f
+        }
+        50%, 100% {
+            border-right-color: #0000
+        }
+    }
+
+    @keyframes move {
+        0% {
+            left: 75px;
+            opacity: 1
+        }
+        50% {
+            left: 0px;
+            opacity: 1
+        }
+        52%, 100% {
+            left: -5px;
+            opacity: 0;
+        }
+    }
+
+    /* <----- Pacman ------ */
+
+    /* ------ Loader -----> */
+    .loader {
+        grid-column: 1/2;
+        grid-row: 2;
+        align-self: start;
+        justify-self: center;
+        color: #999;
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+
+        font-family: "Inter", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .loader::after {
+        content: '';
+        width: 4px;
+        height: 4px;
+        background: currentColor;
+        position: absolute;
+        bottom: 5px;
+        right: -8px;
+        box-sizing: border-box;
+        animation: animloader 1s linear infinite;
+    }
+
+    @keyframes animloader {
+        0% {
+            box-shadow: 10px 0 rgba(255, 255, 255, 0), 20px 0 rgba(255, 255, 255, 0);
+        }
+        50% {
+            box-shadow: 10px 0 #999, 20px 0 rgba(255, 255, 255, 0);
+        }
+        100% {
+            box-shadow: 10px 0 #999, 20px 0 #999;
+        }
+    }
+
+    /* <----- Loader ------ */
 </style>
