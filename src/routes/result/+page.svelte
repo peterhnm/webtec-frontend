@@ -4,10 +4,11 @@
     import GameDesign from "./GameDesign.svelte";
     import { headingStore, promptStore } from "../stores";
     import { selectedTagsStore } from "../stores.js";
+    import type { AiResponse } from "./types";
 
     $headingStore = "Generation complete!\nYour game is:";
 
-    async function getData() {
+    async function getData(): Promise<AiResponse> {
         const url: string = `https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io?theme=${$promptStore}&tags=${$selectedTagsStore}`;
         const res = await fetch(url);
         return await res.json();
@@ -21,17 +22,18 @@
     const data = getData();
 </script>
 
-<div class="main">
-    <span class="pacman"></span>
-    <span class="loader">Loading</span>
-    {#await data}
-    {:then res}
+{#await data}
+    <div class="main-loader">
+        <span class="pacman" />
+        <span class="loader">Loading</span>
+    </div>
+{:then res}
+    <div class="main">
         <GameDescription data={res.concept} />
         <GameDesign data={res.images} />
         <button on:click={reload}>Try again</button>
-    {/await}
-
-</div>
+    </div>
+{/await}
 
 <style>
     .main {
@@ -42,9 +44,13 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto 72px;
         grid-column-gap: 5px;
-        /* grid-row-gap: 15px; */
+        grid-row-gap: 15px;
         width: 100%;
         max-width: 875px;
+    }
+
+    .main-loader {
+        display: grid;
     }
 
     button {
@@ -83,8 +89,9 @@
         animation: eat 1s linear infinite;
     }
 
-    .pacman::after, .pacman::before {
-        content: '';
+    .pacman::after,
+    .pacman::before {
+        content: "";
         position: absolute;
         left: 50px;
         top: 50%;
@@ -103,24 +110,27 @@
     }
 
     @keyframes eat {
-        0%, 49% {
-            border-right-color: #44ab9f
+        0%,
+        49% {
+            border-right-color: #44ab9f;
         }
-        50%, 100% {
-            border-right-color: #0000
+        50%,
+        100% {
+            border-right-color: #0000;
         }
     }
 
     @keyframes move {
         0% {
             left: 75px;
-            opacity: 1
+            opacity: 1;
         }
         50% {
             left: 0px;
-            opacity: 1
+            opacity: 1;
         }
-        52%, 100% {
+        52%,
+        100% {
             left: -5px;
             opacity: 0;
         }
@@ -146,7 +156,7 @@
     }
 
     .loader::after {
-        content: '';
+        content: "";
         width: 4px;
         height: 4px;
         background: currentColor;
