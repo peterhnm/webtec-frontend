@@ -1,10 +1,12 @@
 <script lang="ts">
-    export let data: string;
+    import type { Concept } from "./types";
+
+    export let data: Concept;
 </script>
 
 <div class="gameDesc">
-    <p>Game Description:</p>
-    <textarea readonly>{data}</textarea>
+    <p>{data.title}</p>
+    <textarea readonly>{data.description}</textarea>
 </div>
 
 <style>

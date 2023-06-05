@@ -3,12 +3,12 @@
     import GameDescription from "./GameDescription.svelte";
     import GameDesign from "./GameDesign.svelte";
     import { headingStore, promptStore, selectedTagsStore } from "../stores";
+    import type { AiResponse } from "./types";
 
     $headingStore = "Generation complete!\nYour game is:";
 
-    async function getData() {
+    async function getData(): Promise<AiResponse> {
         const url: string = `https://jambuddyserver.onrender.com?theme=${$promptStore}&tags=${$selectedTagsStore}`;
-        console.log(url);
         const res = await fetch(url);
         return await res.json();
     }
@@ -21,8 +21,6 @@
 
     const data = getData();
 </script>
-
-<!-- <button on:click={goBack}>Back</button> -->
 
 <div class="main">
     {#await data}
