@@ -34,7 +34,9 @@
         // Workaround
         selectedTagsStore.subscribe(() => {
             // eslint-disable-next-line no-undef
-            const boxes: NodeListOf<HTMLInputElement> = selectedTags.querySelectorAll("input[type=\"checkbox\"]");
+            const boxes: NodeListOf<HTMLInputElement> = selectedTags.querySelectorAll(
+                'input[type="checkbox"]'
+            );
             for (const box of boxes) {
                 box.checked = true;
             }
@@ -93,7 +95,6 @@
         </div>
         <small>Added Tags</small>
     </div>
-
 </div>
 
 <style>
