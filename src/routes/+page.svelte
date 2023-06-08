@@ -10,6 +10,7 @@
 
     let searchBar: HTMLInputElement;
     let visible = false;
+    let selectedTags: HTMLDivElement;
 
     onMount(() => {
         searchBar.addEventListener("focusin", () => {
@@ -29,6 +30,15 @@
                 visible = false;
             }
         });
+
+        // Workaround
+        selectedTagsStore.subscribe(() => {
+            // eslint-disable-next-line no-undef
+            const boxes: NodeListOf<HTMLInputElement> = selectedTags.querySelectorAll("input[type=\"checkbox\"]");
+            for (const box of boxes) {
+                box.checked = true;
+            }
+        });
     });
 
     function processData() {
@@ -41,11 +51,6 @@
         // Redirect to result page
         goto(`${base}/result`);
     }
-
-    let selectedTags: string[];
-    selectedTagsStore.subscribe((value: string[]) => {
-        selectedTags = value;
-    });
 </script>
 
 <div class="main">
@@ -79,9 +84,9 @@
             <small>Add tags to specify what kind of game you want</small>
         </div>
 
-        <div class="selectedTags">
-            {#if selectedTags}
-                {#each selectedTags as tag}
+        <div bind:this={selectedTags} class="selectedTags">
+            {#if $selectedTagsStore}
+                {#each $selectedTagsStore as tag}
                     <Tag id={tag} checked={true} />
                 {/each}
             {/if}
@@ -115,6 +120,7 @@
     }
 
     small {
+        margin-top: 6px;
         width: 100%;
 
         font-family: "Inter", sans-serif;
