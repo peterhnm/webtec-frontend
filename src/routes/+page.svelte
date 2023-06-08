@@ -66,6 +66,10 @@
     </div>
 
     <div class="tags">
+        {#if visible}
+            <Dropdown />
+        {/if}
+
         <div class="search">
             <input
                 bind:this={searchBar}
@@ -85,9 +89,6 @@
         <small>Added Tags</small>
     </div>
 
-    {#if visible}
-        <Dropdown />
-    {/if}
 </div>
 
 <style>
@@ -107,6 +108,10 @@
 
     input[type="text"]:placeholder-shown {
         font-style: italic;
+    }
+
+    p {
+        height: 81px;
     }
 
     small {
@@ -175,6 +180,7 @@
         grid-template-areas:
             "search"
             "selectedTags";
+        position: relative;
     }
 
     .search {
@@ -184,6 +190,7 @@
             "input"
             "small";
         margin-bottom: 33px;
+        z-index: 1; /* otherwise the dropdown will interrupt the selection marker */
     }
 
     .selectedTags {

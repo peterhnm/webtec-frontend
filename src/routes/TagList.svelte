@@ -24,12 +24,12 @@
 <style>
     ul {
         display: table;
-        margin: 10px;
+        margin: 17px 19px 10px;
         padding: 0;
         list-style: none;
     }
 
-    li {
+    li:not(:last-child) {
         margin: 0 0 14px 0;
     }
 </style>

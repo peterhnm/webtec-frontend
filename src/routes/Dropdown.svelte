@@ -21,13 +21,9 @@
 
 <style>
     .dropdown {
-        grid-column: 1;
-        grid-row: 1 / 3;
-
-        justify-self: start;
-        align-self: end;
-        max-height: 240px;
-        margin: 0 0 2px 0;
+        position: absolute;
+        left: 0;
+        bottom: 100%;
 
         background: #bee6dc;
         border-top-right-radius: 3px;
