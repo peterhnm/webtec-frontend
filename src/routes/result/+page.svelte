@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { invalidate } from "$app/navigation";
     import GameDescription from "./GameDescription.svelte";
     import GameDesign from "./GameDesign.svelte";
     import { headingStore, promptStore } from "../stores";
@@ -14,23 +13,21 @@
         return await res.json();
     }
 
-    function reload() {
-        // execute the load function again = new post request
-        invalidate((url) => url.pathname === `/`);
-    }
-
-    const data = getData();
+    let data = getData();
 </script>
 
 <div class="main">
+    <button
+        on:click={() => {
+            data = getData();
+        }}>Try again</button
+    >
     {#await data}
         <GameDescription loading={true} />
         <GameDesign loading={true} />
-        <button on:click={reload} disabled>Try again</button>
     {:then res}
         <GameDescription data={res.concept} loading={false} />
         <GameDesign data={res.images} loading={false} />
-        <button on:click={reload}>Try again</button>
     {/await}
 </div>
 
