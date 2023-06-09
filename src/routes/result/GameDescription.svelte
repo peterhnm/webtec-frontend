@@ -3,6 +3,14 @@
 
     export let data: Concept;
     export let loading: boolean;
+
+    let text: HTMLTextAreaElement;
+
+    function copyToClipboard() {
+        text.select();
+        text.setSelectionRange(0, 99999); // For mobile devices
+        navigator.clipboard.writeText(text.value);
+    }
 </script>
 
 {#if loading}
@@ -13,9 +21,9 @@
     <div class="gameDesc">
         <div class="gameConcept">
             <p>{data.title}</p>
-            <textarea readonly>{data.description}</textarea>
+            <textarea bind:this={text} readonly>{data.description}</textarea>
         </div>
-        <div class="copyBtn">
+        <button class="copyBtn" on:click={copyToClipboard}>
             Copy Text
             <svg
                 width="30"
@@ -45,7 +53,7 @@
                     stroke-linejoin="round"
                 />
             </svg>
-        </div>
+        </button>
     </div>
 {/if}
 
@@ -91,6 +99,7 @@
         margin: 0;
         padding: 0;
 
+        outline: none;
         border: none;
         resize: none;
 
@@ -122,6 +131,12 @@
         border-radius: 15px;
         background: #fff;
         padding: 2px;
+
+        transform: translateY(0);
+    }
+
+    .copyBtn:active {
+        transform: translateY(1px);
     }
 
     .pacman {
