@@ -1,1 +1,1 @@
-(JamBuddy)[https://peterhnm.github.io/webtec-frontend/]
+[JamBuddy](https://peterhnm.github.io/webtec-frontend/)
