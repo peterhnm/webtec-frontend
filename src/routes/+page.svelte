@@ -35,7 +35,7 @@
         selectedTagsStore.subscribe(() => {
             // eslint-disable-next-line no-undef
             const boxes: NodeListOf<HTMLInputElement> = selectedTags.querySelectorAll(
-                'input[type="checkbox"]'
+                "input[type=\"checkbox\"]"
             );
             for (const box of boxes) {
                 box.checked = true;
@@ -53,6 +53,16 @@
         // Redirect to result page
         goto(`${base}/result`);
     }
+
+    async function getData() {
+        const url: string =
+            "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/tags";
+        const res = await fetch(url);
+        return await res.json();
+    }
+
+    const data = getData();
+
 </script>
 
 <div class="main">
@@ -74,7 +84,11 @@
 
     <div class="tags">
         {#if visible}
-            <Dropdown />
+            {#await data}
+                <Dropdown loading={true} />
+            {:then tags}
+                <Dropdown {tags} loading={false} />
+            {/await}
         {/if}
 
         <div class="search">
