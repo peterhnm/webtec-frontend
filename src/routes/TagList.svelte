@@ -4,23 +4,35 @@
 
     export let tags: string[];
     export let loading: boolean;
+
+    let displayedTags = tags;
+    let displayLength = 5;
+
+    $: (displayedTags = filterSelectedTags($selectedTagsStore));
+    $: (displayLength = getDisplayLength(displayedTags));
+
+    //$: (displayLength = displayedTags.length > 5 ? 5 : displayedTags.length);
+
+    function filterSelectedTags(selectedTags: string[]) {
+        if (tags) {
+            return tags.filter(item => !selectedTags.includes(item));
+        }
+    }
+
+    function getDisplayLength(displayedTags: string[]) {
+        if (displayedTags) {
+            return displayedTags.length > 5 ? 5 : displayedTags.length;
+        }
+    }
 </script>
 
 <ul>
-    {#each { length: 5 } as _, i}
+    {#each { length: displayLength } as _, i}
         <li>
             {#if loading}
                 <span class="dropdownLoader"></span>
             {:else}
-                {#if $selectedTagsStore}
-                    {#if $selectedTagsStore.includes(tags[i])}
-                        <Tag id={tags[i]} checked={true} />
-                    {:else}
-                        <Tag id={tags[i]} checked={false} />
-                    {/if}
-                {:else}
-                    <Tag id={tags[i]} checked={false} />
-                {/if}
+                <Tag id={displayedTags[i]} checked={false} />
             {/if}
         </li>
     {/each}

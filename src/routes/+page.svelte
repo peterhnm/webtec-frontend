@@ -11,6 +11,7 @@
     let searchBar: HTMLInputElement;
     let visible = false;
     let selectedTags: HTMLDivElement;
+    let dropdown: HTMLDivElement;
 
     onMount(() => {
         searchBar.addEventListener("focusin", () => {
@@ -34,11 +35,19 @@
         // Workaround
         selectedTagsStore.subscribe(() => {
             // eslint-disable-next-line no-undef
-            const boxes: NodeListOf<HTMLInputElement> = selectedTags.querySelectorAll(
+            const selectedBoxes: NodeListOf<HTMLInputElement> = selectedTags.querySelectorAll(
                 "input[type=\"checkbox\"]"
             );
-            for (const box of boxes) {
+            for (const box of selectedBoxes) {
                 box.checked = true;
+            }
+
+            // eslint-disable-next-line no-undef
+            const dropdownBoxes: NodeListOf<HTMLInputElement> = dropdown.querySelectorAll(
+                "input[type=\"checkbox\"]"
+            );
+            for (const box of dropdownBoxes) {
+                box.checked = false;
             }
         });
     });
@@ -83,13 +92,15 @@
     </div>
 
     <div class="tags">
-        {#if visible}
-            {#await data}
-                <Dropdown loading={true} />
-            {:then tags}
-                <Dropdown {tags} loading={false} />
-            {/await}
-        {/if}
+        <div bind:this={dropdown}>
+            {#if visible}
+                {#await data}
+                    <Dropdown loading={true} />
+                {:then tags}
+                    <Dropdown {tags} loading={false} />
+                {/await}
+            {/if}
+        </div>
 
         <div class="search">
             <input
