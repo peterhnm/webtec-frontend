@@ -11,8 +11,6 @@
     $: displayedTags = filterSelectedTags($selectedTagsStore);
     $: displayLength = getDisplayLength(displayedTags);
 
-    //$: (displayLength = displayedTags.length > 5 ? 5 : displayedTags.length);
-
     function filterSelectedTags(selectedTags: string[]) {
         if (tags) {
             return tags.filter((item) => !selectedTags.includes(item));
@@ -27,15 +25,19 @@
 </script>
 
 <ul>
-    {#each { length: displayLength } as _, i}
-        <li>
-            {#if loading}
+    {#if loading}
+        {#each { length: 5 } as _, i}
+            <li>
                 <span class="dropdownLoader" />
-            {:else}
+            </li>
+        {/each}
+    {:else}
+        {#each { length: displayLength } as _, i}
+            <li>
                 <Tag id={displayedTags[i]} checked={false} />
-            {/if}
-        </li>
-    {/each}
+            </li>
+        {/each}
+    {/if}
 </ul>
 
 <style>
