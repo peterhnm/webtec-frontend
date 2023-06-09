@@ -8,14 +8,14 @@
     let displayedTags = tags;
     let displayLength = 5;
 
-    $: (displayedTags = filterSelectedTags($selectedTagsStore));
-    $: (displayLength = getDisplayLength(displayedTags));
+    $: displayedTags = filterSelectedTags($selectedTagsStore);
+    $: displayLength = getDisplayLength(displayedTags);
 
     //$: (displayLength = displayedTags.length > 5 ? 5 : displayedTags.length);
 
     function filterSelectedTags(selectedTags: string[]) {
         if (tags) {
-            return tags.filter(item => !selectedTags.includes(item));
+            return tags.filter((item) => !selectedTags.includes(item));
         }
     }
 
@@ -30,7 +30,7 @@
     {#each { length: displayLength } as _, i}
         <li>
             {#if loading}
-                <span class="dropdownLoader"></span>
+                <span class="dropdownLoader" />
             {:else}
                 <Tag id={displayedTags[i]} checked={false} />
             {/if}
@@ -55,14 +55,14 @@
         position: relative;
         height: 32px;
         width: 138px;
-        border: 8px solid #70C4B0;
+        border: 8px solid #70c4b0;
         border-radius: 15px;
         box-sizing: border-box;
-        background: #70C4B0;
+        background: #70c4b0;
     }
 
     .dropdownLoader:before {
-        content: '';
+        content: "";
         position: absolute;
         align-self: center;
         width: 20px;
@@ -82,5 +82,4 @@
             transform: translateX(-100%);
         }
     }
-
 </style>

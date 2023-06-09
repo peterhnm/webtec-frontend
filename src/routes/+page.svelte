@@ -35,17 +35,15 @@
         // Workaround
         selectedTagsStore.subscribe(() => {
             // eslint-disable-next-line no-undef
-            const selectedBoxes: NodeListOf<HTMLInputElement> = selectedTags.querySelectorAll(
-                "input[type=\"checkbox\"]"
-            );
+            const selectedBoxes: NodeListOf<HTMLInputElement> =
+                selectedTags.querySelectorAll('input[type="checkbox"]');
             for (const box of selectedBoxes) {
                 box.checked = true;
             }
 
             // eslint-disable-next-line no-undef
-            const dropdownBoxes: NodeListOf<HTMLInputElement> = dropdown.querySelectorAll(
-                "input[type=\"checkbox\"]"
-            );
+            const dropdownBoxes: NodeListOf<HTMLInputElement> =
+                dropdown.querySelectorAll('input[type="checkbox"]');
             for (const box of dropdownBoxes) {
                 box.checked = false;
             }
@@ -71,7 +69,6 @@
     }
 
     const data = getData();
-
 </script>
 
 <div class="main">

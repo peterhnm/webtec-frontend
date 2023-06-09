@@ -7,7 +7,7 @@
 
 <div class="dropdown">
     {#if loading}
-        <TagList loading={loading} />
+        <TagList {loading} />
     {:else}
         <TagList {tags} loading={false} />
     {/if}
