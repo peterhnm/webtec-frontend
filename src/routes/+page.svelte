@@ -12,6 +12,7 @@
     let visible = false;
     let selectedTags: HTMLDivElement;
     let dropdown: HTMLDivElement;
+    let searchTerm: string;
 
     onMount(() => {
         searchBar.addEventListener("focusin", () => {
@@ -94,7 +95,7 @@
                 {#await data}
                     <Dropdown loading={true} />
                 {:then tags}
-                    <Dropdown {tags} loading={false} />
+                    <Dropdown {tags} search={searchTerm} loading={false} />
                 {/await}
             {/if}
         </div>
@@ -102,6 +103,7 @@
         <div class="search">
             <input
                 bind:this={searchBar}
+                bind:value={searchTerm}
                 placeholder="...search for game tags"
                 type="text"
             />

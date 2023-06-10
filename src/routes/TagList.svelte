@@ -1,19 +1,33 @@
 <script lang="ts">
     import Tag from "./Tag.svelte";
     import { selectedTagsStore } from "./stores";
+    import { stringSimilarity } from "string-similarity-js";
 
     export let tags: string[];
+    export let search: string;
     export let loading: boolean;
 
-    let displayedTags = tags;
-    let displayLength = 5;
+    const MIN_ACCURACY = 0.2;
 
-    $: displayedTags = filterSelectedTags($selectedTagsStore);
+    let displayedTags: string[];
+    let displayLength: number;
+
+    $: displayedTags = filterTags($selectedTagsStore, search);
     $: displayLength = getDisplayLength(displayedTags);
 
-    function filterSelectedTags(selectedTags: string[]) {
+    function filterTags(selectedTags: string[], searchTerm: string) {
         if (tags) {
-            return tags.filter((item) => !selectedTags.includes(item));
+            return tags.filter((tag) => {
+                if (searchTerm) {
+                    return (
+                        !selectedTags.includes(tag) &&
+                        (searchFilter(tag, searchTerm) ||
+                            tag.toLowerCase().includes(searchTerm.toLowerCase()))
+                    );
+                } else {
+                    return !selectedTags.includes(tag);
+                }
+            });
         }
     }
 
@@ -21,6 +35,13 @@
         if (displayedTags) {
             return displayedTags.length > 5 ? 5 : displayedTags.length;
         }
+    }
+
+    function searchFilter(tag: string, searchTerm: string): boolean {
+        return (
+            stringSimilarity(tag.toLowerCase(), searchTerm.toLowerCase(), 1) >=
+            MIN_ACCURACY
+        );
     }
 </script>
 
@@ -31,12 +52,14 @@
                 <span class="dropdownLoader" />
             </li>
         {/each}
-    {:else}
+    {:else if displayLength > 0}
         {#each { length: displayLength } as _, i}
             <li>
                 <Tag id={displayedTags[i]} checked={false} />
             </li>
         {/each}
+    {:else}
+        <li><p>Nothing found</p></li>
     {/if}
 </ul>
 

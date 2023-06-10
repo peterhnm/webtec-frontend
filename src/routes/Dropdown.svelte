@@ -2,6 +2,7 @@
     import TagList from "./TagList.svelte";
 
     export let tags: string[];
+    export let search: string;
     export let loading: boolean;
 </script>
 
@@ -9,7 +10,7 @@
     {#if loading}
         <TagList {loading} />
     {:else}
-        <TagList {tags} loading={false} />
+        <TagList {tags} {search} loading={false} />
     {/if}
 </div>
 
