@@ -9,21 +9,8 @@
     let dots: HTMLOListElement;
     let prev: HTMLButtonElement;
     let next: HTMLButtonElement;
-    let downloadBtn: HTMLButtonElement;
+    // let downloadBtn: HTMLButtonElement;
     let current = 0;
-
-    const setActiveDot = () => {
-        let index = 0;
-        dots.childNodes.forEach((el: HTMLElement) => {
-            if (el.nodeType === 1) {
-                index === current
-                    ? el.classList.add(active)
-                    : el.classList.remove(active);
-
-                index++;
-            }
-        });
-    };
 
     onMount(() => {
         let total = items.children.length - 1;
@@ -48,6 +35,36 @@
         prev.addEventListener("click", scrollPrev);
         next.addEventListener("click", scrollNext);
     });
+
+    const setActiveDot = () => {
+        let index = 0;
+        dots.childNodes.forEach((el: HTMLElement) => {
+            if (el.nodeType === 1) {
+                index === current
+                    ? el.classList.add(active)
+                    : el.classList.remove(active);
+
+                index++;
+            }
+        });
+    };
+
+    async function downloadImg() {
+        const url: string = data[current];
+        const res = await fetch(url);
+        const blobImage = await res.blob();
+
+        const href = URL.createObjectURL(blobImage);
+        const anchorElement = document.createElement("a");
+        anchorElement.href = href;
+        anchorElement.download = `jambuddy_image_${current + 1}`;
+
+        document.body.appendChild(anchorElement);
+        anchorElement.click();
+
+        document.body.removeChild(anchorElement);
+        window.URL.revokeObjectURL(href);
+    }
 </script>
 
 <div class="gameImage">
@@ -104,7 +121,7 @@
             />
         </svg>
     </button>
-    <button bind:this={downloadBtn} class="carousel-download" title="Download image">
+    <button class="carousel-download" on:click={downloadImg} title="Download image">
         <svg
             fill="none"
             height="30"
@@ -272,7 +289,7 @@
         width: 400px;
         height: 400px;
         background: linear-gradient(0.25turn, transparent, #fff, transparent),
-            linear-gradient(#ddd, #ddd);
+        linear-gradient(#ddd, #ddd);
         background-color: #fff;
         background-repeat: no-repeat;
         background-position: -315px 0, 0 0, 15px 140px, 65px 145px;
