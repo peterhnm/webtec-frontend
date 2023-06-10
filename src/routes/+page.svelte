@@ -8,6 +8,8 @@
 
     $headingStore = "Generate your Game Jam Idea within minutes!";
 
+    let promptField: HTMLInputElement;
+    let promptFieldDesc: HTMLParagraphElement;
     let searchBar: HTMLInputElement;
     let visible = false;
     let selectedTags: HTMLDivElement;
@@ -37,14 +39,14 @@
         selectedTagsStore.subscribe(() => {
             // eslint-disable-next-line no-undef
             const selectedBoxes: NodeListOf<HTMLInputElement> =
-                selectedTags.querySelectorAll('input[type="checkbox"]');
+                selectedTags.querySelectorAll("input[type=\"checkbox\"]");
             for (const box of selectedBoxes) {
                 box.checked = true;
             }
 
             // eslint-disable-next-line no-undef
             const dropdownBoxes: NodeListOf<HTMLInputElement> =
-                dropdown.querySelectorAll('input[type="checkbox"]');
+                dropdown.querySelectorAll("input[type=\"checkbox\"]");
             for (const box of dropdownBoxes) {
                 box.checked = false;
             }
@@ -53,8 +55,11 @@
 
     function processData() {
         // TODO Display error message when no prompt is given
-        if (!prompt) {
-            console.error("No prompt given!");
+        if (!$promptStore) {
+            promptField.select();
+            promptField.style.outline = "2px solid red";
+            promptFieldDesc.innerHTML = "Please enter a prompt!";
+            promptFieldDesc.style.color = "red";
             return;
         }
 
@@ -80,11 +85,12 @@
 
     <div class="prompt">
         <input
+            bind:this={promptField}
             bind:value={$promptStore}
             placeholder="...enter Game Jam Theme here"
             type="text"
         />
-        <small>What is the theme of your Game Jam?</small>
+        <small bind:this={promptFieldDesc}>What is the theme of your Game Jam?</small>
 
         <button on:click={processData}>Generate</button>
     </div>
@@ -124,6 +130,7 @@
 <style>
     input[type="text"] {
         min-height: 42px;
+        min-width: 358px;
 
         border: none;
         border-radius: 3px;
