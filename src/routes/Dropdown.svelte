@@ -1,33 +1,23 @@
 <script lang="ts">
     import TagList from "./TagList.svelte";
 
-    async function getData() {
-        const url: string =
-            "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/tags";
-        const res = await fetch(url);
-        return await res.json();
-    }
-
-    const data = getData();
+    export let tags: string[];
+    export let loading: boolean;
 </script>
 
 <div class="dropdown">
-    {#await data}
-        <p>loading ...</p>
-    {:then tags}
-        <TagList {tags} />
-    {/await}
+    {#if loading}
+        <TagList {loading} />
+    {:else}
+        <TagList {tags} loading={false} />
+    {/if}
 </div>
 
 <style>
     .dropdown {
-        grid-column: 1;
-        grid-row: 1 / 3;
-
-        justify-self: start;
-        align-self: end;
-        max-height: 240px;
-        margin: 0 0 2px 0;
+        position: absolute;
+        left: 0;
+        bottom: 100%;
 
         background: #bee6dc;
         border-top-right-radius: 3px;

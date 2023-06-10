@@ -1,37 +1,34 @@
 <script lang="ts">
-    import { invalidate } from "$app/navigation";
     import GameDescription from "./GameDescription.svelte";
     import GameDesign from "./GameDesign.svelte";
     import { headingStore, promptStore } from "../stores";
     import { selectedTagsStore } from "../stores.js";
+    import type { AiResponse } from "./types";
 
     $headingStore = "Generation complete!\nYour game is:";
 
-    async function getData() {
+    async function getData(): Promise<AiResponse> {
         const url: string = `https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io?theme=${$promptStore}&tags=${$selectedTagsStore}`;
         const res = await fetch(url);
         return await res.json();
     }
 
-    function reload() {
-        // execute the load function again = new post request
-        invalidate((url) => url.pathname === `/`);
-    }
-
-    const data = getData();
+    let data = getData();
 </script>
 
-<!-- <button on:click={goBack}>Back</button> -->
-
 <div class="main">
+    <button
+        on:click={() => {
+            data = getData();
+        }}>Try again</button
+    >
     {#await data}
-        <p>loading ...</p>
+        <GameDescription loading={true} />
+        <GameDesign loading={true} />
     {:then res}
-        <GameDescription data={res.concept} />
-        <GameDesign data={res.images} />
+        <GameDescription data={res.concept} loading={false} />
+        <GameDesign data={res.images} loading={false} />
     {/await}
-
-    <button on:click={reload}>Try again</button>
 </div>
 
 <style>
@@ -42,11 +39,10 @@
             "button button";
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto 72px;
-        grid-column-gap: 5px;
-        grid-row-gap: 15px;
+        grid-column-gap: 15px;
+        grid-row-gap: 18px;
         width: 100%;
         max-width: 875px;
-        margin: 77px auto 20px auto;
     }
 
     button {
