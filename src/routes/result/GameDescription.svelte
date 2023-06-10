@@ -129,7 +129,7 @@
         color: #999;
         cursor: pointer;
         border-radius: 15px;
-        background: #fff;
+        background: unset;
         padding: 2px;
 
         transform: translateY(0);
