@@ -10,6 +10,8 @@
 
     let searchBar: HTMLInputElement;
     let visible = false;
+    let selectedTags: HTMLDivElement;
+    let dropdown: HTMLDivElement;
 
     onMount(() => {
         searchBar.addEventListener("focusin", () => {
@@ -27,6 +29,23 @@
                 !(target.tagName === "INPUT" && target.type === "checkbox")
             ) {
                 visible = false;
+            }
+        });
+
+        // Workaround
+        selectedTagsStore.subscribe(() => {
+            // eslint-disable-next-line no-undef
+            const selectedBoxes: NodeListOf<HTMLInputElement> =
+                selectedTags.querySelectorAll('input[type="checkbox"]');
+            for (const box of selectedBoxes) {
+                box.checked = true;
+            }
+
+            // eslint-disable-next-line no-undef
+            const dropdownBoxes: NodeListOf<HTMLInputElement> =
+                dropdown.querySelectorAll('input[type="checkbox"]');
+            for (const box of dropdownBoxes) {
+                box.checked = false;
             }
         });
     });
@@ -49,11 +68,6 @@
     }
 
     const data = getData();
-
-    let selectedTags: string[];
-    selectedTagsStore.subscribe((value: string[]) => {
-        selectedTags = value;
-    });
 </script>
 
 <div class="main">
@@ -74,6 +88,16 @@
     </div>
 
     <div class="tags">
+        <div bind:this={dropdown}>
+            {#if visible}
+                {#await data}
+                    <Dropdown loading={true} />
+                {:then tags}
+                    <Dropdown {tags} loading={false} />
+                {/await}
+            {/if}
+        </div>
+
         <div class="search">
             <input
                 bind:this={searchBar}
@@ -83,23 +107,15 @@
             <small>Add tags to specify what kind of game you want</small>
         </div>
 
-        <div class="selectedTags">
-            {#if selectedTags}
-                {#each selectedTags as tag}
+        <div bind:this={selectedTags} class="selectedTags">
+            {#if $selectedTagsStore}
+                {#each $selectedTagsStore as tag}
                     <Tag id={tag} checked={true} />
                 {/each}
             {/if}
         </div>
         <small>Added Tags</small>
     </div>
-
-    {#if visible}
-        {#await data}
-            <p>loading ...</p>
-        {:then tags}
-            <Dropdown {tags} />
-        {/await}
-    {/if}
 </div>
 
 <style>
@@ -121,7 +137,12 @@
         font-style: italic;
     }
 
+    p {
+        height: 81px;
+    }
+
     small {
+        margin-top: 6px;
         width: 100%;
 
         font-family: "Inter", sans-serif;
@@ -141,7 +162,6 @@
             "tags";
         width: 100%;
         max-width: 545px;
-        margin: 77px auto 20px auto;
         padding: 6px;
     }
 
@@ -188,6 +208,7 @@
         grid-template-areas:
             "search"
             "selectedTags";
+        position: relative;
     }
 
     .search {
@@ -197,17 +218,16 @@
             "input"
             "small";
         margin-bottom: 33px;
+        z-index: 1; /* otherwise the dropdown will interrupt the selection marker */
     }
 
     .selectedTags {
-        display: inline-flex;
+        display: flex;
         flex-wrap: wrap;
         gap: 13px;
         grid-area: selectedTags;
-        padding: 13px;
         min-height: 32px;
 
-        background: #bee6dc;
         border-radius: 15px;
     }
 </style>
