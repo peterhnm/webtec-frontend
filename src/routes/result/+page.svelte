@@ -15,18 +15,16 @@
     let data = getData();
 </script>
 
-<!-- <button on:click={goBack}>Back</button> -->
-
 <div class="main">
-    <button
-        on:click={() => {
-            data = getData();
-        }}>Try again</button
-    >
     {#await data}
         <GameDescription loading={true} />
         <GameDesign loading={true} />
     {:then res}
+        <button
+            on:click={() => {
+                data = getData();
+            }}>Try again</button
+        >
         <GameDescription data={res.concept} loading={false} />
         <GameDesign data={res.images} loading={false} />
     {/await}
@@ -44,7 +42,6 @@
         grid-row-gap: 18px;
         width: 100%;
         max-width: 875px;
-        margin: 77px auto 20px auto;
     }
 
     button {
