@@ -114,24 +114,26 @@
             />
         </svg>
     </button>
-    <button class="carousel-download" on:click={downloadImg} title="Download image">
-        <svg
-            fill="none"
-            height="30"
-            viewBox="0 0 30 30"
-            width="30"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <circle cx="15" cy="15" fill="white" r="15" transform="rotate(-180 15 15)" />
-            <path
-                d="M23 16.7143V19H7V16.7143M15 17.2857L12.5385 15M15 17.2857L17.4615 15M15 17.2857V7"
-                stroke="#999999"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-            />
-        </svg>
-    </button>
+    {#if !loading}
+        <button class="carousel-download" on:click={downloadImg} title="Download image">
+            <svg
+                fill="none"
+                height="30"
+                viewBox="0 0 30 30"
+                width="30"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <circle cx="15" cy="15" fill="white" r="15" transform="rotate(-180 15 15)" />
+                <path
+                    d="M23 16.7143V19H7V16.7143M15 17.2857L12.5385 15M15 17.2857L17.4615 15M15 17.2857V7"
+                    stroke="#999999"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                />
+            </svg>
+        </button>
+    {/if}
     <ol bind:this={dots} class="carousel-dots">
         {#if loading}
             {#each { length: 2 } as _, i}
