@@ -123,7 +123,13 @@
                 width="30"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                <circle cx="15" cy="15" fill="white" r="15" transform="rotate(-180 15 15)" />
+                <circle
+                    cx="15"
+                    cy="15"
+                    fill="white"
+                    r="15"
+                    transform="rotate(-180 15 15)"
+                />
                 <path
                     d="M23 16.7143V19H7V16.7143M15 17.2857L12.5385 15M15 17.2857L17.4615 15M15 17.2857V7"
                     stroke="#999999"
