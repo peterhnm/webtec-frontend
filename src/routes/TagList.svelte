@@ -7,7 +7,7 @@
     export let search: string;
     export let loading: boolean;
 
-    const MIN_ACCURACY = 0.2;
+    const MIN_ACCURACY = 0.3;
 
     let displayedTags: string[];
     let displayLength: number;
