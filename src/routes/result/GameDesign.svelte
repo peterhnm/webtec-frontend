@@ -9,7 +9,6 @@
     let dots: HTMLOListElement;
     let prev: HTMLButtonElement;
     let next: HTMLButtonElement;
-    // let downloadBtn: HTMLButtonElement;
     let current = 0;
 
     onMount(() => {
@@ -50,20 +49,14 @@
     };
 
     async function downloadImg() {
-        const url: string = data[current];
-        const res = await fetch(url);
-        const blobImage = await res.blob();
-
-        const href = URL.createObjectURL(blobImage);
+        const href = `data:image/png;base64,${data[current]}`;
         const anchorElement = document.createElement("a");
         anchorElement.href = href;
         anchorElement.download = `jambuddy_image_${current + 1}`;
 
         document.body.appendChild(anchorElement);
         anchorElement.click();
-
         document.body.removeChild(anchorElement);
-        window.URL.revokeObjectURL(href);
     }
 </script>
 
@@ -79,7 +72,7 @@
             {:else}
                 {#each data as img, i}
                     <li class="item">
-                        <img src={img} alt="Image {i}" />
+                        <img src="data:image/png;base64,{img}" alt="Image {i}" />
                     </li>
                 {/each}
             {/if}
@@ -164,7 +157,9 @@
     .gameImage {
         grid-area: image;
         display: grid;
-        grid-template: "container" 1fr;
+        grid-template-areas: "container";
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr;
         place-items: center;
         place-content: center;
         overflow: hidden;
@@ -200,6 +195,9 @@
     }
 
     .carousel-viewport .item {
+        display: flex;
+        place-items: center;
+        justify-content: center;
         position: relative;
         overflow: hidden;
         aspect-ratio: 16 / 9;
@@ -209,8 +207,8 @@
 
     .carousel-viewport img {
         object-fit: contain;
-        width: 100%;
-        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
         user-select: none;
     }
 
