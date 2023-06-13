@@ -8,10 +8,13 @@
 
     $headingStore = "Generate your Game Jam Idea within minutes!";
 
+    let promptField: HTMLInputElement;
+    let promptFieldDesc: HTMLParagraphElement;
     let searchBar: HTMLInputElement;
     let visible = false;
     let selectedTags: HTMLDivElement;
     let dropdown: HTMLDivElement;
+    let searchTerm: string;
 
     onMount(() => {
         searchBar.addEventListener("focusin", () => {
@@ -52,8 +55,11 @@
 
     function processData() {
         // TODO Display error message when no prompt is given
-        if (!prompt) {
-            console.error("No prompt given!");
+        if (!$promptStore) {
+            promptField.select();
+            promptField.style.outline = "2px solid red";
+            promptFieldDesc.innerHTML = "Please enter a prompt!";
+            promptFieldDesc.style.color = "red";
             return;
         }
 
@@ -79,11 +85,12 @@
 
     <div class="prompt">
         <input
+            bind:this={promptField}
             bind:value={$promptStore}
             placeholder="...enter Game Jam Theme here"
             type="text"
         />
-        <small>What is the theme of your Game Jam?</small>
+        <small bind:this={promptFieldDesc}>What is the theme of your Game Jam?</small>
 
         <button on:click={processData}>Generate</button>
     </div>
@@ -94,7 +101,7 @@
                 {#await data}
                     <Dropdown loading={true} />
                 {:then tags}
-                    <Dropdown {tags} loading={false} />
+                    <Dropdown {tags} search={searchTerm} loading={false} />
                 {/await}
             {/if}
         </div>
@@ -102,6 +109,7 @@
         <div class="search">
             <input
                 bind:this={searchBar}
+                bind:value={searchTerm}
                 placeholder="...search for game tags"
                 type="text"
             />
@@ -122,6 +130,7 @@
 <style>
     input[type="text"] {
         min-height: 42px;
+        min-width: 358px;
 
         border: none;
         border-radius: 3px;

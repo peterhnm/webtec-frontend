@@ -10,6 +10,9 @@
             <li aria-current={$page.url.pathname === "/" ? "page" : undefined}>
                 <a href="/">Home</a>
             </li>
+            <li>
+                <p>Contact</p>
+            </li>
         </ul>
     </nav>
 </header>
@@ -28,7 +31,7 @@
     header p {
         justify-self: start;
 
-        margin: 0 0 0 14px;
+        margin: 0 0 0 20px;
         padding: 0;
 
         font-family: "Inter", sans-serif;
@@ -41,9 +44,8 @@
     }
 
     header nav {
-        justify-self: end;
-
-        margin: 0 14px 0 0;
+        width: 100%;
+        margin: auto 0;
 
         font-family: "Inter", sans-serif;
         font-style: normal;
@@ -55,7 +57,29 @@
     }
 
     ul {
+        display: flex;
+        place-content: center end;
+        margin: 0 24px;
+        padding: 0;
         list-style: none;
+    }
+
+    li:not(:last-child) {
+        float: left;
+        margin-right: 35px;
+    }
+
+    li p {
+        margin: 0;
+
+        font-family: "Inter", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+
+        color: #dcdcdc;
+        cursor: not-allowed;
     }
 
     a {
