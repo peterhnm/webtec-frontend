@@ -42,7 +42,6 @@
         grid-template-rows: auto 72px;
         grid-column-gap: 15px;
         grid-row-gap: 18px;
-        /* width: 100%; */
         width: 876px;
     }
 
