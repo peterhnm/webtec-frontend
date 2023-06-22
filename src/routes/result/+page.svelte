@@ -24,9 +24,9 @@
         <button
             on:click={() => {
                 data = getData();
-            }}>Try again
-        </button
-        >
+            }}
+            >Try again
+        </button>
         <GameDescription data={res.concept} loading={false} />
         <GameDesign data={res.images} loading={false} />
     {/await}

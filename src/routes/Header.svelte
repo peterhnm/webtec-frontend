@@ -1,9 +1,10 @@
 <script>
     import { page } from "$app/stores";
+    import logoSmall from "$lib/images/jambuddy_small.png";
 </script>
 
 <header>
-    <div class="logo-small"></div>
+    <img alt="JamBuddy Logo small" class="logo-small" src={logoSmall} />
 
     <nav>
         <ul>
@@ -31,7 +32,6 @@
         width: 46px;
         height: 34px;
         margin-left: 14px;
-        background: url($lib/images/jambuddy_small.png);
     }
 
     header nav {
