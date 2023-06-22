@@ -14,16 +14,16 @@
 </script>
 
 {#if loading}
-    <div class="loading-gameDesc">
+    <div class="loading-game-desc">
         <span class="pacman" />
     </div>
 {:else}
-    <div class="gameDesc">
-        <div class="gameConcept">
+    <div class="game-desc">
+        <div class="game-concept">
             <p>{data.title}</p>
             <textarea bind:this={text} readonly>{data.description}</textarea>
         </div>
-        <button class="copyBtn" on:click={copyToClipboard}>
+        <button class="copy-btn" on:click={copyToClipboard}>
             Copy Text
             <svg
                 width="30"
@@ -58,14 +58,14 @@
 {/if}
 
 <style>
-    .gameDesc {
+    .game-desc {
         display: grid;
         grid-area: desc;
         grid-template: "container" 1fr;
         width: 100%;
     }
 
-    .gameDesc > * {
+    .game-desc > * {
         grid-area: container;
     }
 
@@ -73,25 +73,22 @@
         box-sizing: border-box;
     }
 
-    .loading-gameDesc {
+    .loading-game-desc {
         grid-area: desc;
         display: grid;
         place-items: center;
     }
 
-    .gameDesc p {
+    .game-desc p {
         margin: 0 0 18px 0;
 
-        font-family: "Inter", sans-serif;
-        font-style: normal;
+        color: var(--text-col);
         font-weight: 600;
         font-size: 36px;
         line-height: 44px;
-
-        color: #333333;
     }
 
-    .gameDesc textarea {
+    .game-desc textarea {
         width: 100%;
         height: 338px;
         max-width: 400px;
@@ -103,16 +100,11 @@
         border: none;
         resize: none;
 
-        font-family: "Inter", sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
+        color: var(--text-col);
         line-height: 19px;
-
-        color: #333333;
     }
 
-    .copyBtn {
+    .copy-btn {
         position: relative;
         place-self: end;
         display: grid;
@@ -120,8 +112,6 @@
         grid-gap: 5px;
         place-items: center;
 
-        font-family: "Inter", sans-serif;
-        font-style: normal;
         font-weight: 700;
         font-size: 14px;
         line-height: 17px;
@@ -135,7 +125,7 @@
         transform: translateY(0);
     }
 
-    .copyBtn:active {
+    .copy-btn:active {
         transform: translateY(1px);
     }
 
@@ -145,7 +135,7 @@
         align-self: center;
         justify-self: center;
         position: relative;
-        border: 24px solid #44ab9f;
+        border: 24px solid var(--button-col);
         border-radius: 50%;
         box-sizing: border-box;
         animation: eat 1s linear infinite;
@@ -174,7 +164,7 @@
     @keyframes eat {
         0%,
         49% {
-            border-right-color: #44ab9f;
+            border-right-color: var(--button-col);
         }
         50%,
         100% {

@@ -60,7 +60,7 @@
     }
 </script>
 
-<div class="gameImage">
+<div class="game-image">
     <div class="carousel-viewport">
         <ul bind:this={items} class="items">
             {#if loading}
@@ -79,39 +79,23 @@
         </ul>
     </div>
     <button bind:this={prev} class="carousel-control prev" title="Go to previous item">
-        <svg
-            fill="none"
-            height="40"
-            viewBox="0 0 40 40"
-            width="40"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <circle cx="20" cy="20" fill="white" r="20" transform="rotate(-180 20 20)" />
-            <path
-                d="M25 7L10 20.0345L25 34"
-                stroke="#999999"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="3"
-            />
+        <svg fill="none" height="40" viewBox="0 0 40 40" width="40" xmlns="http://www.w3.org/2000/svg">
+            <g id="left button">
+                <circle cx="20" cy="20" fill="white" id="Ellipse 6" r="20" transform="rotate(-180 20 20)" />
+                <path d="M20 9L9 20.1034L20 32" id="Vector 3" stroke="#999999" stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3" />
+            </g>
         </svg>
     </button>
     <button bind:this={next} class="carousel-control next" title="Go to next item">
-        <svg
-            fill="none"
-            height="40"
-            viewBox="0 0 40 40"
-            width="40"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <circle cx="20" cy="20" fill="white" r="20" transform="rotate(-180 20 20)" />
-            <path
-                d="M16 34L31 20.9655L16 7"
-                stroke="#999999"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="3"
-            />
+        <svg fill="none" height="40" viewBox="0 0 40 40" width="40" xmlns="http://www.w3.org/2000/svg">
+            <g id="right button">
+                <circle cx="20" cy="20" fill="white" id="Ellipse 5" r="20" transform="rotate(-180 20 20)" />
+                <path d="M20 32L31 20.8966L20 9" id="Vector 4" stroke="#999999" stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3" />
+            </g>
         </svg>
     </button>
     {#if !loading}
@@ -162,22 +146,22 @@
 </div>
 
 <style>
-    .gameImage {
+    .game-image {
         grid-area: image;
         display: grid;
         grid-template-areas: "container";
         grid-template-rows: 1fr;
         grid-template-columns: 1fr;
-        place-items: center;
-        place-content: center;
-        overflow: hidden;
+
         width: 400px;
         height: 400px;
+        justify-self: end;
 
         border-radius: 15px;
+        overflow: hidden;
     }
 
-    .gameImage > * {
+    .game-image > * {
         grid-area: container;
     }
 
@@ -295,7 +279,7 @@
         width: 400px;
         height: 400px;
         background: linear-gradient(0.25turn, transparent, #fff, transparent),
-            linear-gradient(#ddd, #ddd);
+        linear-gradient(#ddd, #ddd);
         background-color: #fff;
         background-repeat: no-repeat;
         background-position: -315px 0, 0 0, 15px 140px, 65px 145px;
@@ -305,6 +289,13 @@
     @keyframes img-loading {
         to {
             background-position: 315px 0, 0 0, 15px 140px, 65px 145px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .game-image {
+            margin: 0 0 32px;
+            justify-self: center;
         }
     }
 </style>

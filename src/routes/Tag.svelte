@@ -81,22 +81,19 @@
         display: inline-grid;
         grid-template-areas: "text icon";
         grid-gap: 8px;
-
         align-items: center;
         padding: 2px 0 2px 8px;
         min-height: 28px;
-        cursor: pointer;
+        background: var(--button-col);
 
         border: none;
         border-radius: 15px;
 
-        font-family: "Inter", sans-serif;
+        color: var(--link-col);
         font-style: italic;
-        font-weight: 400;
-        font-size: 16px;
         line-height: 19px;
 
-        background: #70c4b0;
+        cursor: pointer;
     }
 
     .unchecked {

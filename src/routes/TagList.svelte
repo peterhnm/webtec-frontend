@@ -49,7 +49,7 @@
     {#if loading}
         {#each { length: 5 } as _, i}
             <li>
-                <span class="dropdownLoader" />
+                <span class="loader-dropdown" />
             </li>
         {/each}
     {:else if displayLength > 0}
@@ -66,7 +66,7 @@
 <style>
     ul {
         display: table;
-        margin: 17px 19px 10px;
+        margin: 17px 19px 11px;
         padding: 0;
         list-style: none;
     }
@@ -75,25 +75,32 @@
         margin: 0 0 14px 0;
     }
 
-    .dropdownLoader {
+    li p {
+        color: var(--link-col);
+        font-weight: 600;
+    }
+
+    .loader-dropdown {
         display: flex;
         position: relative;
         height: 32px;
         width: 138px;
-        border: 8px solid #70c4b0;
+        background: var(--button-col);
+
+        border: 8px solid var(--button-col);
         border-radius: 15px;
         box-sizing: border-box;
-        background: #70c4b0;
     }
 
-    .dropdownLoader:before {
-        content: "";
+    .loader-dropdown:before {
         position: absolute;
-        align-self: center;
         width: 20px;
         height: 20px;
-        border-radius: 50%;
+        align-self: center;
         background: white;
+
+        content: "";
+        border-radius: 50%;
         animation: ballbns 2s ease-in-out infinite alternate;
     }
 

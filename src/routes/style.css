@@ -1,21 +1,35 @@
+:root {
+    --header-col: #005867;
+    --footer-col: #12272B;
+    --button-col: #087385;
+    --input-col: #00A8B3;
+    --link-col: #fff;
+    --text-col: #333;
+}
+
+* {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
 body {
     margin: 0;
     padding: 0;
 }
 
 button {
-    cursor: pointer;
     align-items: center;
 
-    background: #44ab9f;
+    background: var(--button-col);
     border-radius: 5px;
     border: none;
 
-    font-family: "Inter", sans-serif;
-    font-style: normal;
+    color: var(--link-col);
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
 
-    color: #000000;
+    cursor: pointer;
 }

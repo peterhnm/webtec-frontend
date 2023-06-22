@@ -39,14 +39,14 @@
         selectedTagsStore.subscribe(() => {
             // eslint-disable-next-line no-undef
             const selectedBoxes: NodeListOf<HTMLInputElement> =
-                selectedTags.querySelectorAll('input[type="checkbox"]');
+                selectedTags.querySelectorAll("input[type=\"checkbox\"]");
             for (const box of selectedBoxes) {
                 box.checked = true;
             }
 
             // eslint-disable-next-line no-undef
             const dropdownBoxes: NodeListOf<HTMLInputElement> =
-                dropdown.querySelectorAll('input[type="checkbox"]');
+                dropdown.querySelectorAll("input[type=\"checkbox\"]");
             for (const box of dropdownBoxes) {
                 box.checked = false;
             }
@@ -54,7 +54,6 @@
     });
 
     function processData() {
-        // TODO Display error message when no prompt is given
         if (!$promptStore) {
             promptField.select();
             promptField.style.outline = "2px solid red";
@@ -116,7 +115,7 @@
             <small>Add tags to specify what kind of game you want</small>
         </div>
 
-        <div bind:this={selectedTags} class="selectedTags">
+        <div bind:this={selectedTags} class="selected-tags">
             {#if $selectedTagsStore}
                 {#each $selectedTagsStore as tag}
                     <Tag id={tag} checked={true} />
@@ -129,18 +128,19 @@
 
 <style>
     input[type="text"] {
-        min-height: 42px;
-        min-width: 358px;
+        --padding: 12px;
+        padding: var(--padding);
+        width: calc(100% - 2 * var(--padding));
+        height: 100%;
+        max-height: calc(42px - 2 * var(--padding));
 
+        background: var(--input-col);
         border: none;
         border-radius: 3px;
-        font-family: "Inter", sans-serif;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
+        outline-style: none;
 
-        color: #000000;
-        background: #bee6dc;
+        color: var(--link-col);
+        line-height: 19px;
     }
 
     input[type="text"]:placeholder-shown {
@@ -154,14 +154,8 @@
     small {
         margin-top: 6px;
         width: 100%;
-
-        font-family: "Inter", sans-serif;
-        font-style: italic;
-        font-weight: 400;
-        font-size: 16px;
+        color: #4b4b4b;
         line-height: 19px;
-
-        color: #000000;
     }
 
     .main {
@@ -170,22 +164,15 @@
             "desc"
             "prompt"
             "tags";
-        width: 100%;
-        max-width: 545px;
-        padding: 6px;
+        margin: 24px auto;
+        width: 533px;
     }
 
     .main p {
         grid-area: desc;
         margin: 0 0 37px 0;
-
-        font-family: "Inter", sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
+        color: var(--text-col);
         line-height: 19px;
-
-        color: #333333;
     }
 
     .prompt {
@@ -194,22 +181,26 @@
         grid-template-areas:
             "input button"
             "small button";
+        grid-template-columns: 1fr auto;
         grid-column-gap: 33px;
         margin-bottom: 97px;
     }
 
     .prompt input {
-        display: grid;
         grid-area: input;
+        width: 100%;
+        max-width: calc(358px - 2 * var(--padding));
     }
 
     .prompt small {
-        display: grid;
         grid-area: small;
     }
 
     .prompt button {
         grid-area: button;
+        padding: 24px 26px;
+        width: 142px;
+        height: 72px;
     }
 
     .tags {
@@ -228,10 +219,9 @@
             "input"
             "small";
         margin-bottom: 33px;
-        z-index: 1; /* otherwise the dropdown will interrupt the selection marker */
     }
 
-    .selectedTags {
+    .selected-tags {
         display: flex;
         flex-wrap: wrap;
         gap: 13px;
@@ -239,5 +229,11 @@
         min-height: 32px;
 
         border-radius: 15px;
+    }
+
+    @media (max-width: 480px) {
+        .main {
+            width: calc(480px - 2 * 16px);
+        }
     }
 </style>

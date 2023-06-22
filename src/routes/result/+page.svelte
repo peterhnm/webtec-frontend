@@ -24,7 +24,8 @@
         <button
             on:click={() => {
                 data = getData();
-            }}>Try again</button
+            }}>Try again
+        </button
         >
         <GameDescription data={res.concept} loading={false} />
         <GameDesign data={res.images} loading={false} />
@@ -41,12 +42,15 @@
         grid-template-rows: auto 72px;
         grid-column-gap: 15px;
         grid-row-gap: 18px;
-        width: 100%;
-        max-width: 875px;
+        /* width: 100%; */
+        width: 876px;
     }
 
     button {
         grid-area: button;
+        padding: 24px 26px;
+        width: 142px;
+        height: 72px;
         justify-self: start;
     }
 
@@ -58,13 +62,14 @@
                 "button";
             grid-template-columns: 1fr;
             grid-template-rows: auto;
-            place-items: center;
-            place-content: center;
+            margin: 0 auto 24px;
+            width: calc(480px - 2 * 16px);
         }
 
         button {
             justify-self: center;
             height: 72px;
+            width: 100%;
         }
     }
 </style>
