@@ -259,6 +259,9 @@
     .carousel-control {
         display: flex;
         position: relative;
+        padding: 0;
+        width: 40px;
+        height: 40px;
         align-content: center;
         justify-content: center;
         background: unset;
