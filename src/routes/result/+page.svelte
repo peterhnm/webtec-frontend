@@ -42,6 +42,7 @@
         grid-template-rows: auto 72px;
         grid-column-gap: 15px;
         grid-row-gap: 18px;
+        margin: 0 auto;
         width: 876px;
     }
 
@@ -56,13 +57,12 @@
     @media (max-width: 480px) {
         .main {
             grid-template-areas:
-                "image"
                 "desc"
+                "image"
                 "button";
             grid-template-columns: 1fr;
             grid-template-rows: auto;
-            margin: 0 auto 24px;
-            width: calc(480px - 2 * 16px);
+            width: calc(480px - 2 * 48px);
         }
 
         button {

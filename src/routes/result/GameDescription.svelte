@@ -32,26 +32,31 @@
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                <circle
-                    cx="15"
-                    cy="15"
-                    r="15"
-                    transform="rotate(-180 15 15)"
-                    fill="white"
-                />
-                <path
-                    d="M16 11H9V22H16V11Z"
-                    stroke="#999999"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                />
-                <path
-                    d="M21 8H14V19H21V8Z"
-                    fill="white"
-                    stroke="#999999"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                />
+                <g id="save text button">
+                    <circle
+                        id="Ellipse 3"
+                        cx="15"
+                        cy="15"
+                        r="15"
+                        transform="rotate(-180 15 15)"
+                        fill="white"
+                    />
+                    <path
+                        id="Vector 7"
+                        d="M16 11H9V22H16V11Z"
+                        stroke="#999999"
+                        stroke-width="2"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        id="Vector 6"
+                        d="M21 8H14V19H21V8Z"
+                        fill="white"
+                        stroke="#999999"
+                        stroke-width="2"
+                        stroke-linejoin="round"
+                    />
+                </g>
             </svg>
         </button>
     </div>
@@ -185,6 +190,12 @@
         100% {
             left: -5px;
             opacity: 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .game-desc {
+            margin-bottom: 32px;
         }
     }
 </style>

@@ -96,7 +96,7 @@
                     transform="rotate(-180 20 20)"
                 />
                 <path
-                    d="M20 9L9 20.1034L20 32"
+                    d="M22 9L11 20.1034L22 32"
                     id="Vector 3"
                     stroke="#999999"
                     stroke-linecap="round"
@@ -124,7 +124,7 @@
                     transform="rotate(-180 20 20)"
                 />
                 <path
-                    d="M20 32L31 20.8966L20 9"
+                    d="M18 32L29 20.8966L18 9"
                     id="Vector 4"
                     stroke="#999999"
                     stroke-linecap="round"
@@ -137,26 +137,30 @@
     {#if !loading}
         <button class="carousel-download" on:click={downloadImg} title="Download image">
             <svg
-                fill="none"
+                width="30"
                 height="30"
                 viewBox="0 0 30 30"
-                width="30"
+                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                <circle
-                    cx="15"
-                    cy="15"
-                    fill="white"
-                    r="15"
-                    transform="rotate(-180 15 15)"
-                />
-                <path
-                    d="M23 16.7143V19H7V16.7143M15 17.2857L12.5385 15M15 17.2857L17.4615 15M15 17.2857V7"
-                    stroke="#999999"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                />
+                <g id="download button">
+                    <circle
+                        id="Ellipse 4"
+                        cx="15"
+                        cy="15"
+                        r="15"
+                        transform="rotate(-180 15 15)"
+                        fill="white"
+                    />
+                    <path
+                        id="Vector 5"
+                        d="M23 16.7143V19H7V16.7143M15 17.2857L12.5385 15M15 17.2857L17.4615 15M15 17.2857V7"
+                        stroke="#999999"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </g>
             </svg>
         </button>
     {/if}
@@ -330,7 +334,7 @@
 
     @media (max-width: 480px) {
         .game-image {
-            margin: 0 0 32px;
+            margin-bottom: 64px;
             justify-self: center;
         }
     }

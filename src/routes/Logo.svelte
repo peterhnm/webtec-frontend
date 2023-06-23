@@ -12,7 +12,7 @@
 <style>
     .container {
         display: grid;
-        margin: 83px auto 77px;
+        margin: 0 auto 77px;
         width: 100%;
         max-width: 619px;
         align-items: center;

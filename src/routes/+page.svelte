@@ -235,16 +235,15 @@
         grid-template-areas:
             "input"
             "small";
-        margin-bottom: 33px;
+        margin-bottom: 46px;
     }
 
     .selected-tags {
+        grid-area: selectedTags;
         display: flex;
         flex-wrap: wrap;
         gap: 13px;
-        grid-area: selectedTags;
         min-height: 32px;
-
         border-radius: 15px;
     }
 
@@ -255,7 +254,7 @@
 
     @media (max-width: 480px) {
         .main {
-            width: calc(480px - 2 * 16px);
+            width: calc(480px - 2 * 48px);
         }
     }
 </style>

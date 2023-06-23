@@ -1,5 +1,5 @@
 <script>
-    import { page } from "$app/stores";
+    import { base } from "$app/paths";
     import logoSmall from "$lib/images/jambuddy_small.png";
 </script>
 
@@ -8,8 +8,8 @@
 
     <nav>
         <ul>
-            <li aria-current={$page.url.pathname === "/" ? "page" : undefined}>
-                <a href="/">Home</a>
+            <li>
+                <a href="{base}/">Home</a>
             </li>
             <li>
                 <p>Contact</p>

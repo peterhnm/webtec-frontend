@@ -30,13 +30,14 @@
             "header"
             "main"
             "footer";
-        grid-template-rows: 57px 100vh 121px;
+        grid-template-rows: 57px 1fr 121px;
+        min-height: 100vh;
     }
 
     main {
         grid-area: main;
         box-sizing: border-box;
-        margin: 0 auto;
+        margin: 83px 0;
     }
 
     footer {
