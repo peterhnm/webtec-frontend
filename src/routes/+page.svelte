@@ -40,16 +40,17 @@
             if (!selectedTags) {
                 return;
             }
+
             // eslint-disable-next-line no-undef
             const selectedBoxes: NodeListOf<HTMLInputElement> =
-                selectedTags.querySelectorAll("input[type=\"checkbox\"]");
+                selectedTags.querySelectorAll('input[type="checkbox"]');
             for (const box of selectedBoxes) {
                 box.checked = true;
             }
 
             // eslint-disable-next-line no-undef
             const dropdownBoxes: NodeListOf<HTMLInputElement> =
-                dropdown.querySelectorAll("input[type=\"checkbox\"]");
+                dropdown.querySelectorAll('input[type="checkbox"]');
             for (const box of dropdownBoxes) {
                 box.checked = false;
             }
