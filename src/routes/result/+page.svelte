@@ -21,10 +21,12 @@
         <GameDesign loading={true} />
     {:then res}
         <button
+            class="app-button"
             on:click={() => {
                 data = getData();
-            }}>Try again</button
-        >
+            }}
+            >Try again
+        </button>
         <GameDescription data={res.concept} loading={false} />
         <GameDesign data={res.images} loading={false} />
     {/await}
@@ -40,8 +42,8 @@
         grid-template-rows: auto 72px;
         grid-column-gap: 15px;
         grid-row-gap: 18px;
-        width: 100%;
-        max-width: 875px;
+        margin: 0 auto;
+        width: 876px;
     }
 
     button {
@@ -52,18 +54,18 @@
     @media (max-width: 480px) {
         .main {
             grid-template-areas:
-                "image"
                 "desc"
+                "image"
                 "button";
             grid-template-columns: 1fr;
             grid-template-rows: auto;
-            place-items: center;
-            place-content: center;
+            width: calc(480px - 2 * 48px);
         }
 
         button {
             justify-self: center;
             height: 72px;
+            width: 100%;
         }
     }
 </style>

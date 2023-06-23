@@ -4,7 +4,11 @@
     export let id: string;
     export let checked: boolean;
 
-    const toggleTag = (event) => {
+    /**
+     * Add or remove tag from the store.
+     * @param event
+     */
+    function toggleTag(event) {
         const el = event.srcElement;
         if (el.checked) {
             // add tag to the store
@@ -21,7 +25,7 @@
                 return arr;
             });
         }
-    };
+    }
 </script>
 
 {#if checked}
@@ -35,13 +39,16 @@
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <circle cx="10" cy="10" r="10" fill="white" />
-            <path
-                d="M3 10L17 10"
-                stroke="#999999"
-                stroke-width="2"
-                stroke-linecap="round"
-            />
+            <g id="minus button">
+                <circle id="Ellipse 4" cx="10" cy="10" r="10" fill="white" />
+                <path
+                    id="Vector 3"
+                    d="M5 10L15 10"
+                    stroke="#999999"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                />
+            </g>
         </svg>
     </label>
 {:else}
@@ -49,24 +56,24 @@
         {id}
         <input {checked} {id} on:click={toggleTag} type="checkbox" />
         <svg
-            fill="none"
+            width="20"
             height="20"
             viewBox="0 0 20 20"
-            width="20"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <circle cx="10" cy="10" fill="white" r="10" />
+            <circle cx="10" cy="10" r="10" fill="white" />
             <path
-                d="M3 10L17 10"
+                d="M5 10L15 10"
                 stroke="#999999"
-                stroke-linecap="round"
                 stroke-width="2"
+                stroke-linecap="round"
             />
             <path
-                d="M10 3L10 17"
+                d="M10 5V15"
                 stroke="#999999"
-                stroke-linecap="round"
                 stroke-width="2"
+                stroke-linecap="round"
             />
         </svg>
     </label>
@@ -81,22 +88,19 @@
         display: inline-grid;
         grid-template-areas: "text icon";
         grid-gap: 8px;
-
         align-items: center;
         padding: 2px 0 2px 8px;
         min-height: 28px;
-        cursor: pointer;
+        background: var(--button-col);
 
         border: none;
         border-radius: 15px;
 
-        font-family: "Inter", sans-serif;
+        color: var(--link-col);
         font-style: italic;
-        font-weight: 400;
-        font-size: 16px;
         line-height: 19px;
 
-        background: #70c4b0;
+        cursor: pointer;
     }
 
     .unchecked {

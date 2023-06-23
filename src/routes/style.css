@@ -1,21 +1,49 @@
+:root {
+    --header-col: #005867;
+    --footer-col: #12272b;
+    --button-col: #087385;
+    --input-col: #00a8b3;
+    --link-col: #fff;
+    --text-col: #333;
+}
+
+* {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
 body {
     margin: 0;
     padding: 0;
 }
 
 button {
-    cursor: pointer;
     align-items: center;
 
-    background: #44ab9f;
+    background: var(--button-col);
     border-radius: 5px;
     border: none;
 
-    font-family: "Inter", sans-serif;
-    font-style: normal;
+    color: var(--link-col);
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
 
-    color: #000000;
+    cursor: pointer;
+}
+
+.app-button {
+    padding: 24px 26px;
+    width: 142px;
+    height: 72px;
+}
+
+.svg-button {
+    transform: translateY(0);
+}
+
+.svg-button:active {
+    transform: translateY(1px);
 }

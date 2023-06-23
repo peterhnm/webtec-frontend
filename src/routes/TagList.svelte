@@ -7,14 +7,20 @@
     export let search: string;
     export let loading: boolean;
 
+    // We have set the filter very generously to get results even for typos
     const MIN_ACCURACY = 0.3;
 
     let displayedTags: string[];
-    let displayLength: number;
+    let displayedTagsLength: number;
 
     $: displayedTags = filterTags($selectedTagsStore, search);
-    $: displayLength = getDisplayLength(displayedTags);
+    $: displayedTagsLength = getDisplayedTagsLength(displayedTags);
 
+    /**
+     * Filter tags by the search term and already selected tags.
+     * @param selectedTags Already selected tags
+     * @param searchTerm The search term entered by the user
+     */
     function filterTags(selectedTags: string[], searchTerm: string) {
         if (tags) {
             return tags.filter((tag) => {
@@ -31,12 +37,22 @@
         }
     }
 
-    function getDisplayLength(displayedTags: string[]) {
+    /**
+     * Determines the number of tags displayed. We only want to display a maximum of
+     * five tags at a time.
+     * @param displayedTags All tags after filtering.
+     */
+    function getDisplayedTagsLength(displayedTags: string[]) {
         if (displayedTags) {
             return displayedTags.length > 5 ? 5 : displayedTags.length;
         }
     }
 
+    /**
+     * Filter tags by search term.
+     * @param tag
+     * @param searchTerm
+     */
     function searchFilter(tag: string, searchTerm: string): boolean {
         return (
             stringSimilarity(tag.toLowerCase(), searchTerm.toLowerCase(), 1) >=
@@ -49,11 +65,11 @@
     {#if loading}
         {#each { length: 5 } as _, i}
             <li>
-                <span class="dropdownLoader" />
+                <span class="loader-dropdown" />
             </li>
         {/each}
-    {:else if displayLength > 0}
-        {#each { length: displayLength } as _, i}
+    {:else if displayedTagsLength > 0}
+        {#each { length: displayedTagsLength } as _, i}
             <li>
                 <Tag id={displayedTags[i]} checked={false} />
             </li>
@@ -66,7 +82,7 @@
 <style>
     ul {
         display: table;
-        margin: 17px 19px 10px;
+        margin: 17px 19px 11px;
         padding: 0;
         list-style: none;
     }
@@ -75,25 +91,32 @@
         margin: 0 0 14px 0;
     }
 
-    .dropdownLoader {
+    li p {
+        color: var(--link-col);
+        font-weight: 600;
+    }
+
+    .loader-dropdown {
         display: flex;
         position: relative;
         height: 32px;
         width: 138px;
-        border: 8px solid #70c4b0;
+        background: var(--button-col);
+
+        border: 8px solid var(--button-col);
         border-radius: 15px;
         box-sizing: border-box;
-        background: #70c4b0;
     }
 
-    .dropdownLoader:before {
-        content: "";
+    .loader-dropdown:before {
         position: absolute;
-        align-self: center;
         width: 20px;
         height: 20px;
-        border-radius: 50%;
+        align-self: center;
         background: white;
+
+        content: "";
+        border-radius: 50%;
         animation: ballbns 2s ease-in-out infinite alternate;
     }
 

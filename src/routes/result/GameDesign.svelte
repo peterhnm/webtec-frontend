@@ -35,7 +35,7 @@
         next.addEventListener("click", scrollNext);
     });
 
-    const setActiveDot = () => {
+    function setActiveDot() {
         let index = 0;
         dots.childNodes.forEach((el: HTMLElement) => {
             if (el.nodeType === 1) {
@@ -46,7 +46,7 @@
                 index++;
             }
         });
-    };
+    }
 
     async function downloadImg() {
         const href = `data:image/png;base64,${data[current]}`;
@@ -60,7 +60,7 @@
     }
 </script>
 
-<div class="gameImage">
+<div class="game-image">
     <div class="carousel-viewport">
         <ul bind:this={items} class="items">
             {#if loading}
@@ -78,7 +78,11 @@
             {/if}
         </ul>
     </div>
-    <button bind:this={prev} class="carousel-control prev" title="Go to previous item">
+    <button
+        bind:this={prev}
+        class="svg-button carousel-control prev"
+        title="Go to previous item"
+    >
         <svg
             fill="none"
             height="40"
@@ -86,57 +90,89 @@
             width="40"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <circle cx="20" cy="20" fill="white" r="20" transform="rotate(-180 20 20)" />
-            <path
-                d="M25 7L10 20.0345L25 34"
-                stroke="#999999"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="3"
-            />
-        </svg>
-    </button>
-    <button bind:this={next} class="carousel-control next" title="Go to next item">
-        <svg
-            fill="none"
-            height="40"
-            viewBox="0 0 40 40"
-            width="40"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <circle cx="20" cy="20" fill="white" r="20" transform="rotate(-180 20 20)" />
-            <path
-                d="M16 34L31 20.9655L16 7"
-                stroke="#999999"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="3"
-            />
-        </svg>
-    </button>
-    {#if !loading}
-        <button class="carousel-download" on:click={downloadImg} title="Download image">
-            <svg
-                fill="none"
-                height="30"
-                viewBox="0 0 30 30"
-                width="30"
-                xmlns="http://www.w3.org/2000/svg"
-            >
+            <g id="left button">
                 <circle
-                    cx="15"
-                    cy="15"
+                    cx="20"
+                    cy="20"
                     fill="white"
-                    r="15"
-                    transform="rotate(-180 15 15)"
+                    id="Ellipse 6"
+                    r="20"
+                    transform="rotate(-180 20 20)"
                 />
                 <path
-                    d="M23 16.7143V19H7V16.7143M15 17.2857L12.5385 15M15 17.2857L17.4615 15M15 17.2857V7"
+                    d="M22 9L11 20.1034L22 32"
+                    id="Vector 3"
                     stroke="#999999"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    stroke-width="2"
+                    stroke-width="3"
                 />
+            </g>
+        </svg>
+    </button>
+    <button
+        bind:this={next}
+        class="svg-button carousel-control next"
+        title="Go to next item"
+    >
+        <svg
+            fill="none"
+            height="40"
+            viewBox="0 0 40 40"
+            width="40"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <g id="right button">
+                <circle
+                    cx="20"
+                    cy="20"
+                    fill="white"
+                    id="Ellipse 5"
+                    r="20"
+                    transform="rotate(-180 20 20)"
+                />
+                <path
+                    d="M18 32L29 20.8966L18 9"
+                    id="Vector 4"
+                    stroke="#999999"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                />
+            </g>
+        </svg>
+    </button>
+    {#if !loading}
+        <button
+            class="svg-button carousel-download"
+            on:click={downloadImg}
+            title="Download image"
+        >
+            <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <g id="download button">
+                    <circle
+                        id="Ellipse 4"
+                        cx="15"
+                        cy="15"
+                        r="15"
+                        transform="rotate(-180 15 15)"
+                        fill="white"
+                    />
+                    <path
+                        id="Vector 5"
+                        d="M23 16.7143V19H7V16.7143M15 17.2857L12.5385 15M15 17.2857L17.4615 15M15 17.2857V7"
+                        stroke="#999999"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </g>
             </svg>
         </button>
     {/if}
@@ -162,22 +198,22 @@
 </div>
 
 <style>
-    .gameImage {
+    .game-image {
         grid-area: image;
         display: grid;
         grid-template-areas: "container";
         grid-template-rows: 1fr;
         grid-template-columns: 1fr;
-        place-items: center;
-        place-content: center;
-        overflow: hidden;
+
         width: 400px;
         height: 400px;
+        justify-self: end;
 
         border-radius: 15px;
+        overflow: hidden;
     }
 
-    .gameImage > * {
+    .game-image > * {
         grid-area: container;
     }
 
@@ -187,14 +223,14 @@
 
     .carousel-viewport {
         position: relative;
-        overflow: hidden;
         width: 100%;
         height: 100%;
+        overflow: hidden;
     }
 
     .carousel-viewport .items {
-        position: relative;
         display: flex;
+        position: relative;
         margin: 0;
         padding: 0;
         width: 100%;
@@ -204,34 +240,32 @@
 
     .carousel-viewport .item {
         display: flex;
+        position: relative;
+        min-width: 100%;
         place-items: center;
         justify-content: center;
-        position: relative;
         overflow: hidden;
         aspect-ratio: 16 / 9;
-        min-width: 100%;
         transform: translateZ(0);
     }
 
     .carousel-viewport img {
-        object-fit: contain;
         max-width: 100%;
         max-height: 100%;
+        object-fit: contain;
         user-select: none;
     }
 
     .carousel-control {
-        position: relative;
         display: flex;
+        position: relative;
+        padding: 0;
+        width: 40px;
+        height: 40px;
         align-content: center;
         justify-content: center;
         background: unset;
         touch-action: manipulation;
-        transform: translateY(0);
-    }
-
-    .carousel-control:active {
-        transform: translateY(1px);
     }
 
     .carousel-control svg {
@@ -241,13 +275,13 @@
     }
 
     .carousel-control.prev {
-        place-self: center left;
         margin-left: 18px;
+        place-self: center left;
     }
 
     .carousel-control.next {
-        place-self: center right;
         margin-right: 18px;
+        place-self: center right;
     }
 
     .carousel-dots {
@@ -256,20 +290,20 @@
         padding: 2px;
         place-self: end center;
         gap: 2px;
-        background: #fff;
         border-radius: 5px;
+        background: #fff;
         z-index: 1;
     }
 
     .carousel-dots .dot {
         --size: 6px;
         padding: 0;
-        font-size: 0;
-        color: transparent;
-        background-color: #999;
-        border-radius: 50%;
         width: var(--size);
         height: var(--size);
+        border-radius: 50%;
+        color: transparent;
+        background-color: #999;
+        font-size: 0;
     }
 
     .carousel-dots .dot.active {
@@ -283,13 +317,16 @@
         padding: 0;
         background: unset;
         z-index: 1;
-        transform: translateY(0);
     }
 
-    .carousel-download:active {
-        transform: translateY(1px);
+    @media (max-width: 480px) {
+        .game-image {
+            margin-bottom: 64px;
+            justify-self: center;
+        }
     }
 
+    /* loading animation */
     .img-loader {
         display: inline-block;
         width: 400px;

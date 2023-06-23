@@ -14,16 +14,16 @@
 </script>
 
 {#if loading}
-    <div class="loading-gameDesc">
+    <div class="loading-game-desc">
         <span class="pacman" />
     </div>
 {:else}
-    <div class="gameDesc">
-        <div class="gameConcept">
+    <div class="game-desc">
+        <div class="game-concept">
             <p>{data.title}</p>
             <textarea bind:this={text} readonly>{data.description}</textarea>
         </div>
-        <button class="copyBtn" on:click={copyToClipboard}>
+        <button class="svg-button copy-btn" on:click={copyToClipboard}>
             Copy Text
             <svg
                 width="30"
@@ -32,40 +32,45 @@
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                <circle
-                    cx="15"
-                    cy="15"
-                    r="15"
-                    transform="rotate(-180 15 15)"
-                    fill="white"
-                />
-                <path
-                    d="M16 11H9V22H16V11Z"
-                    stroke="#999999"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                />
-                <path
-                    d="M21 8H14V19H21V8Z"
-                    fill="white"
-                    stroke="#999999"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                />
+                <g id="save text button">
+                    <circle
+                        id="Ellipse 3"
+                        cx="15"
+                        cy="15"
+                        r="15"
+                        transform="rotate(-180 15 15)"
+                        fill="white"
+                    />
+                    <path
+                        id="Vector 7"
+                        d="M16 11H9V22H16V11Z"
+                        stroke="#999999"
+                        stroke-width="2"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        id="Vector 6"
+                        d="M21 8H14V19H21V8Z"
+                        fill="white"
+                        stroke="#999999"
+                        stroke-width="2"
+                        stroke-linejoin="round"
+                    />
+                </g>
             </svg>
         </button>
     </div>
 {/if}
 
 <style>
-    .gameDesc {
+    .game-desc {
         display: grid;
         grid-area: desc;
         grid-template: "container" 1fr;
         width: 100%;
     }
 
-    .gameDesc > * {
+    .game-desc > * {
         grid-area: container;
     }
 
@@ -73,25 +78,22 @@
         box-sizing: border-box;
     }
 
-    .loading-gameDesc {
+    .loading-game-desc {
         grid-area: desc;
         display: grid;
         place-items: center;
     }
 
-    .gameDesc p {
+    .game-desc p {
         margin: 0 0 18px 0;
 
-        font-family: "Inter", sans-serif;
-        font-style: normal;
+        color: var(--text-col);
         font-weight: 600;
         font-size: 36px;
         line-height: 44px;
-
-        color: #333333;
     }
 
-    .gameDesc textarea {
+    .game-desc textarea {
         width: 100%;
         height: 338px;
         max-width: 400px;
@@ -103,16 +105,11 @@
         border: none;
         resize: none;
 
-        font-family: "Inter", sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
+        color: var(--text-col);
         line-height: 19px;
-
-        color: #333333;
     }
 
-    .copyBtn {
+    .copy-btn {
         position: relative;
         place-self: end;
         display: grid;
@@ -120,8 +117,6 @@
         grid-gap: 5px;
         place-items: center;
 
-        font-family: "Inter", sans-serif;
-        font-style: normal;
         font-weight: 700;
         font-size: 14px;
         line-height: 17px;
@@ -131,21 +126,22 @@
         border-radius: 15px;
         background: unset;
         padding: 2px;
-
-        transform: translateY(0);
     }
 
-    .copyBtn:active {
-        transform: translateY(1px);
+    @media (max-width: 480px) {
+        .game-desc {
+            margin-bottom: 32px;
+        }
     }
 
+    /* Loading animation */
     .pacman {
         display: inline-grid;
         margin: auto;
         align-self: center;
         justify-self: center;
         position: relative;
-        border: 24px solid #44ab9f;
+        border: 24px solid var(--button-col);
         border-radius: 50%;
         box-sizing: border-box;
         animation: eat 1s linear infinite;
@@ -174,7 +170,7 @@
     @keyframes eat {
         0%,
         49% {
-            border-right-color: #44ab9f;
+            border-right-color: var(--button-col);
         }
         50%,
         100% {
