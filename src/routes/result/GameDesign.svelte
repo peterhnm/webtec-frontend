@@ -78,7 +78,11 @@
             {/if}
         </ul>
     </div>
-    <button bind:this={prev} class="svg-button carousel-control prev" title="Go to previous item">
+    <button
+        bind:this={prev}
+        class="svg-button carousel-control prev"
+        title="Go to previous item"
+    >
         <svg
             fill="none"
             height="40"
@@ -106,7 +110,11 @@
             </g>
         </svg>
     </button>
-    <button bind:this={next} class="svg-button carousel-control next" title="Go to next item">
+    <button
+        bind:this={next}
+        class="svg-button carousel-control next"
+        title="Go to next item"
+    >
         <svg
             fill="none"
             height="40"
@@ -135,7 +143,11 @@
         </svg>
     </button>
     {#if !loading}
-        <button class="svg-button carousel-download" on:click={downloadImg} title="Download image">
+        <button
+            class="svg-button carousel-download"
+            on:click={downloadImg}
+            title="Download image"
+        >
             <svg
                 width="30"
                 height="30"
@@ -317,7 +329,7 @@
         width: 400px;
         height: 400px;
         background: linear-gradient(0.25turn, transparent, #fff, transparent),
-        linear-gradient(#ddd, #ddd);
+            linear-gradient(#ddd, #ddd);
         background-color: #fff;
         background-repeat: no-repeat;
         background-position: -315px 0, 0 0, 15px 140px, 65px 145px;
