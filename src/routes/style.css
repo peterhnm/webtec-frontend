@@ -33,3 +33,17 @@ button {
 
     cursor: pointer;
 }
+
+.app-button {
+    padding: 24px 26px;
+    width: 142px;
+    height: 72px;
+}
+
+.svg-button {
+    transform: translateY(0);
+}
+
+.svg-button:active {
+    transform: translateY(1px);
+}

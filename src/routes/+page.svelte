@@ -22,7 +22,7 @@
         });
 
         window.addEventListener("click", (event) => {
-            // hide Dropdown if we click outside it
+            // hide Dropdown if we click outside of it
             const target = event.target as HTMLElement;
 
             if (
@@ -43,14 +43,14 @@
 
             // eslint-disable-next-line no-undef
             const selectedBoxes: NodeListOf<HTMLInputElement> =
-                selectedTags.querySelectorAll('input[type="checkbox"]');
+                selectedTags.querySelectorAll("input[type=\"checkbox\"]");
             for (const box of selectedBoxes) {
                 box.checked = true;
             }
 
             // eslint-disable-next-line no-undef
             const dropdownBoxes: NodeListOf<HTMLInputElement> =
-                dropdown.querySelectorAll('input[type="checkbox"]');
+                dropdown.querySelectorAll("input[type=\"checkbox\"]");
             for (const box of dropdownBoxes) {
                 box.checked = false;
             }
@@ -81,21 +81,22 @@
 </script>
 
 <div class="main">
-    <p>
+    <p class="gamejam-desc">
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
         tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
     </p>
 
     <div class="prompt">
-        <input
-            bind:this={promptField}
-            bind:value={$promptStore}
-            placeholder="...enter Game Jam Theme here"
-            type="text"
-        />
-        <small bind:this={promptFieldDesc}>What is the theme of your Game Jam?</small>
-
-        <button on:click={processData}>Generate</button>
+        <label>
+            <input
+                bind:this={promptField}
+                bind:value={$promptStore}
+                placeholder="...enter Game Jam Theme here"
+                type="text"
+            />
+            What is the theme of your Game Jam?
+        </label>
+        <button class="app-button" on:click={processData}>Generate</button>
     </div>
 
     <div class="tags">
@@ -110,13 +111,15 @@
         </div>
 
         <div class="search">
-            <input
-                bind:this={searchBar}
-                bind:value={searchTerm}
-                placeholder="...search for game tags"
-                type="text"
-            />
-            <small>Add tags to specify what kind of game you want</small>
+            <label>
+                <input
+                    bind:this={searchBar}
+                    bind:value={searchTerm}
+                    placeholder="...search for game tags"
+                    type="text"
+                />
+                Add tags to specify what kind of game you want
+            </label>
         </div>
 
         <div bind:this={selectedTags} class="selected-tags">
@@ -126,25 +129,28 @@
                 {/each}
             {/if}
         </div>
-        <small class="selected-tags-desc">Added Tags</small>
+        <p class="selected-tags-desc">Added Tags</p>
     </div>
 </div>
 
 <style>
+    :root {
+        --label-margin: 7px;
+    }
+
     input[type="text"] {
         --padding: 12px;
+        margin-bottom: var(--label-margin);
         padding: var(--padding);
         width: calc(100% - 2 * var(--padding));
-        height: 100%;
         max-height: calc(42px - 2 * var(--padding));
+        height: 100%;
 
+        color: var(--link-col);
         background: var(--input-col);
         border: none;
         border-radius: 3px;
         outline-style: none;
-
-        color: var(--link-col);
-        line-height: 19px;
     }
 
     input[type="text"]:placeholder-shown {
@@ -164,15 +170,8 @@
         color: var(--link-col);
     }
 
-    p {
-        height: 81px;
-    }
-
-    small {
-        margin-top: 6px;
-        width: 100%;
+    label {
         color: #4b4b4b;
-        line-height: 19px;
     }
 
     .main {
@@ -185,39 +184,24 @@
         width: 533px;
     }
 
-    .main p {
+    .gamejam-desc {
         grid-area: desc;
-        margin: 0 0 37px 0;
+        margin: 0 0 23px;
+        height: 81px;
         color: var(--text-col);
-        line-height: 19px;
     }
 
     .prompt {
         grid-area: prompt;
-        display: grid;
-        grid-template-areas:
-            "input button"
-            "small button";
-        grid-template-columns: 1fr auto;
-        grid-column-gap: 33px;
         margin-bottom: 97px;
+        display: flex;
+        align-items: baseline;
+        gap: 33px;
     }
 
     .prompt input {
-        grid-area: input;
-        width: 100%;
         max-width: calc(358px - 2 * var(--padding));
-    }
-
-    .prompt small {
-        grid-area: small;
-    }
-
-    .prompt button {
-        grid-area: button;
-        padding: 24px 26px;
-        width: 142px;
-        height: 72px;
+        width: 100%;
     }
 
     .tags {
@@ -226,7 +210,7 @@
         grid-template-areas:
             "search"
             "selectedTags";
-        position: relative;
+        position: relative; /* because of the dropdown-menu */
     }
 
     .search {
@@ -248,13 +232,17 @@
     }
 
     .selected-tags-desc {
+        margin: var(--label-margin) 0 0;
+        width: 100%;
         color: #4b4b4b;
         font-weight: 700;
+        line-height: 19px;
     }
 
     @media (max-width: 480px) {
         .main {
-            width: calc(480px - 2 * 48px);
+            --margin: 48px;
+            width: calc(480px - 2 * var(--margin));
         }
     }
 </style>

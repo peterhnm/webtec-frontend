@@ -23,7 +23,7 @@
             <p>{data.title}</p>
             <textarea bind:this={text} readonly>{data.description}</textarea>
         </div>
-        <button class="copy-btn" on:click={copyToClipboard}>
+        <button class="svg-button copy-btn" on:click={copyToClipboard}>
             Copy Text
             <svg
                 width="30"
@@ -126,14 +126,15 @@
         border-radius: 15px;
         background: unset;
         padding: 2px;
-
-        transform: translateY(0);
     }
 
-    .copy-btn:active {
-        transform: translateY(1px);
+    @media (max-width: 480px) {
+        .game-desc {
+            margin-bottom: 32px;
+        }
     }
 
+    /* Loading animation */
     .pacman {
         display: inline-grid;
         margin: auto;
@@ -190,12 +191,6 @@
         100% {
             left: -5px;
             opacity: 0;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .game-desc {
-            margin-bottom: 32px;
         }
     }
 </style>

@@ -22,10 +22,11 @@
         <GameDesign loading={true} />
     {:then res}
         <button
+            class="app-button"
             on:click={() => {
                 data = getData();
             }}
-            >Try again
+        >Try again
         </button>
         <GameDescription data={res.concept} loading={false} />
         <GameDesign data={res.images} loading={false} />
@@ -48,9 +49,6 @@
 
     button {
         grid-area: button;
-        padding: 24px 26px;
-        width: 142px;
-        height: 72px;
         justify-self: start;
     }
 

@@ -4,7 +4,11 @@
     export let id: string;
     export let checked: boolean;
 
-    const toggleTag = (event) => {
+    /**
+     * Add or remove tag from the store.
+     * @param event
+     */
+    function toggleTag(event) {
         const el = event.srcElement;
         if (el.checked) {
             // add tag to the store
@@ -21,7 +25,7 @@
                 return arr;
             });
         }
-    };
+    }
 </script>
 
 {#if checked}

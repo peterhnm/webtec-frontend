@@ -7,14 +7,20 @@
     export let search: string;
     export let loading: boolean;
 
+    // We have set the filter very generously to get results even for typos
     const MIN_ACCURACY = 0.3;
 
     let displayedTags: string[];
-    let displayLength: number;
+    let displayedTagsLength: number;
 
     $: displayedTags = filterTags($selectedTagsStore, search);
-    $: displayLength = getDisplayLength(displayedTags);
+    $: displayedTagsLength = getDisplayedTagsLength(displayedTags);
 
+    /**
+     * Filter tags by the search term and already selected tags.
+     * @param selectedTags Already selected tags
+     * @param searchTerm The search term entered by the user
+     */
     function filterTags(selectedTags: string[], searchTerm: string) {
         if (tags) {
             return tags.filter((tag) => {
@@ -31,12 +37,22 @@
         }
     }
 
-    function getDisplayLength(displayedTags: string[]) {
+    /**
+     * Determines the number of tags displayed. We only want to display a maximum of
+     * five tags at a time.
+     * @param displayedTags All tags after filtering.
+     */
+    function getDisplayedTagsLength(displayedTags: string[]) {
         if (displayedTags) {
             return displayedTags.length > 5 ? 5 : displayedTags.length;
         }
     }
 
+    /**
+     * Filter tags by search term.
+     * @param tag
+     * @param searchTerm
+     */
     function searchFilter(tag: string, searchTerm: string): boolean {
         return (
             stringSimilarity(tag.toLowerCase(), searchTerm.toLowerCase(), 1) >=
@@ -52,8 +68,8 @@
                 <span class="loader-dropdown" />
             </li>
         {/each}
-    {:else if displayLength > 0}
-        {#each { length: displayLength } as _, i}
+    {:else if displayedTagsLength > 0}
+        {#each { length: displayedTagsLength } as _, i}
             <li>
                 <Tag id={displayedTags[i]} checked={false} />
             </li>
