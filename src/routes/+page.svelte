@@ -37,16 +37,19 @@
 
         // Workaround
         selectedTagsStore.subscribe(() => {
+            if (!selectedTags) {
+                return;
+            }
             // eslint-disable-next-line no-undef
             const selectedBoxes: NodeListOf<HTMLInputElement> =
-                selectedTags.querySelectorAll('input[type="checkbox"]');
+                selectedTags.querySelectorAll("input[type=\"checkbox\"]");
             for (const box of selectedBoxes) {
                 box.checked = true;
             }
 
             // eslint-disable-next-line no-undef
             const dropdownBoxes: NodeListOf<HTMLInputElement> =
-                dropdown.querySelectorAll('input[type="checkbox"]');
+                dropdown.querySelectorAll("input[type=\"checkbox\"]");
             for (const box of dropdownBoxes) {
                 box.checked = false;
             }
@@ -122,7 +125,7 @@
                 {/each}
             {/if}
         </div>
-        <small>Added Tags</small>
+        <small class="selected-tags-desc">Added Tags</small>
     </div>
 </div>
 
@@ -144,7 +147,20 @@
     }
 
     input[type="text"]:placeholder-shown {
+        color: var(--link-col);
         font-style: italic;
+    }
+
+    ::-webkit-input-placeholder {
+        color: var(--link-col);
+    }
+
+    ::-moz-placeholder {
+        color: var(--link-col);
+    }
+
+    ::placeholder {
+        color: var(--link-col);
     }
 
     p {
@@ -229,6 +245,11 @@
         min-height: 32px;
 
         border-radius: 15px;
+    }
+
+    .selected-tags-desc {
+        color: #4b4b4b;
+        font-weight: 700;
     }
 
     @media (max-width: 480px) {

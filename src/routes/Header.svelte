@@ -65,6 +65,10 @@
         text-decoration: none;
     }
 
+    a:link {
+        color: var(--link-col);
+    }
+
     a:visited {
         color: var(--link-col);
     }
