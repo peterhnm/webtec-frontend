@@ -10,6 +10,7 @@
 
     let promptField: HTMLInputElement;
     let promptFieldDesc: HTMLParagraphElement;
+    let promptLabel = "What is the theme of your Game Jam?";
     let searchBar: HTMLInputElement;
     let visible = false;
     let selectedTags: HTMLDivElement;
@@ -61,8 +62,8 @@
         if (!$promptStore) {
             promptField.select();
             promptField.style.outline = "2px solid red";
-            promptFieldDesc.innerHTML = "Please enter a prompt!";
             promptFieldDesc.style.color = "red";
+            promptLabel = "Please enter a prompt!";
             return;
         }
 
@@ -87,14 +88,14 @@
     </p>
 
     <div class="prompt">
-        <label>
+        <label bind:this={promptFieldDesc}>
             <input
                 bind:this={promptField}
                 bind:value={$promptStore}
                 placeholder="...enter Game Jam Theme here"
                 type="text"
             />
-            What is the theme of your Game Jam?
+            {promptLabel}
         </label>
         <button class="app-button" on:click={processData}>Generate</button>
     </div>
@@ -134,47 +135,8 @@
 </div>
 
 <style>
-    :root {
-        --label-margin: 7px;
-    }
-
-    input[type="text"] {
-        --padding: 12px;
-        margin-bottom: var(--label-margin);
-        padding: var(--padding);
-        width: calc(100% - 2 * var(--padding));
-        max-height: calc(42px - 2 * var(--padding));
-        height: 100%;
-
-        color: var(--link-col);
-        background: var(--input-col);
-        border: none;
-        border-radius: 3px;
-        outline-style: none;
-    }
-
-    input[type="text"]:placeholder-shown {
-        color: var(--link-col);
-        font-style: italic;
-    }
-
-    ::-webkit-input-placeholder {
-        color: var(--link-col);
-    }
-
-    ::-moz-placeholder {
-        color: var(--link-col);
-    }
-
-    ::placeholder {
-        color: var(--link-col);
-    }
-
-    label {
-        color: #4b4b4b;
-    }
-
     .main {
+        --label-margin: 7px;
         display: grid;
         grid-template-areas:
             "desc"
@@ -182,6 +144,10 @@
             "tags";
         margin: 24px auto;
         width: 533px;
+    }
+
+    input[type="text"] {
+        margin-bottom: var(--label-margin);
     }
 
     .gamejam-desc {
@@ -227,9 +193,10 @@
     }
 
     .selected-tags-desc {
-        margin: var(--label-margin) 0 0;
+        margin: 14px 0 0;
         width: 100%;
-        color: #4b4b4b;
+        color: var(--label-col);
+        font-size: 14px;
         font-weight: 700;
         line-height: 19px;
     }

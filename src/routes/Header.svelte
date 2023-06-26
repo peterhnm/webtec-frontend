@@ -58,6 +58,7 @@
 
     li p {
         margin: 0;
+        color: var(--link-col);
         font-weight: 700;
         cursor: not-allowed;
     }

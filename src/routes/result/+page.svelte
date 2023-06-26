@@ -50,7 +50,7 @@
             "button button"
             "tags tags";
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto 72px;
+        grid-template-rows: 400px 72px auto;
         grid-column-gap: 15px;
         grid-row-gap: 18px;
         margin: 0 auto;
@@ -78,8 +78,10 @@
     }
 
     .tags li {
+        --height: 32px;
         padding: 7px 12px;
         min-width: 32px;
+        min-height: calc(var(--height) - 2 * 7px);
         border-radius: 15px;
         background: var(--button-col);
 
@@ -91,7 +93,7 @@
     }
 
     .tags p {
-        margin: 17px 0 0;
+        margin: 14px 0 0;
         padding: 0;
         color: #4b4b4b;
         font-size: 14px;

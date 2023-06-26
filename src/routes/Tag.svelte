@@ -50,12 +50,13 @@
     }
 
     label {
+        --height: 32px;
         display: inline-grid;
         grid-template-areas: "text icon";
         grid-gap: 8px;
         align-items: center;
-        padding: 2px 0 2px 8px;
-        min-height: 28px;
+        padding: 2px 8px;
+        min-height: calc(var(--height) - 2 * 2px);
         background: var(--button-col);
 
         border: none;
@@ -75,6 +76,5 @@
     img {
         grid-area: icon;
         justify-self: end;
-        margin-right: 8px;
     }
 </style>

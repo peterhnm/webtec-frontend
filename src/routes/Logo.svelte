@@ -23,7 +23,6 @@
         margin: 0;
         text-align: center;
 
-        color: var(--text-col);
         font-weight: 800;
         font-size: 48px;
         line-height: 58px;

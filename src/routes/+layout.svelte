@@ -36,7 +36,6 @@
 
     main {
         grid-area: main;
-        box-sizing: border-box;
         margin: 83px 0;
     }
 
@@ -47,9 +46,11 @@
         align-items: center;
         padding: 0 57px;
         background: var(--footer-col);
-
-        color: var(--link-col);
         line-height: 19px;
+    }
+
+    footer p {
+        color: var(--link-col);
     }
 
     footer .left {
