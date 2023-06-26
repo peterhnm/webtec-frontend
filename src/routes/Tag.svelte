@@ -1,5 +1,7 @@
 <script lang="ts">
     import { selectedTagsStore } from "./stores";
+    import minusBtn from "$lib/images/minusBtn.svg";
+    import plusBtn from "$lib/images/plusBtn.svg";
 
     export let id: string;
     export let checked: boolean;
@@ -32,50 +34,13 @@
     <label for={id}>
         {id}
         <input {checked} {id} on:click={toggleTag} type="checkbox" />
-        <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <g id="minus button">
-                <circle id="Ellipse 4" cx="10" cy="10" r="10" fill="white" />
-                <path
-                    id="Vector 3"
-                    d="M5 10L15 10"
-                    stroke="#999999"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                />
-            </g>
-        </svg>
+        <img src={minusBtn} alt="Unselect Button" />
     </label>
 {:else}
     <label for={id} class="unchecked">
         {id}
         <input {checked} {id} on:click={toggleTag} type="checkbox" />
-        <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <circle cx="10" cy="10" r="10" fill="white" />
-            <path
-                d="M5 10L15 10"
-                stroke="#999999"
-                stroke-width="2"
-                stroke-linecap="round"
-            />
-            <path
-                d="M10 5V15"
-                stroke="#999999"
-                stroke-width="2"
-                stroke-linecap="round"
-            />
-        </svg>
+        <img src={plusBtn} alt="Select Button" />
     </label>
 {/if}
 
@@ -107,7 +72,7 @@
         width: 130px;
     }
 
-    svg {
+    img {
         grid-area: icon;
         justify-self: end;
         margin-right: 8px;

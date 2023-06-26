@@ -4,7 +4,9 @@
 </script>
 
 <header>
-    <img alt="JamBuddy Logo small" class="logo-small" src={logoSmall} />
+    <a href="{base}/">
+        <img alt="JamBuddy Logo small" class="logo-small" src={logoSmall} />
+    </a>
 
     <nav>
         <ul>

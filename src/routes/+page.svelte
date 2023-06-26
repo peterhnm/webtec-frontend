@@ -215,10 +215,6 @@
 
     .search {
         grid-area: search;
-        display: grid;
-        grid-template-areas:
-            "input"
-            "small";
         margin-bottom: 46px;
     }
 
@@ -228,7 +224,6 @@
         flex-wrap: wrap;
         gap: 13px;
         min-height: 32px;
-        border-radius: 15px;
     }
 
     .selected-tags-desc {

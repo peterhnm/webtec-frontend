@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Concept } from "./types";
+    import copyBtn from "$lib/images/copyBtn.svg";
 
     export let data: Concept;
     export let loading: boolean;
@@ -25,39 +26,7 @@
         </div>
         <button class="svg-button copy-btn" on:click={copyToClipboard}>
             Copy Text
-            <svg
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <g id="save text button">
-                    <circle
-                        id="Ellipse 3"
-                        cx="15"
-                        cy="15"
-                        r="15"
-                        transform="rotate(-180 15 15)"
-                        fill="white"
-                    />
-                    <path
-                        id="Vector 7"
-                        d="M16 11H9V22H16V11Z"
-                        stroke="#999999"
-                        stroke-width="2"
-                        stroke-linejoin="round"
-                    />
-                    <path
-                        id="Vector 6"
-                        d="M21 8H14V19H21V8Z"
-                        fill="white"
-                        stroke="#999999"
-                        stroke-width="2"
-                        stroke-linejoin="round"
-                    />
-                </g>
-            </svg>
+            <img alt="Copy Text" class="svg-button" src={copyBtn} />
         </button>
     </div>
 {/if}
