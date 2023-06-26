@@ -86,14 +86,14 @@
         class="svg-button carousel-control prev"
         title="Go to previous item"
     >
-        <img alt="Previous Image" class="svg-button" src={prevBtn} />
+        <img alt="Previous Button" class="svg-button" src={prevBtn} />
     </button>
     <button
         bind:this={next}
         class="svg-button carousel-control next"
         title="Go to next item"
     >
-        <img alt="Next Image" class="svg-button" src={nextBtn} />
+        <img alt="Next Button" class="svg-button" src={nextBtn} />
     </button>
     {#if !loading}
         <button
@@ -101,7 +101,7 @@
             on:click={downloadImg}
             title="Download image"
         >
-            <img alt="Download Image" class="svg-button" src={downloadBtn} />
+            <img alt="Download Button" class="svg-button" src={downloadBtn} />
         </button>
     {/if}
     <ol bind:this={dots} class="carousel-dots">
@@ -260,7 +260,7 @@
         width: 400px;
         height: 400px;
         background: linear-gradient(0.25turn, transparent, #fff, transparent),
-            linear-gradient(#ddd, #ddd);
+        linear-gradient(#ddd, #ddd);
         background-color: #fff;
         background-repeat: no-repeat;
         background-position: -315px 0, 0 0, 15px 140px, 65px 145px;
