@@ -67,7 +67,7 @@
     }
 
     .game-concept {
-        height: 100%;
+        min-height: 0;
     }
 
     .game-concept .heading {
@@ -99,7 +99,7 @@
         height: 338px;
         max-height: 338px;
         margin: 0;
-        padding: 0 8px var(--btn-height) 0;
+        padding: 0 8px calc(var(--btn-height) + 6px) 0;
 
         outline: none;
         border: none;
@@ -119,6 +119,7 @@
         margin-right: 4px;
         padding: 2px 6px;
         height: calc(var(--btn-height) - 2 * 2px);
+        background: white;
 
         font-weight: 700;
         font-size: 14px;
@@ -127,7 +128,6 @@
         color: #999;
         cursor: pointer;
         border-radius: 15px;
-        background: white;
     }
 
     @media (max-width: 480px) {
