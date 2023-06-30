@@ -138,6 +138,7 @@
     .loading-container {
         grid-area: heading;
         display: grid;
+        margin-top: 6px;
         place-items: center;
     }
 
