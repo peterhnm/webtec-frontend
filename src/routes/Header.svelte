@@ -4,7 +4,9 @@
 </script>
 
 <header>
-    <img alt="JamBuddy Logo small" class="logo-small" src={logoSmall} />
+    <a href="{base}/">
+        <img alt="JamBuddy Logo small" class="logo-small" src={logoSmall} />
+    </a>
 
     <nav>
         <ul>
@@ -56,6 +58,7 @@
 
     li p {
         margin: 0;
+        color: var(--link-col);
         font-weight: 700;
         cursor: not-allowed;
     }

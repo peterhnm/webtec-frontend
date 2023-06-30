@@ -1,5 +1,8 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import prevBtn from "$lib/images/prevBtn.svg";
+    import nextBtn from "$lib/images/nextBtn.svg";
+    import downloadBtn from "$lib/images/downloadBtn.svg";
 
     export let data: string[];
     export let loading: boolean;
@@ -83,64 +86,14 @@
         class="svg-button carousel-control prev"
         title="Go to previous item"
     >
-        <svg
-            fill="none"
-            height="40"
-            viewBox="0 0 40 40"
-            width="40"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <g id="left button">
-                <circle
-                    cx="20"
-                    cy="20"
-                    fill="white"
-                    id="Ellipse 6"
-                    r="20"
-                    transform="rotate(-180 20 20)"
-                />
-                <path
-                    d="M22 9L11 20.1034L22 32"
-                    id="Vector 3"
-                    stroke="#999999"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="3"
-                />
-            </g>
-        </svg>
+        <img alt="Previous Button" class="svg-button" src={prevBtn} />
     </button>
     <button
         bind:this={next}
         class="svg-button carousel-control next"
         title="Go to next item"
     >
-        <svg
-            fill="none"
-            height="40"
-            viewBox="0 0 40 40"
-            width="40"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <g id="right button">
-                <circle
-                    cx="20"
-                    cy="20"
-                    fill="white"
-                    id="Ellipse 5"
-                    r="20"
-                    transform="rotate(-180 20 20)"
-                />
-                <path
-                    d="M18 32L29 20.8966L18 9"
-                    id="Vector 4"
-                    stroke="#999999"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="3"
-                />
-            </g>
-        </svg>
+        <img alt="Next Button" class="svg-button" src={nextBtn} />
     </button>
     {#if !loading}
         <button
@@ -148,32 +101,7 @@
             on:click={downloadImg}
             title="Download image"
         >
-            <svg
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <g id="download button">
-                    <circle
-                        id="Ellipse 4"
-                        cx="15"
-                        cy="15"
-                        r="15"
-                        transform="rotate(-180 15 15)"
-                        fill="white"
-                    />
-                    <path
-                        id="Vector 5"
-                        d="M23 16.7143V19H7V16.7143M15 17.2857L12.5385 15M15 17.2857L17.4615 15M15 17.2857V7"
-                        stroke="#999999"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-                </g>
-            </svg>
+            <img alt="Download Button" class="svg-button" src={downloadBtn} />
         </button>
     {/if}
     <ol bind:this={dots} class="carousel-dots">
@@ -268,7 +196,7 @@
         touch-action: manipulation;
     }
 
-    .carousel-control svg {
+    .carousel-control img {
         width: 100%;
         height: 100%;
         pointer-events: none;

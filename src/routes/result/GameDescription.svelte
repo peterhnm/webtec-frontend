@@ -1,5 +1,7 @@
 <script lang="ts">
     import type { Concept } from "./types";
+    import TextBox from "./TextBox.svelte";
+    import copyBtn from "$lib/images/copyBtn.svg";
 
     export let data: Concept;
     export let loading: boolean;
@@ -7,9 +9,11 @@
     let text: HTMLTextAreaElement;
 
     function copyToClipboard() {
-        text.select();
-        text.setSelectionRange(0, 99999); // For mobile devices
-        navigator.clipboard.writeText(text.value);
+        const range = document.createRange();
+        range.selectNode(text);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        navigator.clipboard.writeText(window.getSelection().toString());
     }
 </script>
 
@@ -20,54 +24,32 @@
 {:else}
     <div class="game-desc">
         <div class="game-concept">
-            <p>{data.title}</p>
-            <textarea bind:this={text} readonly>{data.description}</textarea>
+            <div class="heading">
+                <h2>{data.title}</h2>
+                <p>{data.genre}</p>
+            </div>
+            <div bind:this={text} class="text-box">
+                <TextBox heading={3} label="Key Mechanics" text={data.key_mechanic} />
+                <TextBox heading={3} label="Description" text={data.description} />
+                <TextBox heading={3} label="Visuals" text={data.visuals} />
+                <TextBox heading={3} label="Special" text={data.special} />
+            </div>
         </div>
         <button class="svg-button copy-btn" on:click={copyToClipboard}>
             Copy Text
-            <svg
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <g id="save text button">
-                    <circle
-                        id="Ellipse 3"
-                        cx="15"
-                        cy="15"
-                        r="15"
-                        transform="rotate(-180 15 15)"
-                        fill="white"
-                    />
-                    <path
-                        id="Vector 7"
-                        d="M16 11H9V22H16V11Z"
-                        stroke="#999999"
-                        stroke-width="2"
-                        stroke-linejoin="round"
-                    />
-                    <path
-                        id="Vector 6"
-                        d="M21 8H14V19H21V8Z"
-                        fill="white"
-                        stroke="#999999"
-                        stroke-width="2"
-                        stroke-linejoin="round"
-                    />
-                </g>
-            </svg>
+            <img alt="Copy Text" class="svg-button" src={copyBtn} />
         </button>
     </div>
 {/if}
 
 <style>
     .game-desc {
+        --btn-height: 30px;
         display: grid;
         grid-area: desc;
         grid-template: "container" 1fr;
         width: 100%;
+        overflow: hidden;
     }
 
     .game-desc > * {
@@ -84,38 +66,60 @@
         place-items: center;
     }
 
-    .game-desc p {
-        margin: 0 0 18px 0;
+    .game-concept {
+        min-height: 0;
+    }
 
-        color: var(--text-col);
+    .game-concept .heading {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-bottom: 12px;
+    }
+
+    .heading h2 {
+        margin: 0;
+        width: 100%;
+
         font-weight: 600;
         font-size: 36px;
         line-height: 44px;
     }
 
-    .game-desc textarea {
-        width: 100%;
-        height: 338px;
-        max-width: 400px;
-        max-height: 338px;
+    .game-concept p {
         margin: 0;
         padding: 0;
+        width: 100%;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .text-box {
+        width: 100%;
+        height: 338px;
+        max-height: 338px;
+        margin: 0;
+        padding: 0 8px calc(var(--btn-height) + 6px) 0;
 
         outline: none;
         border: none;
-        resize: none;
+        overflow: scroll;
 
         color: var(--text-col);
         line-height: 19px;
     }
 
     .copy-btn {
-        position: relative;
-        place-self: end;
         display: grid;
+        position: relative;
         grid-template-columns: auto auto;
         grid-gap: 5px;
-        place-items: center;
+        place-self: end;
+        place-content: center;
+        margin-right: 4px;
+        padding: 2px 6px;
+        height: calc(var(--btn-height) - 2 * 2px);
+        background: white;
 
         font-weight: 700;
         font-size: 14px;
@@ -124,8 +128,6 @@
         color: #999;
         cursor: pointer;
         border-radius: 15px;
-        background: unset;
-        padding: 2px;
     }
 
     @media (max-width: 480px) {

@@ -1,13 +1,25 @@
 :root {
-    --header-col: #005867;
-    --footer-col: #12272b;
     --button-col: #087385;
+    --footer-col: #12272b;
+    --header-col: #005867;
     --input-col: #00a8b3;
+    --label-col: #4b4b4b;
     --link-col: #fff;
     --text-col: #333;
 }
 
+::-moz-selection {
+    color: var(--link-col);
+    background: var(--header-col);
+}
+
+::selection {
+    color: var(--link-col);
+    background: var(--header-col);
+}
+
 * {
+    color: var(--text-col);
     font-family: "Inter", sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -29,9 +41,33 @@ button {
     color: var(--link-col);
     font-weight: 600;
     font-size: 20px;
-    line-height: 24px;
 
     cursor: pointer;
+}
+
+input[type="text"] {
+    --padding: 12px;
+    margin: 0;
+    padding: var(--padding);
+    width: calc(100% - 2 * var(--padding));
+    max-height: calc(42px - 2 * var(--padding));
+    height: 100%;
+
+    color: var(--link-col);
+    background: var(--input-col);
+    border: none;
+    border-radius: 3px;
+    outline-style: none;
+}
+
+input::placeholder {
+    color: var(--link-col);
+    font-style: italic;
+    opacity: 1;
+}
+
+label {
+    color: var(--label-col);
 }
 
 .app-button {
