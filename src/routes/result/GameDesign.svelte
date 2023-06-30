@@ -135,7 +135,7 @@
 
         width: 400px;
         height: 400px;
-        justify-self: end;
+        place-self: start end;
 
         border-radius: 15px;
         overflow: hidden;
@@ -260,7 +260,7 @@
         width: 400px;
         height: 400px;
         background: linear-gradient(0.25turn, transparent, #fff, transparent),
-            linear-gradient(#ddd, #ddd);
+        linear-gradient(#ddd, #ddd);
         background-color: #fff;
         background-repeat: no-repeat;
         background-position: -315px 0, 0 0, 15px 140px, 65px 145px;

@@ -22,12 +22,12 @@
         <span class="pacman" />
     </div>
 {:else}
+    <div class="heading">
+        <h2>{data.title}</h2>
+        <p>{data.genre}</p>
+    </div>
     <div class="game-desc">
         <div class="game-concept">
-            <div class="heading">
-                <h2>{data.title}</h2>
-                <p>{data.genre}</p>
-            </div>
             <div bind:this={text} class="text-box">
                 <TextBox heading={3} label="Key Mechanics" text={data.key_mechanic} />
                 <TextBox heading={3} label="Description" text={data.description} />
@@ -46,10 +46,10 @@
     .game-desc {
         --btn-height: 30px;
         display: grid;
-        grid-area: desc;
+        grid-area: concept;
         grid-template: "container" 1fr;
-        width: 100%;
-        overflow: hidden;
+        width: 400px;
+        min-height: 0;
     }
 
     .game-desc > * {
@@ -70,7 +70,8 @@
         min-height: 0;
     }
 
-    .game-concept .heading {
+    .heading {
+        grid-area: heading;
         display: flex;
         flex-direction: column;
         gap: 3px;
@@ -86,7 +87,7 @@
         line-height: 44px;
     }
 
-    .game-concept p {
+    .heading p {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -95,18 +96,15 @@
     }
 
     .text-box {
+        --line-height: 19px;
         width: 100%;
-        height: 338px;
-        max-height: 338px;
-        margin: 0;
-        padding: 0 8px calc(var(--btn-height) + 6px) 0;
+        margin: 0 0 calc(var(--line-height) + 6px); /* button should not cover the text */
+        padding: 0;
 
         outline: none;
         border: none;
-        overflow: scroll;
 
         color: var(--text-col);
-        line-height: 19px;
     }
 
     .copy-btn {
@@ -116,7 +114,6 @@
         grid-gap: 5px;
         place-self: end;
         place-content: center;
-        margin-right: 4px;
         padding: 2px 6px;
         height: calc(var(--btn-height) - 2 * 2px);
         background: white;

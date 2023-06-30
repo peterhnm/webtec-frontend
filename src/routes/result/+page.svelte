@@ -26,7 +26,7 @@
             on:click={() => {
                 data = getData();
             }}
-            >Try again
+        >Try again
         </button>
         <GameDescription data={res.concept} loading={false} />
         <GameDesign data={res.images} loading={false} />
@@ -43,28 +43,27 @@
 
 <style>
     .main {
-        --gap-size: 13px;
         display: grid;
         grid-template-areas:
-            "desc image"
+            "heading heading"
+            "concept image"
             "button button"
             "tags tags";
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 400px 72px auto;
-        grid-column-gap: 15px;
-        grid-row-gap: 18px;
+        grid-template-columns: 400px 400px;
+        grid-column-gap: 75px;
         margin: 0 auto;
         width: 876px;
     }
 
     button {
+        margin-top: 55px;
         grid-area: button;
         justify-self: start;
     }
 
     .tags {
         grid-area: tags;
-        margin: calc(57px - var(--gap-size)) 0 0;
+        margin: 57px 0 0;
     }
 
     .tags ul {
