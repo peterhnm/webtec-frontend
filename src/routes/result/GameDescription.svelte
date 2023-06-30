@@ -2,11 +2,18 @@
     import type { Concept } from "./types";
     import TextBox from "./TextBox.svelte";
     import copyBtn from "$lib/images/copyBtn.svg";
+    import { headingStore } from "../stores";
 
     export let data: Concept;
     export let loading: boolean;
 
     let text: HTMLTextAreaElement;
+
+    if (loading) {
+        $headingStore = "Your game is being generated...";
+    } else {
+        $headingStore = "Generation complete!\nYour game is:";
+    }
 
     function copyToClipboard() {
         const range = document.createRange();
@@ -18,7 +25,7 @@
 </script>
 
 {#if loading}
-    <div class="loading-game-desc">
+    <div class="loading-container">
         <span class="pacman" />
     </div>
 {:else}
@@ -58,12 +65,6 @@
 
     * {
         box-sizing: border-box;
-    }
-
-    .loading-game-desc {
-        grid-area: desc;
-        display: grid;
-        place-items: center;
     }
 
     .game-concept {
@@ -134,13 +135,19 @@
     }
 
     /* Loading animation */
+    .loading-container {
+        grid-area: heading;
+        display: grid;
+        place-items: center;
+    }
+
     .pacman {
         display: inline-grid;
         margin: auto;
         align-self: center;
         justify-self: center;
         position: relative;
-        border: 24px solid var(--button-col);
+        border: 46px solid var(--button-col);
         border-radius: 50%;
         box-sizing: border-box;
         animation: eat 1s linear infinite;
@@ -153,9 +160,9 @@
         left: 50px;
         top: 50%;
         transform: translateY(-50%);
-        background: #999;
-        width: 15px;
-        height: 15px;
+        background: #6d6d6d;
+        width: 21px;
+        height: 21px;
         border-radius: 50%;
         box-sizing: border-box;
         opacity: 0;

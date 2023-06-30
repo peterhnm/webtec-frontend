@@ -1,11 +1,9 @@
 <script lang="ts">
     import GameDescription from "./GameDescription.svelte";
     import GameDesign from "./GameDesign.svelte";
-    import { headingStore, promptStore } from "../stores";
+    import { promptStore } from "../stores";
     import { selectedTagsStore } from "../stores.js";
     import type { AiResponse } from "./types";
-
-    $headingStore = "Generation complete!\nYour game is:";
 
     async function getData(): Promise<AiResponse> {
         const url: string = `https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io?theme=${$promptStore}&tags=${$selectedTagsStore}`;
@@ -19,26 +17,25 @@
 <div class="main">
     {#await data}
         <GameDescription loading={true} />
-        <GameDesign loading={true} />
     {:then res}
         <button
             class="app-button"
             on:click={() => {
                 data = getData();
             }}
-        >Try again
+            >Try again
         </button>
         <GameDescription data={res.concept} loading={false} />
         <GameDesign data={res.images} loading={false} />
+        <div class="tags">
+            <ul>
+                {#each $selectedTagsStore as tag}
+                    <li>{tag}</li>
+                {/each}
+            </ul>
+            <p>Added Tags</p>
+        </div>
     {/await}
-    <div class="tags">
-        <ul>
-            {#each $selectedTagsStore as tag}
-                <li>{tag}</li>
-            {/each}
-        </ul>
-        <p>Added Tags</p>
-    </div>
 </div>
 
 <style>

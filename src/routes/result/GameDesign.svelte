@@ -5,7 +5,6 @@
     import downloadBtn from "$lib/images/downloadBtn.svg";
 
     export let data: string[];
-    export let loading: boolean;
 
     const active = "active";
     let items: HTMLUListElement;
@@ -66,19 +65,11 @@
 <div class="game-image">
     <div class="carousel-viewport">
         <ul bind:this={items} class="items">
-            {#if loading}
-                {#each { length: 2 } as _}
-                    <li class="item">
-                        <span class="img-loader" />
-                    </li>
-                {/each}
-            {:else}
-                {#each data as img, i}
-                    <li class="item">
-                        <img src="data:image/png;base64,{img}" alt="Image {i}" />
-                    </li>
-                {/each}
-            {/if}
+            {#each data as img, i}
+                <li class="item">
+                    <img src="data:image/png;base64,{img}" alt="Image {i}" />
+                </li>
+            {/each}
         </ul>
     </div>
     <button
@@ -95,33 +86,21 @@
     >
         <img alt="Next Button" class="svg-button" src={nextBtn} />
     </button>
-    {#if !loading}
-        <button
-            class="svg-button carousel-download"
-            on:click={downloadImg}
-            title="Download image"
-        >
-            <img alt="Download Button" class="svg-button" src={downloadBtn} />
-        </button>
-    {/if}
+    <button
+        class="svg-button carousel-download"
+        on:click={downloadImg}
+        title="Download image"
+    >
+        <img alt="Download Button" class="svg-button" src={downloadBtn} />
+    </button>
     <ol bind:this={dots} class="carousel-dots">
-        {#if loading}
-            {#each { length: 2 } as _, i}
-                {#if i === 0}
-                    <li class="dot active">{i + 1}</li>
-                {:else}
-                    <li class="dot">{i + 1}</li>
-                {/if}
-            {/each}
-        {:else}
-            {#each { length: data.length } as _, i}
-                {#if i === 0}
-                    <li class="dot active">{i + 1}</li>
-                {:else}
-                    <li class="dot">{i + 1}</li>
-                {/if}
-            {/each}
-        {/if}
+        {#each { length: data.length } as _, i}
+            {#if i === 0}
+                <li class="dot active">{i + 1}</li>
+            {:else}
+                <li class="dot">{i + 1}</li>
+            {/if}
+        {/each}
     </ol>
 </div>
 
@@ -255,6 +234,7 @@
     }
 
     /* loading animation */
+    /*
     .img-loader {
         display: inline-block;
         width: 400px;
@@ -272,4 +252,5 @@
             background-position: 315px 0, 0 0, 15px 140px, 65px 145px;
         }
     }
+    */
 </style>
