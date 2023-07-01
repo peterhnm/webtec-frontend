@@ -18,23 +18,25 @@
     {#await data}
         <GameDescription loading={true} />
     {:then res}
+        <GameDescription data={res.concept} loading={false} />
+        <GameDesign data={res.images} loading={false} />
         <button
             class="app-button"
             on:click={() => {
                 data = getData();
             }}
-            >Try again
+        >Try again
         </button>
-        <GameDescription data={res.concept} loading={false} />
-        <GameDesign data={res.images} loading={false} />
-        <div class="search-container">
-            <ul>
-                {#each $selectedTagsStore as tag}
-                    <li>{tag}</li>
-                {/each}
-            </ul>
-            <p>Added Tags</p>
-        </div>
+        {#if $selectedTagsStore.length > 0}
+            <div class="tags">
+                <ul>
+                    {#each $selectedTagsStore as tag}
+                        <li>{tag}</li>
+                    {/each}
+                </ul>
+                <p>Added Tags</p>
+            </div>
+        {/if}
     {/await}
 </div>
 
@@ -47,23 +49,24 @@
             "button button"
             "tags tags";
         grid-template-columns: 400px 400px;
+        grid-template-rows: repeat(3, min-content) auto;
         grid-column-gap: 75px;
         margin: 0 auto;
         width: 876px;
     }
 
     button {
-        margin-top: 55px;
         grid-area: button;
         justify-self: start;
+        margin-bottom: 57px;
     }
 
-    .search-container {
+    .tags {
         grid-area: tags;
-        margin: 57px 0 0;
+        align-self: end;
     }
 
-    .search-container ul {
+    .tags ul {
         display: flex;
         margin: 0;
         padding: 0;
@@ -73,7 +76,7 @@
         list-style: none;
     }
 
-    .search-container li {
+    .tags li {
         --height: 32px;
         padding: 7px 12px;
         min-width: 32px;
@@ -88,7 +91,7 @@
         text-align: center;
     }
 
-    .search-container p {
+    .tags p {
         margin: 14px 0 0;
         padding: 0;
         color: #4b4b4b;

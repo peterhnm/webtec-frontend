@@ -112,6 +112,7 @@
         grid-template-rows: 1fr;
         grid-template-columns: 1fr;
 
+        margin-bottom: 55px; /* relevant if text box content shorter than 400px */
         width: 400px;
         height: 400px;
         place-self: start end;

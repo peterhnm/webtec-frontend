@@ -33,7 +33,7 @@
         <h2>{data.title}</h2>
         <p>{data.genre}</p>
     </div>
-    <div class="game-desc">
+    <div class="concept-container">
         <div class="game-concept">
             <div bind:this={text} class="text-box">
                 <TextBox heading={3} label="Key Mechanics" text={data.key_mechanic} />
@@ -50,16 +50,18 @@
 {/if}
 
 <style>
-    .game-desc {
+    .concept-container {
         --btn-height: 30px;
         display: grid;
         grid-area: concept;
         grid-template: "container" 1fr;
+        margin-bottom: 20px;
         width: 400px;
-        min-height: 0;
+        min-height: 400px;
+        height: min-content;
     }
 
-    .game-desc > * {
+    .concept-container > * {
         grid-area: container;
     }
 
@@ -100,7 +102,7 @@
         --line-height: 19px;
         width: 100%;
         margin-bottom: calc(
-            2 * var(--line-height) + 4px
+                2 * var(--line-height) + 4px
         ); /* button should not cover the text */
         padding: 0;
 
@@ -117,7 +119,7 @@
         grid-gap: 5px;
         place-self: end;
         place-content: center;
-        padding: 2px 6px;
+        padding: 2px;
         height: calc(var(--btn-height) - 2 * 2px);
         background: white;
 
@@ -131,7 +133,7 @@
     }
 
     @media (max-width: 480px) {
-        .game-desc {
+        .concept-container {
             margin-bottom: 32px;
         }
     }
