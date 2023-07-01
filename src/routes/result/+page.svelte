@@ -1,10 +1,9 @@
 <script lang="ts">
-    import GameDescription from "./GameDescription.svelte";
+    import GameDescription from "./GameConcept.svelte";
     import GameDesign from "./GameDesign.svelte";
-    import { headingStore, promptStore, selectedTagsStore } from "../stores";
+    import { promptStore } from "../stores";
+    import { selectedTagsStore } from "../stores.js";
     import type { AiResponse } from "./types";
-
-    $headingStore = "Generation complete!\nYour game is:";
 
     async function getData(): Promise<AiResponse> {
         const url: string = `https://jambuddyserver.onrender.com?theme=${$promptStore}&tags=${$selectedTagsStore}`;
@@ -18,8 +17,9 @@
 <div class="main">
     {#await data}
         <GameDescription loading={true} />
-        <GameDesign loading={true} />
     {:then res}
+        <GameDescription data={res.concept} loading={false} />
+        <GameDesign data={res.images} loading={false} />
         <button
             class="app-button"
             on:click={() => {
@@ -27,31 +27,30 @@
             }}
             >Try again
         </button>
-        <GameDescription data={res.concept} loading={false} />
-        <GameDesign data={res.images} loading={false} />
+        {#if $selectedTagsStore.length > 0}
+            <div class="tags">
+                <ul>
+                    {#each $selectedTagsStore as tag}
+                        <li>{tag}</li>
+                    {/each}
+                </ul>
+                <p>Added Tags</p>
+            </div>
+        {/if}
     {/await}
-    <div class="tags">
-        <ul>
-            {#each $selectedTagsStore as tag}
-                <li>{tag}</li>
-            {/each}
-        </ul>
-        <p>Added Tags</p>
-    </div>
 </div>
 
 <style>
     .main {
-        --gap-size: 13px;
         display: grid;
         grid-template-areas:
-            "desc image"
+            "heading heading"
+            "concept image"
             "button button"
             "tags tags";
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 400px 72px auto;
-        grid-column-gap: 15px;
-        grid-row-gap: 18px;
+        grid-template-columns: 400px 400px;
+        grid-template-rows: repeat(3, min-content) auto;
+        grid-column-gap: 75px;
         margin: 0 auto;
         width: 876px;
     }
@@ -59,11 +58,12 @@
     button {
         grid-area: button;
         justify-self: start;
+        margin-bottom: 57px;
     }
 
     .tags {
         grid-area: tags;
-        margin: calc(57px - var(--gap-size)) 0 0;
+        align-self: end;
     }
 
     .tags ul {

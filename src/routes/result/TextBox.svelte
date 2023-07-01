@@ -26,6 +26,7 @@
     p {
         margin: 0;
         padding: 0;
+        line-height: var(--line-height);
     }
 
     .heading-one {

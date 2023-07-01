@@ -2,11 +2,18 @@
     import type { Concept } from "./types";
     import TextBox from "./TextBox.svelte";
     import copyBtn from "$lib/images/copyBtn.svg";
+    import { headingStore } from "../stores";
 
     export let data: Concept;
     export let loading: boolean;
 
     let text: HTMLTextAreaElement;
+
+    if (loading) {
+        $headingStore = "Your game is being generated...";
+    } else {
+        $headingStore = "Generation complete!\nYour game is:";
+    }
 
     function copyToClipboard() {
         const range = document.createRange();
@@ -18,16 +25,16 @@
 </script>
 
 {#if loading}
-    <div class="loading-game-desc">
+    <div class="loading-container">
         <span class="pacman" />
     </div>
 {:else}
-    <div class="game-desc">
+    <div class="heading">
+        <h2>{data.title}</h2>
+        <p>{data.genre}</p>
+    </div>
+    <div class="concept-container">
         <div class="game-concept">
-            <div class="heading">
-                <h2>{data.title}</h2>
-                <p>{data.genre}</p>
-            </div>
             <div bind:this={text} class="text-box">
                 <TextBox heading={3} label="Key Mechanics" text={data.key_mechanic} />
                 <TextBox heading={3} label="Description" text={data.description} />
@@ -43,16 +50,18 @@
 {/if}
 
 <style>
-    .game-desc {
+    .concept-container {
         --btn-height: 30px;
         display: grid;
-        grid-area: desc;
+        grid-area: concept;
         grid-template: "container" 1fr;
-        width: 100%;
-        overflow: hidden;
+        margin-bottom: 20px;
+        width: 400px;
+        min-height: 400px;
+        height: min-content;
     }
 
-    .game-desc > * {
+    .concept-container > * {
         grid-area: container;
     }
 
@@ -60,17 +69,12 @@
         box-sizing: border-box;
     }
 
-    .loading-game-desc {
-        grid-area: desc;
-        display: grid;
-        place-items: center;
-    }
-
     .game-concept {
         min-height: 0;
     }
 
-    .game-concept .heading {
+    .heading {
+        grid-area: heading;
         display: flex;
         flex-direction: column;
         gap: 3px;
@@ -86,7 +90,7 @@
         line-height: 44px;
     }
 
-    .game-concept p {
+    .heading p {
         margin: 0;
         padding: 0;
         width: 100%;
@@ -95,18 +99,17 @@
     }
 
     .text-box {
+        --line-height: 19px;
         width: 100%;
-        height: 338px;
-        max-height: 338px;
-        margin: 0;
-        padding: 0 8px calc(var(--btn-height) + 6px) 0;
+        margin-bottom: calc(
+            2 * var(--line-height) + 4px
+        ); /* button should not cover the text */
+        padding: 0;
 
         outline: none;
         border: none;
-        overflow: scroll;
 
         color: var(--text-col);
-        line-height: 19px;
     }
 
     .copy-btn {
@@ -116,8 +119,7 @@
         grid-gap: 5px;
         place-self: end;
         place-content: center;
-        margin-right: 4px;
-        padding: 2px 6px;
+        padding: 2px;
         height: calc(var(--btn-height) - 2 * 2px);
         background: white;
 
@@ -131,19 +133,26 @@
     }
 
     @media (max-width: 480px) {
-        .game-desc {
+        .concept-container {
             margin-bottom: 32px;
         }
     }
 
     /* Loading animation */
+    .loading-container {
+        grid-area: heading;
+        display: grid;
+        margin-top: 6px;
+        place-items: center;
+    }
+
     .pacman {
         display: inline-grid;
         margin: auto;
         align-self: center;
         justify-self: center;
         position: relative;
-        border: 24px solid var(--button-col);
+        border: 46px solid var(--button-col);
         border-radius: 50%;
         box-sizing: border-box;
         animation: eat 1s linear infinite;
@@ -156,9 +165,9 @@
         left: 50px;
         top: 50%;
         transform: translateY(-50%);
-        background: #999;
-        width: 15px;
-        height: 15px;
+        background: #6d6d6d;
+        width: 21px;
+        height: 21px;
         border-radius: 50%;
         box-sizing: border-box;
         opacity: 0;

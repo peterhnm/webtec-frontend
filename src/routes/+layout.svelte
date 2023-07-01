@@ -18,7 +18,7 @@
     </main>
 
     <footer>
-        <p class="left">Webtechnologien</p>
+        <p class="left">Webtechnologien SS 2023</p>
         <p class="right">Social Media</p>
     </footer>
 </div>
@@ -36,7 +36,10 @@
 
     main {
         grid-area: main;
-        margin: 83px 0;
+        display: grid;
+        grid-template-rows: min-content auto;
+        grid-gap: 77px;
+        margin: 83px 0 180px;
     }
 
     footer {

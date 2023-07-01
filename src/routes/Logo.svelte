@@ -12,11 +12,13 @@
 <style>
     .container {
         display: grid;
-        margin: 0 auto 77px;
-        width: 100%;
+        grid-template-rows: 127px min-content;
+        grid-gap: 18px;
+
+        margin: 0 auto;
         max-width: 619px;
-        align-items: center;
-        box-sizing: border-box;
+        width: 100%;
+        min-height: 0;
     }
 
     .container p {
@@ -29,7 +31,6 @@
     }
 
     .logo {
-        margin-bottom: 18px;
         width: 587px;
         height: 127px;
         justify-self: center;
