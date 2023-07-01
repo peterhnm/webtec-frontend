@@ -99,7 +99,9 @@
     .text-box {
         --line-height: 19px;
         width: 100%;
-        margin-bottom: calc(2 * var(--line-height) + 4px); /* button should not cover the text */
+        margin-bottom: calc(
+            2 * var(--line-height) + 4px
+        ); /* button should not cover the text */
         padding: 0;
 
         outline: none;
