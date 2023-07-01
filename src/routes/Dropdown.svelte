@@ -18,7 +18,7 @@
     .dropdown {
         position: absolute;
         left: 0;
-        bottom: 99%;
+        bottom: 96%;
 
         background: var(--input-col);
         border-top-right-radius: 3px;
