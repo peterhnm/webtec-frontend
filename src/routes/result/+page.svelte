@@ -25,7 +25,7 @@
             on:click={() => {
                 data = getData();
             }}
-        >Try again
+            >Try again
         </button>
         {#if $selectedTagsStore.length > 0}
             <div class="tags">
