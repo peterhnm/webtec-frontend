@@ -18,7 +18,7 @@
     </main>
 
     <footer>
-        <p class="left">Webtechnologien</p>
+        <p class="left">Webtechnologien SS 2023</p>
         <p class="right">Social Media</p>
     </footer>
 </div>
