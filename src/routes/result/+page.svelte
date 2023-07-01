@@ -1,5 +1,5 @@
 <script lang="ts">
-    import GameDescription from "./GameDescription.svelte";
+    import GameDescription from "./GameConcept.svelte";
     import GameDesign from "./GameDesign.svelte";
     import { promptStore } from "../stores";
     import { selectedTagsStore } from "../stores.js";
@@ -23,11 +23,11 @@
             on:click={() => {
                 data = getData();
             }}
-            >Try again
+        >Try again
         </button>
         <GameDescription data={res.concept} loading={false} />
         <GameDesign data={res.images} loading={false} />
-        <div class="tags">
+        <div class="search-container">
             <ul>
                 {#each $selectedTagsStore as tag}
                     <li>{tag}</li>
@@ -58,12 +58,12 @@
         justify-self: start;
     }
 
-    .tags {
+    .search-container {
         grid-area: tags;
         margin: 57px 0 0;
     }
 
-    .tags ul {
+    .search-container ul {
         display: flex;
         margin: 0;
         padding: 0;
@@ -73,7 +73,7 @@
         list-style: none;
     }
 
-    .tags li {
+    .search-container li {
         --height: 32px;
         padding: 7px 12px;
         min-width: 32px;
@@ -88,7 +88,7 @@
         text-align: center;
     }
 
-    .tags p {
+    .search-container p {
         margin: 14px 0 0;
         padding: 0;
         color: #4b4b4b;

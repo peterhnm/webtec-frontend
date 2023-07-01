@@ -44,14 +44,14 @@
 
             // eslint-disable-next-line no-undef
             const selectedBoxes: NodeListOf<HTMLInputElement> =
-                selectedTags.querySelectorAll('input[type="checkbox"]');
+                selectedTags.querySelectorAll("input[type=\"checkbox\"]");
             for (const box of selectedBoxes) {
                 box.checked = true;
             }
 
             // eslint-disable-next-line no-undef
             const dropdownBoxes: NodeListOf<HTMLInputElement> =
-                dropdown.querySelectorAll('input[type="checkbox"]');
+                dropdown.querySelectorAll("input[type=\"checkbox\"]");
             for (const box of dropdownBoxes) {
                 box.checked = false;
             }
@@ -83,8 +83,9 @@
 
 <div class="main">
     <p class="gamejam-desc">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+        Having trouble coming up with a Game Jam Idea? Enter your Theme below and let
+        ChatGTP and DALL-E help you with that! Optionally, you can add Tags if you
+        already know the direction you want your game to take.
     </p>
 
     <div class="prompt">
@@ -100,7 +101,7 @@
         <button class="app-button" on:click={processData}>Generate</button>
     </div>
 
-    <div class="tags">
+    <div class="search-container">
         <div bind:this={dropdown}>
             {#if visible}
                 {#await data}
@@ -122,16 +123,20 @@
                 Add tags to specify what kind of game you want
             </label>
         </div>
-
-        <div bind:this={selectedTags} class="selected-tags">
-            {#if $selectedTagsStore}
-                {#each $selectedTagsStore as tag}
-                    <Tag id={tag} checked={true} />
-                {/each}
-            {/if}
-        </div>
-        <p class="selected-tags-desc">Added Tags</p>
     </div>
+
+    {#if $selectedTagsStore.length > 0}
+        <div class="selected-tags-container">
+            <div bind:this={selectedTags} class="selected-tags">
+                {#if $selectedTagsStore}
+                    {#each $selectedTagsStore as tag}
+                        <Tag id={tag} checked={true} />
+                    {/each}
+                {/if}
+            </div>
+            <p class="selected-tags-desc">Added Tags</p>
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -139,10 +144,12 @@
         --label-margin: 7px;
         display: grid;
         grid-template-areas:
-            "desc"
+            "description"
             "prompt"
-            "tags";
-        margin: 24px auto;
+            "search"
+            "selected-tags";
+        grid-template-rows: repeat(3, min-content) auto;
+        margin: 0 auto;
         width: 533px;
     }
 
@@ -151,9 +158,9 @@
     }
 
     .gamejam-desc {
-        grid-area: desc;
+        grid-area: description;
         margin: 0 0 23px;
-        height: 81px;
+        min-height: 81px;
         color: var(--text-col);
     }
 
@@ -170,22 +177,18 @@
         width: 100%;
     }
 
-    .tags {
-        grid-area: tags;
-        display: grid;
-        grid-template-areas:
-            "search"
-            "selectedTags";
-        position: relative; /* because of the dropdown-menu */
-    }
-
-    .search {
+    .search-container {
         grid-area: search;
+        position: relative; /* because of the dropdown-menu */
         margin-bottom: 46px;
     }
 
+    .selected-tags-container {
+        grid-area: selected-tags;
+        align-self: end;
+    }
+
     .selected-tags {
-        grid-area: selectedTags;
         display: flex;
         flex-wrap: wrap;
         gap: 13px;
