@@ -6,6 +6,8 @@
 
     export let data: string[];
 
+    $: imgFormat = inspectImages(data);
+
     const active = "active";
     let items: HTMLUListElement;
     let dots: HTMLOListElement;
@@ -50,8 +52,30 @@
         });
     }
 
+    function inspectImages(images: string[]): string {
+        if (!images) {
+            return "base64";
+        }
+
+        for (const img of images) {
+            if (img.indexOf("https") !== -1) {
+                return "url";
+            }
+        }
+    }
+
     async function downloadImg() {
-        const href = `data:image/png;base64,${data[current]}`;
+        let href = "";
+
+        if (imgFormat === "url") {
+            const url = data[current];
+            const res = await fetch(url);
+            const blobImg = await res.blob();
+            href = URL.createObjectURL(blobImg);
+        } else {
+            href = `data:image/png;base64,${data[current]}`;
+        }
+
         const anchorElement = document.createElement("a");
         anchorElement.href = href;
         anchorElement.download = `jambuddy_image_${current + 1}`;
@@ -67,7 +91,11 @@
         <ul bind:this={items} class="items">
             {#each data as img, i}
                 <li class="item">
-                    <img src="data:image/png;base64,{img}" alt="Image {i}" />
+                    {#if imgFormat === "base64"}
+                        <img src="data:image/png;base64,{img}" alt="Image {i}" />
+                    {:else}
+                        <img src={img} alt="Image {i}" />
+                    {/if}
                 </li>
             {/each}
         </ul>
