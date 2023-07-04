@@ -1,11 +1,11 @@
 <script>
     import { base } from "$app/paths";
-    import logoSmall from "$lib/images/jambuddy_small.png";
+    import logoSmall from "$lib/images/logo_small.svg";
 </script>
 
 <header>
     <a href="{base}/">
-        <img alt="JamBuddy Logo small" class="logo-small" src={logoSmall} />
+        <img alt="JamBuddy Logo Small" class="logo-small" src={logoSmall} />
     </a>
 
     <nav>
