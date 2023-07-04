@@ -7,7 +7,8 @@
     export let data: Concept;
     export let loading: boolean;
 
-    let text: HTMLTextAreaElement;
+    let heading: HTMLDivElement;
+    let text: HTMLDivElement;
 
     if (loading) {
         $headingStore = "Your game is being generated...";
@@ -16,10 +17,13 @@
     }
 
     function copyToClipboard() {
+        // select text
         const range = document.createRange();
-        range.selectNode(text);
+        range.setStart(heading, 0);
+        range.setEnd(text, 1);
         window.getSelection().removeAllRanges();
         window.getSelection().addRange(range);
+        // copy to clipboard
         navigator.clipboard.writeText(window.getSelection().toString());
     }
 </script>
@@ -29,13 +33,13 @@
         <span class="pacman" />
     </div>
 {:else}
-    <div class="heading">
+    <div bind:this={heading} class="heading">
         <h2>{data.title}</h2>
         <p>{data.genre}</p>
     </div>
     <div class="concept-container">
-        <div class="game-concept">
-            <div bind:this={text} class="text-box">
+        <div bind:this={text} class="game-concept">
+            <div class="text-box">
                 <TextBox heading={3} label="Key Mechanics" text={data.key_mechanic} />
                 <TextBox heading={3} label="Description" text={data.description} />
                 <TextBox heading={3} label="Visuals" text={data.visuals} />
