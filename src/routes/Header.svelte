@@ -45,7 +45,7 @@
 
     ul {
         display: flex;
-        margin: 0 24px;
+        margin: 0 22px;
         padding: 0;
         place-content: center end;
         list-style: none;
