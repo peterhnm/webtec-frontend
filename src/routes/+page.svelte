@@ -185,7 +185,6 @@
 
     .selected-tags-container {
         grid-area: selected-tags;
-        align-self: end;
     }
 
     .selected-tags {
