@@ -63,7 +63,6 @@
 
     .tags {
         grid-area: tags;
-        align-self: end;
     }
 
     .tags ul {

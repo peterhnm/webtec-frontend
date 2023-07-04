@@ -1,5 +1,5 @@
 <script lang="ts">
-    import logo from "$lib/images/jambuddy_Loggo.png";
+    import logo from "$lib/images/logo_big.svg";
 
     export let text: string;
 </script>
