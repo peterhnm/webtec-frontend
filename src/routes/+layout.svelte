@@ -18,8 +18,8 @@
     </main>
 
     <footer>
-        <p class="left">Webtechnologien SS 2023</p>
-        <p class="right">Social Media</p>
+        <p class="left">Webtechnologien Sommersemester 2023</p>
+        <p class="right">Dennis Hawran, Peter Heinemann, Anna Tribulowski</p>
     </footer>
 </div>
 
@@ -47,7 +47,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         align-items: center;
-        padding: 0 57px;
+        padding: 0 26px;
         background: var(--footer-col);
         line-height: 19px;
     }
