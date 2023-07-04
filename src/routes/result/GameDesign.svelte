@@ -62,6 +62,8 @@
                 return "url";
             }
         }
+
+        return "base64";
     }
 
     async function downloadImg() {
