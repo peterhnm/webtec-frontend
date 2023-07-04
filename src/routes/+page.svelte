@@ -72,7 +72,8 @@
     }
 
     async function getData() {
-        const url: string = "https://jambuddyserver.onrender.com/tags";
+        const url: string =
+            "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/tags";
         const res = await fetch(url);
         return await res.json();
     }
