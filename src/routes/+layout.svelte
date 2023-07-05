@@ -2,6 +2,7 @@
     import "./style.css";
     import "@fontsource/inter/400.css";
     import "@fontsource/inter/600.css";
+    import "@fontsource/inter/700.css";
     import "@fontsource/inter/800.css";
     import Header from "./Header.svelte";
     import Logo from "./Logo.svelte";
@@ -11,15 +12,14 @@
 <div class="app">
     <Header />
 
-    <Logo bind:text={$headingStore} />
-
     <main>
+        <Logo bind:text={$headingStore} />
         <slot />
     </main>
 
     <footer>
-        <p class="left">Webtechnologien</p>
-        <p class="right">Social Media</p>
+        <p class="left">Webtechnologien Sommersemester 2023</p>
+        <p class="right">Dennis Hawran, Peter Heinemann, Anna Tribulowski</p>
     </footer>
 </div>
 
@@ -28,17 +28,18 @@
         display: grid;
         grid-template-areas:
             "header"
-            "logo"
             "main"
             "footer";
-        grid-template-rows: 57px 283px auto 121px;
+        grid-template-rows: 57px 1fr 121px;
         min-height: 100vh;
     }
 
     main {
         grid-area: main;
-        box-sizing: border-box;
-        margin: 77px auto;
+        display: grid;
+        grid-template-rows: min-content auto;
+        grid-gap: 77px;
+        margin: 83px 0 180px;
     }
 
     footer {
@@ -46,16 +47,13 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         align-items: center;
-        padding: 0 57px;
-
-        font-family: "Inter", sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
+        padding: 0 26px;
+        background: var(--footer-col);
         line-height: 19px;
+    }
 
-        color: #ffffff;
-        background: #667d77;
+    footer p {
+        color: var(--link-col);
     }
 
     footer .left {
@@ -64,5 +62,15 @@
 
     footer .right {
         justify-self: end;
+    }
+
+    @media (max-width: 480px) {
+        .app {
+            grid-template-rows: 57px 100% 121px;
+        }
+
+        footer {
+            padding: 0 16px;
+        }
     }
 </style>

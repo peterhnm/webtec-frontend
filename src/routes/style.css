@@ -1,21 +1,85 @@
+:root {
+    --button-col: #087385;
+    --footer-col: #12272b;
+    --header-col: #005867;
+    --input-col: #00a8b3;
+    --label-col: #4b4b4b;
+    --link-col: #fff;
+    --text-col: #333;
+}
+
+::-moz-selection {
+    color: var(--link-col);
+    background: var(--header-col);
+}
+
+::selection {
+    color: var(--link-col);
+    background: var(--header-col);
+}
+
+* {
+    color: var(--text-col);
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
 body {
     margin: 0;
     padding: 0;
 }
 
 button {
-    cursor: pointer;
     align-items: center;
 
-    background: #44ab9f;
+    background: var(--button-col);
     border-radius: 5px;
     border: none;
 
-    font-family: "Inter", sans-serif;
-    font-style: normal;
+    color: var(--link-col);
     font-weight: 600;
     font-size: 20px;
-    line-height: 24px;
 
-    color: #000000;
+    cursor: pointer;
+}
+
+input[type="text"] {
+    --padding: 12px;
+    margin: 0;
+    padding: var(--padding);
+    width: calc(100% - 2 * var(--padding));
+    max-height: calc(42px - 2 * var(--padding));
+    height: 100%;
+
+    color: var(--link-col);
+    background: var(--input-col);
+    border: none;
+    border-radius: 3px;
+    outline-style: none;
+}
+
+input::placeholder {
+    color: var(--link-col);
+    font-style: italic;
+    opacity: 1;
+}
+
+label {
+    color: var(--label-col);
+}
+
+.app-button {
+    padding: 24px 26px;
+    width: 142px;
+    height: 72px;
+}
+
+.svg-button {
+    transform: translateY(0);
+}
+
+.svg-button:active {
+    transform: translateY(1px);
 }

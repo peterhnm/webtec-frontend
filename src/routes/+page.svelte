@@ -10,6 +10,7 @@
 
     let promptField: HTMLInputElement;
     let promptFieldDesc: HTMLParagraphElement;
+    let promptLabel = "What is the theme of your Game Jam?";
     let searchBar: HTMLInputElement;
     let visible = false;
     let selectedTags: HTMLDivElement;
@@ -22,7 +23,7 @@
         });
 
         window.addEventListener("click", (event) => {
-            // hide Dropdown if we click outside it
+            // hide Dropdown if we click outside of it
             const target = event.target as HTMLElement;
 
             if (
@@ -37,6 +38,10 @@
 
         // Workaround
         selectedTagsStore.subscribe(() => {
+            if (!selectedTags) {
+                return;
+            }
+
             // eslint-disable-next-line no-undef
             const selectedBoxes: NodeListOf<HTMLInputElement> =
                 selectedTags.querySelectorAll('input[type="checkbox"]');
@@ -54,12 +59,11 @@
     });
 
     function processData() {
-        // TODO Display error message when no prompt is given
         if (!$promptStore) {
             promptField.select();
             promptField.style.outline = "2px solid red";
-            promptFieldDesc.innerHTML = "Please enter a prompt!";
             promptFieldDesc.style.color = "red";
+            promptLabel = "Please enter a prompt!";
             return;
         }
 
@@ -78,24 +82,26 @@
 </script>
 
 <div class="main">
-    <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+    <p class="gamejam-desc">
+        Having trouble coming up with a Game Jam Idea? Enter your Theme below and let
+        ChatGTP and DALL-E help you with that! Optionally, you can add Tags if you
+        already know the direction you want your game to take.
     </p>
 
     <div class="prompt">
-        <input
-            bind:this={promptField}
-            bind:value={$promptStore}
-            placeholder="...enter Game Jam Theme here"
-            type="text"
-        />
-        <small bind:this={promptFieldDesc}>What is the theme of your Game Jam?</small>
-
-        <button on:click={processData}>Generate</button>
+        <label bind:this={promptFieldDesc}>
+            <input
+                bind:this={promptField}
+                bind:value={$promptStore}
+                placeholder="...enter Game Jam Theme here"
+                type="text"
+            />
+            {promptLabel}
+        </label>
+        <button class="app-button" on:click={processData}>Generate</button>
     </div>
 
-    <div class="tags">
+    <div class="search-container">
         <div bind:this={dropdown}>
             {#if visible}
                 {#await data}
@@ -107,137 +113,100 @@
         </div>
 
         <div class="search">
-            <input
-                bind:this={searchBar}
-                bind:value={searchTerm}
-                placeholder="...search for game tags"
-                type="text"
-            />
-            <small>Add tags to specify what kind of game you want</small>
+            <label>
+                <input
+                    bind:this={searchBar}
+                    bind:value={searchTerm}
+                    placeholder="...search for game tags"
+                    type="text"
+                />
+                Add tags to specify what kind of game you want
+            </label>
         </div>
-
-        <div bind:this={selectedTags} class="selectedTags">
-            {#if $selectedTagsStore}
-                {#each $selectedTagsStore as tag}
-                    <Tag id={tag} checked={true} />
-                {/each}
-            {/if}
-        </div>
-        <small>Added Tags</small>
     </div>
+
+    {#if $selectedTagsStore.length > 0}
+        <div class="selected-tags-container">
+            <div bind:this={selectedTags} class="selected-tags">
+                {#if $selectedTagsStore}
+                    {#each $selectedTagsStore as tag}
+                        <Tag id={tag} checked={true} />
+                    {/each}
+                {/if}
+            </div>
+            <p class="selected-tags-desc">Added Tags</p>
+        </div>
+    {/if}
 </div>
 
 <style>
-    input[type="text"] {
-        min-height: 42px;
-        min-width: 358px;
-
-        border: none;
-        border-radius: 3px;
-        font-family: "Inter", sans-serif;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
-
-        color: #000000;
-        background: #bee6dc;
-    }
-
-    input[type="text"]:placeholder-shown {
-        font-style: italic;
-    }
-
-    p {
-        height: 81px;
-    }
-
-    small {
-        margin-top: 6px;
-        width: 100%;
-
-        font-family: "Inter", sans-serif;
-        font-style: italic;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
-
-        color: #000000;
-    }
-
     .main {
+        --label-margin: 7px;
         display: grid;
         grid-template-areas:
-            "desc"
+            "description"
             "prompt"
-            "tags";
-        width: 100%;
-        max-width: 545px;
-        padding: 6px;
+            "search"
+            "selected-tags";
+        grid-template-rows: repeat(3, min-content) auto;
+        margin: 0 auto;
+        width: 533px;
     }
 
-    .main p {
-        grid-area: desc;
-        margin: 0 0 37px 0;
+    input[type="text"] {
+        margin-bottom: var(--label-margin);
+    }
 
-        font-family: "Inter", sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
-
-        color: #333333;
+    .gamejam-desc {
+        grid-area: description;
+        margin: 0 0 23px;
+        min-height: 81px;
+        color: var(--text-col);
     }
 
     .prompt {
         grid-area: prompt;
-        display: grid;
-        grid-template-areas:
-            "input button"
-            "small button";
-        grid-column-gap: 33px;
         margin-bottom: 97px;
+        display: flex;
+        align-items: baseline;
+        gap: 33px;
     }
 
     .prompt input {
-        display: grid;
-        grid-area: input;
+        max-width: calc(358px - 2 * var(--padding));
+        width: 100%;
     }
 
-    .prompt small {
-        display: grid;
-        grid-area: small;
-    }
-
-    .prompt button {
-        grid-area: button;
-    }
-
-    .tags {
-        grid-area: tags;
-        display: grid;
-        grid-template-areas:
-            "search"
-            "selectedTags";
-        position: relative;
-    }
-
-    .search {
+    .search-container {
         grid-area: search;
-        display: grid;
-        grid-template-areas:
-            "input"
-            "small";
-        margin-bottom: 33px;
-        z-index: 1; /* otherwise the dropdown will interrupt the selection marker */
+        position: relative; /* because of the dropdown-menu */
+        margin-bottom: 46px;
     }
 
-    .selectedTags {
+    .selected-tags-container {
+        grid-area: selected-tags;
+    }
+
+    .selected-tags {
         display: flex;
         flex-wrap: wrap;
         gap: 13px;
-        grid-area: selectedTags;
         min-height: 32px;
+    }
 
-        border-radius: 15px;
+    .selected-tags-desc {
+        margin: 14px 0 0;
+        width: 100%;
+        color: var(--label-col);
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 19px;
+    }
+
+    @media (max-width: 480px) {
+        .main {
+            --margin: 48px;
+            width: calc(480px - 2 * var(--margin));
+        }
     }
 </style>

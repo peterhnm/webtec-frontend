@@ -1,14 +1,17 @@
 <script>
-    import { page } from "$app/stores";
+    import { base } from "$app/paths";
+    import logoSmall from "$lib/images/logo_small.svg";
 </script>
 
 <header>
-    <p>JAMBUDDY</p>
+    <a href="{base}/">
+        <img alt="JamBuddy Logo Small" class="logo-small" src={logoSmall} />
+    </a>
 
     <nav>
         <ul>
-            <li aria-current={$page.url.pathname === "/" ? "page" : undefined}>
-                <a href="/">Home</a>
+            <li>
+                <a href="{base}/">Home</a>
             </li>
             <li>
                 <p>Contact</p>
@@ -22,71 +25,54 @@
         grid-area: header;
         display: grid;
         grid-template-columns: 1fr 1fr;
-
-        max-height: 57px;
-
-        background: #3b6660;
+        height: 57px;
+        align-items: center;
+        background: var(--header-col);
     }
 
-    header p {
-        justify-self: start;
-
-        margin: 0 0 0 20px;
-        padding: 0;
-
-        font-family: "Inter", sans-serif;
-        font-style: normal;
-        font-weight: 800;
-        font-size: 24px;
-        line-height: 57px;
-
-        color: #dcdcdc;
+    .logo-small {
+        width: 46px;
+        height: 34px;
+        margin-left: 14px;
     }
 
     header nav {
         width: 100%;
         margin: auto 0;
-
-        font-family: "Inter", sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
+        color: var(--link-col);
         line-height: 19px;
-
-        color: #dcdcdc;
     }
 
     ul {
         display: flex;
-        place-content: center end;
-        margin: 0 24px;
+        margin: 0 22px;
         padding: 0;
+        place-content: center end;
         list-style: none;
     }
 
     li:not(:last-child) {
         float: left;
-        margin-right: 35px;
+        margin-right: 34px;
     }
 
     li p {
         margin: 0;
-
-        font-family: "Inter", sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
-
-        color: #dcdcdc;
+        color: var(--link-col);
+        font-weight: 700;
         cursor: not-allowed;
     }
 
     a {
+        font-weight: 700;
         text-decoration: none;
     }
 
+    a:link {
+        color: var(--link-col);
+    }
+
     a:visited {
-        color: #dcdcdc;
+        color: var(--link-col);
     }
 </style>

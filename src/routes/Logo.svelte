@@ -1,34 +1,50 @@
 <script lang="ts">
+    import logo from "$lib/images/logo_big.svg";
+
     export let text: string;
 </script>
 
-<div class="logo">
-    <p>Logo</p>
+<div class="container">
+    <img alt="JamBuddy Logo" class="logo" src={logo} />
     <p>{text}</p>
 </div>
 
 <style>
-    .logo {
+    .container {
         display: grid;
-        align-items: center;
-        width: 100%;
-        max-width: 619px;
-        height: 100%;
-        max-height: 283px;
-        margin: 0 auto;
-        box-sizing: border-box;
+        grid-template-rows: 127px min-content;
+        grid-gap: 18px;
 
-        font-family: "Inter", sans-serif;
-        font-style: normal;
+        margin: 0 auto;
+        max-width: 619px;
+        width: 100%;
+        min-height: 0;
+    }
+
+    .container p {
+        margin: 0;
+        text-align: center;
+
         font-weight: 800;
         font-size: 48px;
         line-height: 58px;
-        text-align: center;
-
-        color: #333333;
     }
 
-    .logo p {
-        margin: 0;
+    .logo {
+        width: 587px;
+        height: 127px;
+        justify-self: center;
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            width: 480px;
+        }
+
+        .container img {
+            width: 90%;
+            place-self: center;
+            object-fit: scale-down;
+        }
     }
 </style>

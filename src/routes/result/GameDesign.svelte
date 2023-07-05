@@ -1,8 +1,12 @@
-<script lang="ts" xmlns="http://www.w3.org/1999/html">
+<script lang="ts">
     import { onMount } from "svelte";
+    import prevBtn from "$lib/images/prevBtn.svg";
+    import nextBtn from "$lib/images/nextBtn.svg";
+    import downloadBtn from "$lib/images/downloadBtn.svg";
 
     export let data: string[];
-    export let loading: boolean;
+
+    $: imgFormat = inspectImages(data);
 
     const active = "active";
     let items: HTMLUListElement;
@@ -35,7 +39,7 @@
         next.addEventListener("click", scrollNext);
     });
 
-    const setActiveDot = () => {
+    function setActiveDot() {
         let index = 0;
         dots.childNodes.forEach((el: HTMLElement) => {
             if (el.nodeType === 1) {
@@ -46,10 +50,34 @@
                 index++;
             }
         });
-    };
+    }
+
+    function inspectImages(images: string[]): string {
+        if (!images) {
+            return "base64";
+        }
+
+        for (const img of images) {
+            if (img.indexOf("https") !== -1) {
+                return "url";
+            }
+        }
+
+        return "base64";
+    }
 
     async function downloadImg() {
-        const href = `data:image/png;base64,${data[current]}`;
+        let href = "";
+
+        if (imgFormat === "url") {
+            const url = data[current];
+            const res = await fetch(url);
+            const blobImg = await res.blob();
+            href = URL.createObjectURL(blobImg);
+        } else {
+            href = `data:image/png;base64,${data[current]}`;
+        }
+
         const anchorElement = document.createElement("a");
         anchorElement.href = href;
         anchorElement.download = `jambuddy_image_${current + 1}`;
@@ -60,124 +88,70 @@
     }
 </script>
 
-<div class="gameImage">
+<div class="game-image">
     <div class="carousel-viewport">
         <ul bind:this={items} class="items">
-            {#if loading}
-                {#each { length: 2 } as _}
-                    <li class="item">
-                        <span class="img-loader" />
-                    </li>
-                {/each}
-            {:else}
-                {#each data as img, i}
-                    <li class="item">
+            {#each data as img, i}
+                <li class="item">
+                    {#if imgFormat === "base64"}
                         <img src="data:image/png;base64,{img}" alt="Image {i}" />
-                    </li>
-                {/each}
-            {/if}
+                    {:else}
+                        <img src={img} alt="Image {i}" />
+                    {/if}
+                </li>
+            {/each}
         </ul>
     </div>
-    <button bind:this={prev} class="carousel-control prev" title="Go to previous item">
-        <svg
-            fill="none"
-            height="40"
-            viewBox="0 0 40 40"
-            width="40"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <circle cx="20" cy="20" fill="white" r="20" transform="rotate(-180 20 20)" />
-            <path
-                d="M25 7L10 20.0345L25 34"
-                stroke="#999999"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="3"
-            />
-        </svg>
+    <button
+        bind:this={prev}
+        class="svg-button carousel-control prev"
+        title="Go to previous item"
+    >
+        <img alt="Previous Button" class="svg-button" src={prevBtn} />
     </button>
-    <button bind:this={next} class="carousel-control next" title="Go to next item">
-        <svg
-            fill="none"
-            height="40"
-            viewBox="0 0 40 40"
-            width="40"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <circle cx="20" cy="20" fill="white" r="20" transform="rotate(-180 20 20)" />
-            <path
-                d="M16 34L31 20.9655L16 7"
-                stroke="#999999"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="3"
-            />
-        </svg>
+    <button
+        bind:this={next}
+        class="svg-button carousel-control next"
+        title="Go to next item"
+    >
+        <img alt="Next Button" class="svg-button" src={nextBtn} />
     </button>
-    {#if !loading}
-        <button class="carousel-download" on:click={downloadImg} title="Download image">
-            <svg
-                fill="none"
-                height="30"
-                viewBox="0 0 30 30"
-                width="30"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <circle
-                    cx="15"
-                    cy="15"
-                    fill="white"
-                    r="15"
-                    transform="rotate(-180 15 15)"
-                />
-                <path
-                    d="M23 16.7143V19H7V16.7143M15 17.2857L12.5385 15M15 17.2857L17.4615 15M15 17.2857V7"
-                    stroke="#999999"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                />
-            </svg>
-        </button>
-    {/if}
+    <button
+        class="svg-button carousel-download"
+        on:click={downloadImg}
+        title="Download image"
+    >
+        <img alt="Download Button" class="svg-button" src={downloadBtn} />
+    </button>
     <ol bind:this={dots} class="carousel-dots">
-        {#if loading}
-            {#each { length: 2 } as _, i}
-                {#if i === 0}
-                    <li class="dot active">{i + 1}</li>
-                {:else}
-                    <li class="dot">{i + 1}</li>
-                {/if}
-            {/each}
-        {:else}
-            {#each { length: data.length } as _, i}
-                {#if i === 0}
-                    <li class="dot active">{i + 1}</li>
-                {:else}
-                    <li class="dot">{i + 1}</li>
-                {/if}
-            {/each}
-        {/if}
+        {#each { length: data.length } as _, i}
+            {#if i === 0}
+                <li class="dot active">{i + 1}</li>
+            {:else}
+                <li class="dot">{i + 1}</li>
+            {/if}
+        {/each}
     </ol>
 </div>
 
 <style>
-    .gameImage {
+    .game-image {
         grid-area: image;
         display: grid;
         grid-template-areas: "container";
         grid-template-rows: 1fr;
         grid-template-columns: 1fr;
-        place-items: center;
-        place-content: center;
-        overflow: hidden;
+
+        margin-bottom: 55px; /* relevant if text box content shorter than 400px */
         width: 400px;
         height: 400px;
+        place-self: start end;
 
         border-radius: 15px;
+        overflow: hidden;
     }
 
-    .gameImage > * {
+    .game-image > * {
         grid-area: container;
     }
 
@@ -187,14 +161,14 @@
 
     .carousel-viewport {
         position: relative;
-        overflow: hidden;
         width: 100%;
         height: 100%;
+        overflow: hidden;
     }
 
     .carousel-viewport .items {
-        position: relative;
         display: flex;
+        position: relative;
         margin: 0;
         padding: 0;
         width: 100%;
@@ -204,50 +178,48 @@
 
     .carousel-viewport .item {
         display: flex;
+        position: relative;
+        min-width: 100%;
         place-items: center;
         justify-content: center;
-        position: relative;
         overflow: hidden;
         aspect-ratio: 16 / 9;
-        min-width: 100%;
         transform: translateZ(0);
     }
 
     .carousel-viewport img {
-        object-fit: contain;
         max-width: 100%;
         max-height: 100%;
+        object-fit: contain;
         user-select: none;
     }
 
     .carousel-control {
-        position: relative;
         display: flex;
+        position: relative;
+        padding: 0;
+        width: 40px;
+        height: 40px;
         align-content: center;
         justify-content: center;
         background: unset;
         touch-action: manipulation;
-        transform: translateY(0);
     }
 
-    .carousel-control:active {
-        transform: translateY(1px);
-    }
-
-    .carousel-control svg {
+    .carousel-control img {
         width: 100%;
         height: 100%;
         pointer-events: none;
     }
 
     .carousel-control.prev {
-        place-self: center left;
         margin-left: 18px;
+        place-self: center left;
     }
 
     .carousel-control.next {
-        place-self: center right;
         margin-right: 18px;
+        place-self: center right;
     }
 
     .carousel-dots {
@@ -256,20 +228,20 @@
         padding: 2px;
         place-self: end center;
         gap: 2px;
-        background: #fff;
         border-radius: 5px;
+        background: #fff;
         z-index: 1;
     }
 
     .carousel-dots .dot {
         --size: 6px;
         padding: 0;
-        font-size: 0;
-        color: transparent;
-        background-color: #999;
-        border-radius: 50%;
         width: var(--size);
         height: var(--size);
+        border-radius: 50%;
+        color: transparent;
+        background-color: #999;
+        font-size: 0;
     }
 
     .carousel-dots .dot.active {
@@ -283,19 +255,23 @@
         padding: 0;
         background: unset;
         z-index: 1;
-        transform: translateY(0);
     }
 
-    .carousel-download:active {
-        transform: translateY(1px);
+    @media (max-width: 480px) {
+        .game-image {
+            margin-bottom: 64px;
+            justify-self: center;
+        }
     }
 
+    /* loading animation */
+    /*
     .img-loader {
         display: inline-block;
         width: 400px;
         height: 400px;
         background: linear-gradient(0.25turn, transparent, #fff, transparent),
-            linear-gradient(#ddd, #ddd);
+        linear-gradient(#ddd, #ddd);
         background-color: #fff;
         background-repeat: no-repeat;
         background-position: -315px 0, 0 0, 15px 140px, 65px 145px;
@@ -307,4 +283,5 @@
             background-position: 315px 0, 0 0, 15px 140px, 65px 145px;
         }
     }
+    */
 </style>
