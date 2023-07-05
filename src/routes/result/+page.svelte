@@ -101,7 +101,7 @@
     @media (max-width: 480px) {
         .main {
             grid-template-areas:
-                "desc"
+                "concept"
                 "image"
                 "button"
                 "tags";
