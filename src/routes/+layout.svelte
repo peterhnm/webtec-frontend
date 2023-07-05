@@ -19,7 +19,13 @@
 
     <footer>
         <p class="left">Webtechnologien Sommersemester 2023</p>
-        <p class="right">Dennis Hawran, Peter Heinemann, Anna Tribulowski</p>
+        <ul class="right">
+            <li>
+                <a href="https://atmogd.itch.io/">Dennis Hawran</a>
+            </li>
+            <li>Peter Heinemann</li>
+            <li>Anna Tribulowski</li>
+        </ul>
     </footer>
 </div>
 
@@ -30,8 +36,16 @@
             "header"
             "main"
             "footer";
-        grid-template-rows: 57px 1fr 121px;
+        grid-template-rows: 57px minmax(100vh, 1fr) 121px;
         min-height: 100vh;
+    }
+
+    p {
+        color: var(--link-col);
+    }
+
+    a {
+        color: var(--link-col);
     }
 
     main {
@@ -49,11 +63,6 @@
         align-items: center;
         padding: 0 26px;
         background: var(--footer-col);
-        line-height: 19px;
-    }
-
-    footer p {
-        color: var(--link-col);
     }
 
     footer .left {
@@ -64,13 +73,40 @@
         justify-self: end;
     }
 
-    @media (max-width: 480px) {
-        .app {
-            grid-template-rows: 57px 100% 121px;
-        }
+    footer ul {
+        list-style: none;
+    }
 
+    footer li {
+        float: left;
+        color: var(--link-col);
+        white-space: pre;
+    }
+
+    footer li:after {
+        content: " \2022  ";
+    }
+
+    footer li:last-child:after {
+        content: "";
+    }
+
+    @media (max-width: 480px) {
         footer {
             padding: 0 16px;
+        }
+
+        footer ul {
+            width: min-content;
+            list-style: disc;
+        }
+
+        footer li:after {
+            content: "";
+        }
+
+        footer li:not(:last-child) {
+            margin: 0 0 4px;
         }
     }
 </style>

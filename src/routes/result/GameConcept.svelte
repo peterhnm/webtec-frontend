@@ -5,16 +5,11 @@
     import { headingStore } from "../stores";
 
     export let data: Concept;
-    export let loading: boolean;
 
     let heading: HTMLDivElement;
     let text: HTMLDivElement;
 
-    if (loading) {
-        $headingStore = "Your game is being generated...";
-    } else {
-        $headingStore = "Generation complete!\nYour game is:";
-    }
+    $headingStore = "Generation complete!\nYour game is:";
 
     function copyToClipboard() {
         // select text
@@ -28,30 +23,24 @@
     }
 </script>
 
-{#if loading}
-    <div class="loading-container">
-        <span class="pacman" />
-    </div>
-{:else}
-    <div bind:this={heading} class="heading">
-        <h2>{data.title}</h2>
-        <p>{data.genre}</p>
-    </div>
-    <div class="concept-container">
-        <div bind:this={text} class="game-concept">
-            <div class="text-box">
-                <TextBox heading={3} label="Key Mechanics" text={data.key_mechanic} />
-                <TextBox heading={3} label="Description" text={data.description} />
-                <TextBox heading={3} label="Visuals" text={data.visuals} />
-                <TextBox heading={3} label="Special" text={data.special} />
-            </div>
+<div bind:this={heading} class="heading">
+    <h2>{data.title}</h2>
+    <p>{data.genre}</p>
+</div>
+<div class="concept-container">
+    <div bind:this={text} class="game-concept">
+        <div class="text-box">
+            <TextBox heading={3} label="Key Mechanics" text={data.key_mechanic} />
+            <TextBox heading={3} label="Description" text={data.description} />
+            <TextBox heading={3} label="Visuals" text={data.visuals} />
+            <TextBox heading={3} label="Special" text={data.special} />
         </div>
-        <button class="svg-button copy-btn" on:click={copyToClipboard}>
-            Copy Text
-            <img alt="Copy Text" class="svg-button" src={copyBtn} />
-        </button>
     </div>
-{/if}
+    <button class="svg-button copy-btn" on:click={copyToClipboard}>
+        Copy Text
+        <img alt="Copy Text" class="svg-button" src={copyBtn} />
+    </button>
+</div>
 
 <style>
     .concept-container {
@@ -59,7 +48,7 @@
         display: grid;
         grid-area: concept;
         grid-template: "container" 1fr;
-        margin-bottom: 20px;
+        margin: 0 0 20px; /* relevant if text box content longer than 400px */
         width: 400px;
         min-height: 400px;
         height: min-content;
@@ -82,21 +71,17 @@
         display: flex;
         flex-direction: column;
         gap: 3px;
-        margin-bottom: 12px;
+        margin: 0 0 12px;
     }
 
     .heading h2 {
-        margin: 0;
         width: 100%;
-
         font-weight: 600;
         font-size: 36px;
         line-height: 44px;
     }
 
     .heading p {
-        margin: 0;
-        padding: 0;
         width: 100%;
         font-size: 24px;
         font-weight: 600;
@@ -105,10 +90,7 @@
     .text-box {
         --line-height: 19px;
         width: 100%;
-        margin-bottom: calc(
-            2 * var(--line-height) + 4px
-        ); /* button should not cover the text */
-        padding: 0;
+        margin: 0 0 calc(2 * var(--line-height) + 4px); /* button should not cover the text */
 
         outline: none;
         border: none;
@@ -138,74 +120,7 @@
 
     @media (max-width: 480px) {
         .concept-container {
-            margin-bottom: 32px;
-        }
-    }
-
-    /* Loading animation */
-    .loading-container {
-        grid-area: heading;
-        display: grid;
-        margin-top: 6px;
-        place-items: center;
-    }
-
-    .pacman {
-        display: inline-grid;
-        margin: auto;
-        align-self: center;
-        justify-self: center;
-        position: relative;
-        border: 46px solid var(--button-col);
-        border-radius: 50%;
-        box-sizing: border-box;
-        animation: eat 1s linear infinite;
-    }
-
-    .pacman::after,
-    .pacman::before {
-        content: "";
-        position: absolute;
-        left: 50px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: #6d6d6d;
-        width: 21px;
-        height: 21px;
-        border-radius: 50%;
-        box-sizing: border-box;
-        opacity: 0;
-        animation: move 2s linear infinite;
-    }
-
-    .pacman::before {
-        animation-delay: 1s;
-    }
-
-    @keyframes eat {
-        0%,
-        49% {
-            border-right-color: var(--button-col);
-        }
-        50%,
-        100% {
-            border-right-color: #0000;
-        }
-    }
-
-    @keyframes move {
-        0% {
-            left: 75px;
-            opacity: 1;
-        }
-        50% {
-            left: 0;
-            opacity: 1;
-        }
-        52%,
-        100% {
-            left: -5px;
-            opacity: 0;
+            margin: 0 0 32px;
         }
     }
 </style>

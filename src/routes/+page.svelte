@@ -36,7 +36,12 @@
             }
         });
 
-        // Workaround
+        /**
+         * Ugly workaround. If I select the first tag in the dropdown or selected tag div
+         * The next item get selected or unselected.
+         * To display the behavior just remove "display: none" inside the input-element
+         * of the Tag.svelte file.
+         */
         selectedTagsStore.subscribe(() => {
             if (!selectedTags) {
                 return;
@@ -72,8 +77,9 @@
     }
 
     async function getData() {
-        const url: string =
-            "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/tags";
+        // When developing I mocked the Backend with Postman
+        // const url: string = "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/tags";
+        const url: string = "https://jambuddyserver.onrender.com/tags";
         const res = await fetch(url);
         return await res.json();
     }
@@ -120,14 +126,14 @@
                     placeholder="...search for game tags"
                     type="text"
                 />
-                Add tags to specify what kind of game you want
+                Add tags to specify what kind of game you want.
             </label>
         </div>
     </div>
 
-    {#if $selectedTagsStore.length > 0}
-        <div class="selected-tags-container">
-            <div bind:this={selectedTags} class="selected-tags">
+    <div bind:this={selectedTags} class="selected-tags-container">
+        {#if $selectedTagsStore.length > 0}
+            <div class="selected-tags">
                 {#if $selectedTagsStore}
                     {#each $selectedTagsStore as tag}
                         <Tag id={tag} checked={true} />
@@ -135,8 +141,8 @@
                 {/if}
             </div>
             <p class="selected-tags-desc">Added Tags</p>
-        </div>
-    {/if}
+        {/if}
+    </div>
 </div>
 
 <style>
@@ -154,7 +160,7 @@
     }
 
     input[type="text"] {
-        margin-bottom: var(--label-margin);
+        margin: 0 0 var(--label-margin);
     }
 
     .gamejam-desc {
@@ -166,7 +172,7 @@
 
     .prompt {
         grid-area: prompt;
-        margin-bottom: 97px;
+        margin: 0 0 97px;
         display: flex;
         align-items: baseline;
         gap: 33px;
@@ -187,20 +193,11 @@
         grid-area: selected-tags;
     }
 
-    .selected-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 13px;
-        min-height: 32px;
-    }
-
     .selected-tags-desc {
-        margin: 14px 0 0;
         width: 100%;
         color: var(--label-col);
         font-size: 14px;
         font-weight: 700;
-        line-height: 19px;
     }
 
     @media (max-width: 480px) {

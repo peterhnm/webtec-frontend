@@ -22,12 +22,9 @@
     }
 
     .container p {
-        margin: 0;
         text-align: center;
-
         font-weight: 800;
         font-size: 48px;
-        line-height: 58px;
     }
 
     .logo {

@@ -14,11 +14,27 @@ describe("Test displayed tags", () => {
         });
     });
     it("should show one checkboxes", async () => {
-        const prop: ComponentProps<TagList> = { tags, search: "Shoo", loading: false };
+        const prop: ComponentProps<TagList> = {
+            tags,
+            search: "Shooter",
+            loading: false
+        };
         const { getAllByLabelText } = render(TagList, prop);
 
         await waitFor(() => {
             expect(getAllByLabelText(/.*/)).toHaveLength(1);
+        });
+    });
+    it("should show two checkboxes", async () => {
+        const prop: ComponentProps<TagList> = {
+            tags,
+            search: "Tag",
+            loading: false
+        };
+        const { getAllByLabelText } = render(TagList, prop);
+
+        await waitFor(() => {
+            expect(getAllByLabelText(/.*/)).toHaveLength(2);
         });
     });
 });

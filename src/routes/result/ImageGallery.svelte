@@ -6,8 +6,6 @@
 
     export let data: string[];
 
-    $: imgFormat = inspectImages(data);
-
     const active = "active";
     let items: HTMLUListElement;
     let dots: HTMLOListElement;
@@ -52,31 +50,8 @@
         });
     }
 
-    function inspectImages(images: string[]): string {
-        if (!images) {
-            return "base64";
-        }
-
-        for (const img of images) {
-            if (img.indexOf("https") !== -1) {
-                return "url";
-            }
-        }
-
-        return "base64";
-    }
-
     async function downloadImg() {
-        let href = "";
-
-        if (imgFormat === "url") {
-            const url = data[current];
-            const res = await fetch(url);
-            const blobImg = await res.blob();
-            href = URL.createObjectURL(blobImg);
-        } else {
-            href = `data:image/png;base64,${data[current]}`;
-        }
+        let href = `data:image/png;base64,${data[current]}`;
 
         const anchorElement = document.createElement("a");
         anchorElement.href = href;
@@ -93,11 +68,7 @@
         <ul bind:this={items} class="items">
             {#each data as img, i}
                 <li class="item">
-                    {#if imgFormat === "base64"}
-                        <img src="data:image/png;base64,{img}" alt="Image {i}" />
-                    {:else}
-                        <img src={img} alt="Image {i}" />
-                    {/if}
+                    <img src="data:image/png;base64,{img}" alt="Image {i}" />
                 </li>
             {/each}
         </ul>
@@ -169,8 +140,6 @@
     .carousel-viewport .items {
         display: flex;
         position: relative;
-        margin: 0;
-        padding: 0;
         width: 100%;
         height: 100%;
         transition: transform 500ms cubic-bezier(0.25, 1, 0.5, 1);
@@ -197,7 +166,6 @@
     .carousel-control {
         display: flex;
         position: relative;
-        padding: 0;
         width: 40px;
         height: 40px;
         align-content: center;
@@ -252,14 +220,13 @@
         display: flex;
         place-self: end;
         margin: 0 16px 9px 0;
-        padding: 0;
         background: unset;
         z-index: 1;
     }
 
     @media (max-width: 480px) {
         .game-image {
-            margin-bottom: 64px;
+            margin: 0 0 64px;
             justify-self: center;
         }
     }

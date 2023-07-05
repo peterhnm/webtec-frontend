@@ -14,7 +14,9 @@
                 <a href="{base}/">Home</a>
             </li>
             <li>
-                <p>Contact</p>
+                <button on:click={() => window.scrollTo(0, document.body.scrollHeight)}
+                    >Contact
+                </button>
             </li>
         </ul>
     </nav>
@@ -33,20 +35,17 @@
     .logo-small {
         width: 46px;
         height: 34px;
-        margin-left: 14px;
     }
 
     header nav {
         width: 100%;
         margin: auto 0;
         color: var(--link-col);
-        line-height: 19px;
     }
 
     ul {
         display: flex;
         margin: 0 22px;
-        padding: 0;
         place-content: center end;
         list-style: none;
     }
@@ -56,14 +55,16 @@
         margin-right: 34px;
     }
 
-    li p {
-        margin: 0;
+    li button {
         color: var(--link-col);
+        background: none;
         font-weight: 700;
-        cursor: not-allowed;
+        font-size: 16px;
     }
 
     a {
+        margin: 0 0 0 14px;
+        width: min-content;
         font-weight: 700;
         text-decoration: none;
     }

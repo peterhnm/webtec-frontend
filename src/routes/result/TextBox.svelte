@@ -20,12 +20,10 @@
 <style>
     div {
         display: flex;
-        margin-bottom: 8px;
+        margin: 0 0 8px;
     }
 
     p {
-        margin: 0;
-        padding: 0;
         line-height: var(--line-height);
     }
 

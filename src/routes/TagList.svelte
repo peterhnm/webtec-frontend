@@ -8,7 +8,7 @@
     export let loading: boolean;
 
     // We have set the filter very generously to get results even for typos
-    const MIN_ACCURACY = 0.3;
+    const MIN_ACCURACY = 0.5;
 
     let displayedTags: string[];
     let displayedTagsLength: number;
@@ -83,7 +83,6 @@
     ul {
         display: table;
         margin: 17px 19px 11px;
-        padding: 0;
         list-style: none;
     }
 

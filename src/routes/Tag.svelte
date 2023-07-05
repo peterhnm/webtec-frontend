@@ -46,7 +46,7 @@
 
 <style>
     input[type="checkbox"] {
-        display: none;
+        display: none; /* remove this to see why the workaround is needed */
     }
 
     label {
@@ -64,7 +64,6 @@
 
         color: var(--link-col);
         font-style: italic;
-        line-height: 19px;
 
         cursor: pointer;
     }
