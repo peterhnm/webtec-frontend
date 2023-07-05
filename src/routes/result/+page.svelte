@@ -142,7 +142,7 @@
         left: 50px;
         top: 50%;
         transform: translateY(-50%);
-        background: #6d6d6d;
+        background: #999;
         width: 21px;
         height: 21px;
         border-radius: 50%;
