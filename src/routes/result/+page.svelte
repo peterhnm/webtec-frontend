@@ -1,11 +1,12 @@
 <script lang="ts">
-    import GameDescription from "./GameConcept.svelte";
-    import GameDesign from "./GameDesign.svelte";
-    import { promptStore } from "../stores";
+    import GameConcept from "./GameConcept.svelte";
+    import ImageGallery from "./ImageGallery.svelte";
+    import { headingStore, promptStore } from "../stores";
     import { selectedTagsStore } from "../stores.js";
     import type { AiResponse } from "./types";
 
     async function getData(): Promise<AiResponse> {
+        $headingStore = "Your game is being generated...";
         // When developing I mocked the Backend with Postman
         // const url: string = `https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io?theme=${$promptStore}&tags=${$selectedTagsStore}`;
         const url: string = `https://jambuddyserver.onrender.com?theme=${$promptStore}&tags=${$selectedTagsStore}`;
@@ -16,12 +17,14 @@
     let data = getData();
 </script>
 
-<div class="main">
+<div class="container">
     {#await data}
-        <GameDescription loading={true} />
+        <div class="loading-container">
+            <span class="pacman" />
+        </div>
     {:then res}
-        <GameDescription data={res.concept} loading={false} />
-        <GameDesign data={res.images} loading={false} />
+        <GameConcept data={res.concept} />
+        <ImageGallery data={res.images} />
         <button
             class="app-button"
             on:click={() => {
@@ -43,7 +46,7 @@
 </div>
 
 <style>
-    .main {
+    .container {
         display: grid;
         grid-template-areas:
             "heading heading"
@@ -101,7 +104,7 @@
     }
 
     @media (max-width: 480px) {
-        .main {
+        .container {
             grid-template-areas:
                 "heading"
                 "concept"
@@ -117,6 +120,73 @@
             justify-self: center;
             height: 72px;
             width: 100%;
+        }
+    }
+
+    /* Loading animation */
+    .loading-container {
+        grid-area: heading;
+        display: grid;
+        margin-top: 6px;
+        place-items: center;
+    }
+
+    .pacman {
+        display: inline-grid;
+        margin: auto;
+        align-self: center;
+        justify-self: center;
+        position: relative;
+        border: 46px solid var(--button-col);
+        border-radius: 50%;
+        box-sizing: border-box;
+        animation: eat 1s linear infinite;
+    }
+
+    .pacman::after,
+    .pacman::before {
+        content: "";
+        position: absolute;
+        left: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #6d6d6d;
+        width: 21px;
+        height: 21px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        opacity: 0;
+        animation: move 2s linear infinite;
+    }
+
+    .pacman::before {
+        animation-delay: 1s;
+    }
+
+    @keyframes eat {
+        0%,
+        49% {
+            border-right-color: var(--button-col);
+        }
+        50%,
+        100% {
+            border-right-color: #0000;
+        }
+    }
+
+    @keyframes move {
+        0% {
+            left: 75px;
+            opacity: 1;
+        }
+        50% {
+            left: 0;
+            opacity: 1;
+        }
+        52%,
+        100% {
+            left: -5px;
+            opacity: 0;
         }
     }
 </style>
