@@ -83,7 +83,6 @@
     ul {
         display: table;
         margin: 17px 19px 11px;
-        padding: 0;
         list-style: none;
     }
 

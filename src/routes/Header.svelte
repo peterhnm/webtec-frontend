@@ -15,8 +15,8 @@
             </li>
             <li>
                 <button on:click={() => window.scrollTo(0, document.body.scrollHeight)}
-                    >Contact</button
-                >
+                    >Contact
+                </button>
             </li>
         </ul>
     </nav>
@@ -35,20 +35,18 @@
     .logo-small {
         width: 46px;
         height: 34px;
-        margin-left: 14px;
+        margin: 0 0 0 14px;
     }
 
     header nav {
         width: 100%;
         margin: auto 0;
         color: var(--link-col);
-        line-height: 19px;
     }
 
     ul {
         display: flex;
         margin: 0 22px;
-        padding: 0;
         place-content: center end;
         list-style: none;
     }
@@ -59,8 +57,6 @@
     }
 
     li button {
-        margin: 0;
-        padding: 0;
         color: var(--link-col);
         background: none;
         font-weight: 700;

@@ -48,7 +48,7 @@
         display: grid;
         grid-area: concept;
         grid-template: "container" 1fr;
-        margin-bottom: 20px;
+        margin: 0 0 20px; /* relevant if text box content longer than 400px */
         width: 400px;
         min-height: 400px;
         height: min-content;
@@ -71,21 +71,17 @@
         display: flex;
         flex-direction: column;
         gap: 3px;
-        margin-bottom: 12px;
+        margin: 0 0 12px;
     }
 
     .heading h2 {
-        margin: 0;
         width: 100%;
-
         font-weight: 600;
         font-size: 36px;
         line-height: 44px;
     }
 
     .heading p {
-        margin: 0;
-        padding: 0;
         width: 100%;
         font-size: 24px;
         font-weight: 600;
@@ -94,10 +90,7 @@
     .text-box {
         --line-height: 19px;
         width: 100%;
-        margin-bottom: calc(
-            2 * var(--line-height) + 4px
-        ); /* button should not cover the text */
-        padding: 0;
+        margin: 0 0 calc(2 * var(--line-height) + 4px); /* button should not cover the text */
 
         outline: none;
         border: none;
@@ -127,7 +120,7 @@
 
     @media (max-width: 480px) {
         .concept-container {
-            margin-bottom: 32px;
+            margin: 0 0 32px;
         }
     }
 </style>

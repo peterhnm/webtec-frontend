@@ -64,7 +64,6 @@
 
         color: var(--link-col);
         font-style: italic;
-        line-height: 19px;
 
         cursor: pointer;
     }

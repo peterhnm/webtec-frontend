@@ -41,7 +41,6 @@
     }
 
     p {
-        margin: 0;
         color: var(--link-col);
     }
 
@@ -64,7 +63,6 @@
         align-items: center;
         padding: 0 26px;
         background: var(--footer-col);
-        line-height: 19px;
     }
 
     footer .left {
@@ -76,8 +74,6 @@
     }
 
     footer ul {
-        margin: 0;
-        padding: 0;
         list-style: none;
     }
 
@@ -110,7 +106,7 @@
         }
 
         footer li:not(:last-child) {
-            margin-bottom: 4px !important;
+            margin: 0 0 4px;
         }
     }
 </style>

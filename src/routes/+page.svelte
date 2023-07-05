@@ -155,7 +155,7 @@
     }
 
     input[type="text"] {
-        margin-bottom: var(--label-margin);
+        margin: 0 0 var(--label-margin);
     }
 
     .gamejam-desc {
@@ -167,7 +167,7 @@
 
     .prompt {
         grid-area: prompt;
-        margin-bottom: 97px;
+        margin: 0 0 97px;
         display: flex;
         align-items: baseline;
         gap: 33px;
@@ -188,20 +188,11 @@
         grid-area: selected-tags;
     }
 
-    .selected-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 13px;
-        min-height: 32px;
-    }
-
     .selected-tags-desc {
-        margin: 14px 0 0;
         width: 100%;
         color: var(--label-col);
         font-size: 14px;
         font-weight: 700;
-        line-height: 19px;
     }
 
     @media (max-width: 480px) {

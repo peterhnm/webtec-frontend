@@ -140,8 +140,6 @@
     .carousel-viewport .items {
         display: flex;
         position: relative;
-        margin: 0;
-        padding: 0;
         width: 100%;
         height: 100%;
         transition: transform 500ms cubic-bezier(0.25, 1, 0.5, 1);
@@ -168,7 +166,6 @@
     .carousel-control {
         display: flex;
         position: relative;
-        padding: 0;
         width: 40px;
         height: 40px;
         align-content: center;
@@ -223,14 +220,13 @@
         display: flex;
         place-self: end;
         margin: 0 16px 9px 0;
-        padding: 0;
         background: unset;
         z-index: 1;
     }
 
     @media (max-width: 480px) {
         .game-image {
-            margin-bottom: 64px;
+            margin: 0 0 64px;
             justify-self: center;
         }
     }

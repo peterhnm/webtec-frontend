@@ -34,7 +34,7 @@
         </button>
         {#if $selectedTagsStore.length > 0}
             <div class="tags">
-                <ul>
+                <ul class="selected-tags">
                     {#each $selectedTagsStore as tag}
                         <li>{tag}</li>
                     {/each}
@@ -63,7 +63,7 @@
     button {
         grid-area: button;
         justify-self: start;
-        margin-bottom: 57px;
+        margin: 0 0 57px;
     }
 
     .tags {
@@ -71,12 +71,6 @@
     }
 
     .tags ul {
-        display: flex;
-        margin: 0;
-        padding: 0;
-        flex-wrap: wrap;
-        gap: 13px;
-        min-height: 32px;
         list-style: none;
     }
 
@@ -96,8 +90,6 @@
     }
 
     .tags p {
-        margin: 14px 0 0;
-        padding: 0;
         color: #4b4b4b;
         font-size: 14px;
         font-weight: 700;
@@ -127,7 +119,7 @@
     .loading-container {
         grid-area: heading;
         display: grid;
-        margin-top: 6px;
+        margin: 6px 0 0;
         place-items: center;
     }
 
