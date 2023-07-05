@@ -46,7 +46,7 @@
 
 <style>
     input[type="checkbox"] {
-        display: none;
+        display: none; /* remove this to see why the workaround is needed */
     }
 
     label {

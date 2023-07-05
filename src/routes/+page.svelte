@@ -36,7 +36,12 @@
             }
         });
 
-        // Workaround
+        /**
+         * Ugly workaround. If I select the first tag in the dropdown or selected tag div
+         * The next item get selected or unselected.
+         * To display the behavior just remove "display: none" inside the input-element
+         * of the Tag.svelte file.
+         */
         selectedTagsStore.subscribe(() => {
             if (!selectedTags) {
                 return;
@@ -126,9 +131,9 @@
         </div>
     </div>
 
-    {#if $selectedTagsStore.length > 0}
-        <div class="selected-tags-container">
-            <div bind:this={selectedTags} class="selected-tags">
+    <div bind:this={selectedTags} class="selected-tags-container">
+        {#if $selectedTagsStore.length > 0}
+            <div class="selected-tags">
                 {#if $selectedTagsStore}
                     {#each $selectedTagsStore as tag}
                         <Tag id={tag} checked={true} />
@@ -136,8 +141,8 @@
                 {/if}
             </div>
             <p class="selected-tags-desc">Added Tags</p>
-        </div>
-    {/if}
+        {/if}
+    </div>
 </div>
 
 <style>
