@@ -35,7 +35,6 @@
     .logo-small {
         width: 46px;
         height: 34px;
-        margin: 0 0 0 14px;
     }
 
     header nav {
@@ -64,6 +63,8 @@
     }
 
     a {
+        margin: 0 0 0 14px;
+        width: min-content;
         font-weight: 700;
         text-decoration: none;
     }
