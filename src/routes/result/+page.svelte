@@ -6,7 +6,7 @@
     import type { AiResponse } from "./types";
 
     async function getData(): Promise<AiResponse> {
-        const url: string = `https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io?theme=${$promptStore}&tags=${$selectedTagsStore}`;
+        const url: string = `https://jambuddyserver.onrender.com?theme=${$promptStore}&tags=${$selectedTagsStore}`;
         const res = await fetch(url);
         return await res.json();
     }
