@@ -36,7 +36,7 @@
             "header"
             "main"
             "footer";
-        grid-template-rows: 57px 1fr 121px;
+        grid-template-rows: 57px minmax(100vh, 1fr) 121px;
         min-height: 100vh;
     }
 
@@ -96,10 +96,6 @@
     }
 
     @media (max-width: 480px) {
-        .app {
-            grid-template-rows: 57px auto 121px;
-        }
-
         footer {
             padding: 0 16px;
         }
