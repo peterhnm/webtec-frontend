@@ -6,8 +6,6 @@
 
     export let data: string[];
 
-    $: imgFormat = inspectImages(data);
-
     const active = "active";
     let items: HTMLUListElement;
     let dots: HTMLOListElement;
@@ -52,31 +50,8 @@
         });
     }
 
-    function inspectImages(images: string[]): string {
-        if (!images) {
-            return "base64";
-        }
-
-        for (const img of images) {
-            if (img.indexOf("https") !== -1) {
-                return "url";
-            }
-        }
-
-        return "base64";
-    }
-
     async function downloadImg() {
-        let href = "";
-
-        if (imgFormat === "url") {
-            const url = data[current];
-            const res = await fetch(url);
-            const blobImg = await res.blob();
-            href = URL.createObjectURL(blobImg);
-        } else {
-            href = `data:image/png;base64,${data[current]}`;
-        }
+        let href = `data:image/png;base64,${data[current]}`;
 
         const anchorElement = document.createElement("a");
         anchorElement.href = href;
@@ -93,11 +68,7 @@
         <ul bind:this={items} class="items">
             {#each data as img, i}
                 <li class="item">
-                    {#if imgFormat === "base64"}
-                        <img src="data:image/png;base64,{img}" alt="Image {i}" />
-                    {:else}
-                        <img src={img} alt="Image {i}" />
-                    {/if}
+                    <img src="data:image/png;base64,{img}" alt="Image {i}" />
                 </li>
             {/each}
         </ul>
