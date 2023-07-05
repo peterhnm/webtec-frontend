@@ -23,8 +23,8 @@
             <li>
                 <a href="https://atmogd.itch.io/">Dennis Hawran</a>
             </li>
-            <li><p>Peter Heinemann</p></li>
-            <li><p>Anna Tribulowski</p></li>
+            <li>Peter Heinemann</li>
+            <li>Anna Tribulowski</li>
         </ul>
     </footer>
 </div>
@@ -36,8 +36,17 @@
             "header"
             "main"
             "footer";
-        grid-template-rows: 57px 1fr 121px;
+        grid-template-rows: 57px 100vh 121px;
         min-height: 100vh;
+    }
+
+    p {
+        margin: 0;
+        color: var(--link-col);
+    }
+
+    a {
+        color: var(--link-col);
     }
 
     main {
@@ -58,15 +67,6 @@
         line-height: 19px;
     }
 
-    footer p {
-        margin: 0;
-        color: var(--link-col);
-    }
-
-    footer a {
-        color: var(--link-col);
-    }
-
     footer .left {
         justify-self: start;
     }
@@ -76,27 +76,45 @@
     }
 
     footer ul {
-        margin: 16px 0;
+        margin: 0;
         padding: 0;
-        list-style: disc;
+        list-style: none;
     }
 
     footer li {
         float: left;
         color: var(--link-col);
+        white-space: pre;
     }
 
-    footer li:not(:last-child) {
-        margin-right: 22px;
+    footer li:after {
+        content: " \2022  ";
+    }
+
+    footer li:last-child:after {
+        content: "";
     }
 
     @media (max-width: 480px) {
         .app {
-            grid-template-rows: 57px 100% 121px;
+            grid-template-rows: 57px auto 121px;
         }
 
         footer {
             padding: 0 16px;
+        }
+
+        footer ul {
+            width: min-content;
+            list-style: disc;
+        }
+
+        footer li:after {
+            content: "";
+        }
+
+        footer li:not(:last-child) {
+            margin-bottom: 4px !important;
         }
     }
 </style>

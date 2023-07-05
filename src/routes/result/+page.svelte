@@ -103,6 +103,7 @@
     @media (max-width: 480px) {
         .main {
             grid-template-areas:
+                "heading"
                 "concept"
                 "image"
                 "button"
