@@ -14,7 +14,9 @@
                 <a href="{base}/">Home</a>
             </li>
             <li>
-                <p>Contact</p>
+                <button on:click={() => window.scrollTo(0, document.body.scrollHeight)}
+                    >Contact</button
+                >
             </li>
         </ul>
     </nav>
@@ -56,11 +58,13 @@
         margin-right: 34px;
     }
 
-    li p {
+    li button {
         margin: 0;
+        padding: 0;
         color: var(--link-col);
+        background: none;
         font-weight: 700;
-        cursor: not-allowed;
+        font-size: 16px;
     }
 
     a {

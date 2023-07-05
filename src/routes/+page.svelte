@@ -119,7 +119,7 @@
                     placeholder="...search for game tags"
                     type="text"
                 />
-                Add tags to specify what kind of game you want
+                Add tags to specify what kind of game you want.
             </label>
         </div>
     </div>
