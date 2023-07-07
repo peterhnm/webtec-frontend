@@ -50,4 +50,15 @@ npm run dev
 > Note: Das Frontend wurde ausführlich in _*Firefox*_ getestet. Des Weiteren sollten _*Google Chrome*_ und _*Safari*_
 > einwandfrei funktionieren.
 
+# Sonstiges
+
+Bei auswählen/abwählen von Tags gab es ein Problem, dass ich mit einen Workaround gelöst habe.
+Im Code ist das an der entsprechenden Stellen nochmal beschrieben.
+
+Ohne Workaround:  
+![without-workaround](https://github.com/peterhnm/webtec-frontend/blob/d0f98a6187398ebb55545923e91332cd21430af7/docs/images/without_workaround.gif?raw=true)
+
+Mit Workaround:  
+![without-workaround](https://github.com/peterhnm/webtec-frontend/blob/d0f98a6187398ebb55545923e91332cd21430af7/docs/images/with_workaround.gif?raw=true)
+
 [JamBuddy]: https://peterhnm.github.io/webtec-frontend/
