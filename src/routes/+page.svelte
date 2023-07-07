@@ -37,10 +37,14 @@
         });
 
         /**
-         * Ugly workaround. If I select the first tag in the dropdown or selected tag div
-         * The next item get selected or unselected.
-         * To display the behavior just remove "display: none" inside the input-element
-         * of the Tag.svelte file.
+         * Ugly workaround. When I click on a tag in the dropdown or the selected
+         * tag div, the trailing item is selected/deselected without me having to do
+         * anything.
+         * To reproduce the behavior remove "display: none" inside the input-element
+         * of the Tag.svelte file. Also delete or comment the lines 49 - 67.
+         *
+         * With the "subscribe"-Method the callback function gets executed everytime
+         * the content of "selectedTagsStore" is changed.
          */
         selectedTagsStore.subscribe(() => {
             if (!selectedTags) {
@@ -78,8 +82,9 @@
 
     async function getData() {
         // When developing I mocked the Backend with Postman
-        // const url: string = "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/tags";
-        const url: string = "https://jambuddyserver.onrender.com/tags";
+        const url: string =
+            "https://d097fa25-5d10-476c-82d0-b8224ef409e9.mock.pstmn.io/tags";
+        // const url: string = "https://jambuddyserver.onrender.com/tags";
         const res = await fetch(url);
         return await res.json();
     }

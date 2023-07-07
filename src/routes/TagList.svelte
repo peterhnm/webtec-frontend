@@ -13,6 +13,7 @@
     let displayedTags: string[];
     let displayedTagsLength: number;
 
+    // Filters tags each time $selectedTagsStore or search is changed
     $: displayedTags = filterTags($selectedTagsStore, search);
     $: displayedTagsLength = getDisplayedTagsLength(displayedTags);
 
