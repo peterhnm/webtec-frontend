@@ -10,12 +10,12 @@
     // We have set the filter very generously to get results even for typos
     const MIN_ACCURACY = 0.5;
 
-    let displayedTags: string[];
-    let displayedTagsLength: number;
+    let filteredTags: string[];
+    let filteredTagsLength: number;
 
     // Filters tags each time $selectedTagsStore or search is changed
-    $: displayedTags = filterTags($selectedTagsStore, search);
-    $: displayedTagsLength = getDisplayedTagsLength(displayedTags);
+    $: filteredTags = filterTags($selectedTagsStore, search);
+    $: filteredTagsLength = getDisplayedTagsLength(filteredTags);
 
     /**
      * Filter tags by the search term and already selected tags.
@@ -69,10 +69,10 @@
                 <span class="loader-dropdown" />
             </li>
         {/each}
-    {:else if displayedTagsLength > 0}
-        {#each { length: displayedTagsLength } as _, i}
+    {:else if filteredTagsLength > 0}
+        {#each { length: filteredTagsLength } as _, i}
             <li>
-                <Tag id={displayedTags[i]} checked={false} />
+                <Tag id={filteredTags[i]} checked={false} />
             </li>
         {/each}
     {:else}
