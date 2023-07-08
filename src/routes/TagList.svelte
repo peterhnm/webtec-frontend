@@ -15,7 +15,7 @@
 
     // Filters tags each time $selectedTagsStore or search is changed
     $: filteredTags = filterTags($selectedTagsStore, search);
-    $: filteredTagsLength = getDisplayedTagsLength(filteredTags);
+    $: filteredTagsLength = getDisplayLength(filteredTags);
 
     /**
      * Filter tags by the search term and already selected tags.
@@ -43,7 +43,7 @@
      * five tags at a time.
      * @param displayedTags All tags after filtering.
      */
-    function getDisplayedTagsLength(displayedTags: string[]) {
+    function getDisplayLength(displayedTags: string[]) {
         if (displayedTags) {
             return displayedTags.length > 5 ? 5 : displayedTags.length;
         }
