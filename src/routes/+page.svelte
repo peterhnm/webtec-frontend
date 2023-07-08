@@ -51,7 +51,7 @@
                 return;
             }
 
-            // Force every checkbox inside selected tags div to be unchecked
+            // Force every checkbox inside selected tags div to be checked
             // eslint-disable-next-line no-undef
             const selectedBoxes: NodeListOf<HTMLInputElement> =
                 selectedTags.querySelectorAll('input[type="checkbox"]');
@@ -59,7 +59,7 @@
                 box.checked = true;
             }
 
-            // Force every checkbox inside the dropdown menu to be checked
+            // Force every checkbox inside the dropdown menu to be unchecked
             // eslint-disable-next-line no-undef
             const dropdownBoxes: NodeListOf<HTMLInputElement> =
                 dropdown.querySelectorAll('input[type="checkbox"]');
